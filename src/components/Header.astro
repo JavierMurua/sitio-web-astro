@@ -3,11 +3,11 @@ import { Image } from 'astro:assets';
 import logoImg from '../assets/logo.png';
 
 const navItems = [
-  { label: 'Solution', href: '#' },
-  { label: 'Who We Help', href: '#' },
-  { label: 'Outcomes', href: '#' },
-  { label: 'Company', href: '#' },
-  { label: 'Resources', href: '#' },
+  { label: 'Nosotros', href: '#' },
+  { label: 'Servicios', href: '#' },
+  { label: 'Testimonios', href: '#' },
+  { label: 'Blog', href: '#' },
+  { label: 'Contacto', href: '#' },
 ];
 ---
 
@@ -21,7 +21,7 @@ const navItems = [
         width={48}
         height={48}
       />
-      <span class="ml-2">Your Company</span>
+      <span class="ml-2">Zalazar & Paredes</span>
     </a>
     <nav class="hidden md:flex space-x-6">
       {navItems.map(item => (
@@ -31,7 +31,7 @@ const navItems = [
       ))}
     </nav>
     <a href="/#" class="bg-primary-500 text-white px-4 py-2 rounded hover:bg-primary-600 transition duration-150 ease-in-out">
-      Contact Us
+      Contáctanos
     </a>
   </div>
 </header>
