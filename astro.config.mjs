@@ -4,8 +4,8 @@ import react from '@astrojs/react';
 import sharp from 'sharp';
 
 export default defineConfig({
-  site: "https://JavierMurua.github.io", // 🔹 Reemplaza con tu usuario y repo
-  base: "sitio-web-astro", // 🔹 Nombre del repositorio
+  site: "http://localhost:3000", // 🔹 Reemplaza con tu usuario y repo
+  base: "/", // 🔹 Nombre del repositorio
   output: "static", // 🔹 Asegura que Astro genere archivos estáticos
   integrations: [tailwind(), react()],
   assets: {
@@ -16,5 +16,8 @@ export default defineConfig({
         constructor: sharp,
       },
     ],
+  },
+  server: {
+    host: true
   },
 });
