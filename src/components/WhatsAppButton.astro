@@ -1,0 +1,125 @@
+---
+import Icon from '../assets/icon/Icon.astro';
+import { contactInfo } from '../data/contact';
+
+export interface Props {
+  size?: number;
+  message?: string;
+}
+
+const {
+  whatsapp: { linkMobile, linkDesktop },
+} = contactInfo;
+
+const {
+  size = 60,
+  message = "Hola 👋, necesito orientación legal y quiero contarles brevemente mi situación ⬇️\n\n",
+} = Astro.props;
+
+const encodedMessage = encodeURIComponent(message);
+
+const whatsappMobileUrl = `${linkMobile}?text=${encodedMessage}`;
+const whatsappDesktopUrl = `${linkDesktop}&text=${encodedMessage}`;
+
+---
+
+<!-- Botón para Mobile y Tablet -->
+<a
+  href={whatsappMobileUrl}
+  target="_blank"
+  rel="noopener noreferrer"
+  class="whatsapp-button whatsapp-mobile"
+  style={`--button-size: ${size}px;`}
+  aria-label="Chatear por WhatsApp"
+>
+  <Icon name="whatsapp" width={size * 0.6} height={size * 0.6} class="whatsapp-icon" />
+</a>
+
+<!-- Botón para Desktop -->
+<a
+  href={whatsappDesktopUrl}
+  target="_blank"
+  rel="noopener noreferrer"
+  class="whatsapp-button whatsapp-desktop"
+  style={`--button-size: ${size}px;`}
+  aria-label="Chatear por WhatsApp"
+>
+  <Icon name="whatsapp" width={size * 0.6} height={size * 0.6} class="whatsapp-icon" />
+</a>
+
+<style>
+  .whatsapp-button {
+    position: fixed;
+    background-color: #25D366;
+    z-index: 1000;
+    color: white;
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: background var(--transition-duration) var(--transition-timing-function);
+    opacity: 0;
+    animation: fadeIn 2s forwards, glowEffect 7s infinite 3s;
+    width: var(--button-size);
+    height: var(--button-size);
+    font-size: calc(var(--button-size) * 0.6);
+    display: none;
+  }
+
+  .whatsapp-icon {
+    display: block;
+    fill: white;
+  }
+
+  .whatsapp-button:hover {
+    background-color: #128C7E;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: scale(1.5);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  /* ---- GLOW EFFECT basado en --color-accent ---- */
+  @keyframes glowEffect {
+    0% {
+      box-shadow: 0 0 0px 0px var(--color-accent);
+    }
+    50% {
+      box-shadow: 0 0 5px 2px var(--color-accent-dark);
+    }
+    100% {
+      box-shadow: 0 0 0px 0px var(--color-accent);
+    }
+  }
+
+  /* Mobile y Tablets: Centro abajo */
+  @media (max-width: 1023px) {
+    .whatsapp-mobile {
+      display: flex;
+      position: fixed;
+      bottom: 40px;
+      left: 0;
+      right: 0;
+      margin: 0 auto;
+    }
+  }
+
+  /* Desktop: Izquierda abajo */
+  @media (min-width: 1024px) {
+    .whatsapp-desktop {
+      display: flex;
+      left: 20px;
+      bottom: 20px;
+      right: auto;
+      transform: none;
+    }
+  }
+</style>
+

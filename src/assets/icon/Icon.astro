@@ -1,0 +1,59 @@
+---
+// src/components/common/Icon.astro
+import { iconSvgPaths, type IconData } from './iconPaths'; // Importar el mapa y el tipo
+
+export interface Props {
+  name: string;
+  class?: string;
+  width?: number;
+  height?: number;
+  // La prop viewBox ahora actúa como un override opcional
+  viewBox?: string; 
+}
+
+const { name, class: className, width = 24, height = 24 } = Astro.props;
+
+// 1. Obtener el objeto completo del ícono (path y viewBox)
+const iconData: IconData | undefined = iconSvgPaths[name];
+
+// 2. Extraer el path del SVG
+const svgContent = iconData ? iconData.path : '';
+
+// 3. Determinar el viewBox a usar.
+//    - Primero, intenta usar el viewBox que se pasa explícitamente en la prop.
+//    - Si no, usa el viewBox del ícono desde iconPaths.ts.
+//    - Como último recurso (si el ícono no existe), usa un fallback.
+const finalViewBox = Astro.props.viewBox || (iconData ? iconData.viewBox : "0 0 512 512");
+
+// Fallback visual para cuando el icono no se encuentra
+if (!iconData && import.meta.env.DEV) {
+    console.warn(`Icon '${name}' not found in iconSvgPaths. Check src/components/common/icon/iconPaths.ts`);
+}
+---
+
+<svg
+  class={className}
+  width={width}
+  height={height}
+  viewBox={finalViewBox} fill="currentColor"
+  xmlns="http://www.w3.org/2000/svg"
+  set:html={svgContent}
+  aria-hidden="true" 
+  role="img"
+>
+</svg>
+
+<style>
+  svg {
+    display: inline-block;
+    vertical-align: middle;
+    max-width: 100%;
+    max-height: 100%;
+  }
+  
+  /* Esto asegura que si el path en sí mismo tuviera un `fill` definido, 
+     se sobrescriba para heredar el color del texto. Es una buena práctica. */
+  :global(svg path) {
+    fill: currentColor;
+  }
+</style>
