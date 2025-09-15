@@ -1,0 +1,1156 @@
+---
+import WhatsAppButton from "../components/WhatsAppButton.astro";
+---
+
+<!DOCTYPE html>
+<html lang="es-AR" style="scroll-behavior: smooth;">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Estudio Jurídico Zalazar & Paredes | Abogados en Rosario</title>
+  <meta name="description" content="Estudio jurídico en Rosario especializado en derecho de la salud y laboral. Reclamos contra obras sociales, prepagas. Consultá ahora." />
+  <link rel="canonical" href="https://www.tudominio.com/" />
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Estudio Jurídico en Rosario | Salud y Laboral" />
+  <meta property="og:description" content="Especialistas en casos contra obras sociales, prepagas." />
+  <meta property="og:url" content="https://www.tudominio.com/" />
+  <meta property="og:image" content="https://www.tudominio.com/og-image.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Favicons (reemplazar paths si aplica) -->
+  <link rel="icon" href="/favicon.ico" />
+
+  <!-- MEJORA: Tipografía profesional desde Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@600&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+
+
+  <style>
+    /* =========
+       Reset base
+       ========= */
+    *, *::before, *::after { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; }
+    body { margin: 0; line-height: 1.6; color: #15171a; background: #fff; }
+    img, svg, video { max-width: 100%; height: auto; display: block; }
+    a { color: inherit; text-decoration: none; }
+    ul, ol { padding-left: 1.25rem; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    :focus-visible { outline: 2px solid #0d6efd; outline-offset: 2px; }
+
+    /* =========
+       Design tokens
+       ========= */
+    :root{
+      /* MEJORA: Variables de tipografía para fácil gestión */
+      --font-sans: 'Lato', system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: 'Lora', serif;
+
+      --color-bg: #ffffff;
+      --color-surface: #f7f8fa; /* Ligero ajuste para calidez */
+      --color-muted: #69707a;
+      --color-border: #e5e7eb;
+
+      --brand-1: #1747a6;
+      --brand-2: #16a34a;
+      --brand-3: #0b1f4b;
+      --on-brand: #ffffff;
+
+      --radius-1: 8px;
+      --radius-2: 14px;
+
+      --container: 1120px;
+
+      /* Tipografía fluida (sin cambios, ya es excelente) */
+      --step--1: clamp(0.92rem, 0.88rem + 0.25vw, 1rem);
+      --step-0:  clamp(1rem, 0.96rem + 0.35vw, 1.125rem);
+      --step-1:  clamp(1.125rem, 1rem + 0.8vw, 1.375rem);
+      --step-2:  clamp(1.35rem, 1.1rem + 1.6vw, 1.75rem);
+      --step-3:  clamp(1.75rem, 1.3rem + 2.5vw, 2.25rem);
+      --step-4:  clamp(2.25rem, 1.6rem + 3.8vw, 3rem);
+    }
+    
+    body {
+        font-family: var(--font-sans); /* MEJORA: Aplicar fuente base */
+    }
+
+    /* =========
+       Utilidades
+       ========= */
+    .u-container { width: min(100% - 2rem, var(--container)); margin-inline: auto; }
+    .u-section { padding: 4rem 0; }
+    .u-section--tight { padding: 2.5rem 0; }
+    .u-muted { color: var(--color-muted); }
+    .u-badge { display: inline-block; padding: .35rem .6rem; border-radius: 999px; font-size: .8125rem; background: #e8eefc; color: #1d4ed8; font-weight: 700; }
+    .u-visually-hidden { position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+    /* =========
+       Componentes base
+       ========= */
+    .button { display: inline-flex; align-items: center; gap: .5rem; font-weight: 700; border: 1px solid transparent; border-radius: 999px; padding: .8rem 1.25rem; font-size: var(--step--1); line-height: 1; cursor: pointer; transition: filter .2s ease; }
+    .button--primary { background: var(--brand-2); color: var(--on-brand); }
+    .button--ghost   { background: transparent; border-color: var(--on-brand); color: var(--on-brand); }
+    .button--outline { background: transparent; border-color: var(--on-brand); color: var(--on-brand); }
+    .button--block { width: 100%; justify-content: center; }
+    .button:hover { filter: brightness(1.1); }
+     /* Por defecto, ocultamos ambos */
+      .desktop,
+      .mobile {
+        display: none;
+      }
+
+      /* Mostrar solo en escritorio */
+      @media (min-width: 769px) {
+        .desktop {
+          display: inline-block;
+        }
+      }
+
+      /* Mostrar solo en móviles/tablets */
+      @media (max-width: 768px) {
+        .mobile {
+          display: inline-block;
+        }
+      }
+
+    .card { background: var(--color-bg); border: 1px solid var(--color-border); border-radius: var(--radius-1); padding: 1.5rem; transition: transform .25s ease, box-shadow .25s ease;
+      /* MEJORA: Sombra más sutil y profesional */
+      box-shadow: 0 2px 4px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.06);
+    }
+    .card:hover {
+      /* MEJORA: Micro-interacción para dar sensación de calidad */
+      transform: translateY(-5px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.05), 0 8px 24px rgba(0,0,0,0.08);
+    }
+
+    .section__title { font-family: var(--font-serif); font-size: var(--step-3); line-height: 1.2; margin: 0 0 0.75rem; }
+    .section__subtitle { font-size: var(--step-0); color: var(--color-muted); margin: 0 0 2rem; max-width: 60ch; }
+
+/* =========
+   Header fijo
+   ========= */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: saturate(150%) blur(10px);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.header__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .75rem;
+  padding: .75rem 0;
+}
+
+.header__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: .6rem;
+}
+
+.header__logo {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #183c7a, #0b1f4b);
+  display: grid;
+  place-items: center;
+  color: #fff;
+  font-weight: 700;
+  font-family: var(--font-serif);
+}
+
+.header__name {
+  font-weight: 700;
+  font-size: 1.125rem;
+  color: #0b1f4b;
+}
+
+/* ========== Menú hamburguesa ========== */
+.menu-toggle {
+  display: none;
+}
+
+.menu-icon {
+  font-size: 1.5rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+.header__nav {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: white;
+  display: none;
+  flex-direction: column;
+  padding: 1rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.menu__link {
+  color: #0b1f4b;
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+}
+
+.menu__link[aria-current="page"] {
+  color: var(--brand-1);
+}
+
+.menu__cta {
+  margin-top: 1rem;
+}
+
+.menu__cta .button {
+  width: 100%;
+  text-align: center;
+}
+
+/* Toggle abierto */
+.menu-toggle:checked ~ .header__nav {
+  display: flex;
+}
+
+/* ========== Escritorio ========== */
+@media (min-width: 960px) {
+  .menu-icon {
+    display: none;
+  }
+  .header__nav {
+    position: static;
+    display: block;
+    background: transparent;
+    border: none;
+    padding: 0;
+  }
+  .menu {
+    flex-direction: row;
+    gap: 1.5rem;
+    align-items: center;
+  }
+  .menu__cta {
+    margin-top: 0;
+  }
+  .menu__cta .button {
+    width: auto;
+  }
+}
+
+    /* =========
+       Hero
+       ========= */
+    .hero { position: relative; background: #0b1f4b; color: var(--on-brand); text-align: center; }
+    .hero__inner { position: relative; z-index: 1; padding: 4rem 0; display: flex; flex-direction: column; align-items: center; }
+    .hero__bg { position: absolute; inset: 0; background: linear-gradient(rgba(11,31,75,.65), rgba(11,31,75,.95)), url("/src/assets/images/balanza-caduceo-derecho-salud.png") center/cover no-repeat; filter: grayscale(.2); opacity: .8; }
+    .hero__title { font-family: var(--font-serif); font-size: var(--step-4); line-height: 1.1; margin: 0 0 .75rem; letter-spacing: -0.02em; max-width: 20ch; }
+    .hero__subtitle { font-size: var(--step-1); margin: 0 0 1.5rem; color: #e5efff; max-width: 50ch; }
+    .hero__actions { display: flex; flex-wrap: wrap; gap: .75rem; justify-content: center; }
+    .hero__seal { margin-top: 1.5rem; font-size: var(--step--1); color: #d9e3ff; }
+
+    @media (min-width: 960px){
+      .hero__inner { padding: 6rem 0; }
+    }
+
+    /* =========
+       Autoridad inmediata
+       ========= */
+    .trust { background: #f3f5f8; display:none;}
+    .trust__grid { display: grid; gap: 2rem; align-items: center; }
+    .trust__quote { display: flex; gap: .75rem; align-items: flex-start; }
+    .trust__quote-icon { flex: 0 0 28px; height: 28px; color: #1d4ed8; }
+    .trust__quote-text { margin: 0; font-size: var(--step-0); }
+    .trust__logos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; align-items: center; }
+    .trust__logo { filter: grayscale(1) contrast(0) brightness(1.2); opacity: .7; } /* Mejor estilo de logos */
+    .trust__logo svg { max-height: 28px; width: auto; margin: auto; }
+
+    @media (min-width: 800px){
+      .trust__grid { grid-template-columns: 1.2fr 1fr; gap: 3rem; }
+    }
+
+    /* ===========================
+   Servicios - adaptado al sitio
+   =========================== */
+.services__grid{
+  display: grid;
+  gap: 1.5rem;
+  /* responsive: tantas columnas como quepan, mínimo 180px */
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  align-items: stretch;
+}
+
+/* tarjeta de servicio coherente con .card existente */
+.service-card{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+  gap: .75rem;
+  padding: 1.25rem;
+  border-radius: var(--radius-2);
+  transition: transform .25s ease, box-shadow .25s ease, border-color .2s ease;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  min-height: 150px;
+}
+
+/* hover consistente con otras tarjetas del sitio */
+.service-card:hover{
+  transform: translateY(-6px);
+  box-shadow: 0 8px 20px rgba(11,31,75,0.06);
+  border-color: var(--brand-1);
+}
+.service-card__link{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+}
+
+/* icono circular */
+.service-card__media{
+  width: 56px;
+  height: 56px;
+  border-radius: 999px;
+  background: radial-gradient(circle, #ffffff 50%, #eef7f0 100%);
+  border: 2px solid rgba(10,120,70,0.06);
+  display: grid;
+  place-items: center;
+  transition: transform .22s ease, background .22s ease, border-color .22s ease;
+  flex: 0 0 auto;
+}
+
+/* SVG usa currentColor para adaptarse al tema */
+.service-card__media svg{ width: 36px; height: 36px; color: var(--brand-1); }
+
+/* etiqueta del servicio */
+.service-card__label{
+  font-weight: 700;
+  font-size: var(--step--1);
+  color: var(--brand-3);
+}
+
+/* CTA general debajo del grid */
+.services__cta{
+  margin-top: 1.75rem;
+  text-align: center;
+  background: var(--color-surface);
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius-2);
+  padding: 1.25rem;
+}
+
+
+    /* =========
+       Casos de éxito
+       ========= */
+    .cases { background: var(--color-surface); }
+    .cases__grid { display: grid; grid-auto-flow: column; grid-auto-columns: 85%; gap: 1rem; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 1rem; }
+    .case { scroll-snap-align: start; display: flex; flex-direction: column; }
+    .case__content { flex-grow: 1; }
+    .case__title { font-family: var(--font-serif); font-weight: 600; font-size: 1.1rem; margin: .5rem 0 .25rem; }
+    .case__summary { margin: 0 0 1rem; color: var(--color-muted); flex-grow: 1; }
+    .case__meta { font-size: .9rem; margin-top: auto; }
+    .case__meta a { color: var(--brand-1); text-decoration: underline; text-underline-offset: 3px; font-weight: 700; }
+
+    @media (max-width: 899px) {
+      /* MEJORA UX: Pista visual para el scroll horizontal */
+      .cases__grid::after {
+        content: '→ Deslizar para ver más';
+        grid-column: 1 / -1;
+        text-align: right;
+        font-size: .85rem;
+        color: var(--color-muted);
+        margin-top: .5rem;
+        padding-right: .5rem;
+      }
+    }
+    @media (min-width: 900px){
+      .cases__grid { grid-auto-flow: row; grid-template-columns: repeat(3, 1fr); grid-auto-columns: unset; overflow: visible; gap: 1.5rem; }
+    }
+
+    /* ===== CTA ===== */
+
+    .cta {
+  background-color: #0b1f4b;
+  padding: 4rem 1rem;
+  text-align: center;
+}
+
+.cta-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.cta-container h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0;
+}
+
+@media (min-width: 640px) {
+  .cta-container h2 {
+    font-size: 2.5rem;
+  }
+}
+
+.cta-container p {
+  margin-top: 1rem;
+  font-size: 1.25rem;
+  color: #bfdbfe;
+}
+
+.cta-button {
+  margin-top: 2rem;
+}
+
+.cta-button a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 1rem 2rem;
+  background-color: #16a34a;
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.125rem;
+  border-radius: 999px;
+  text-decoration: none;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+  box-shadow: 0 10px 15px rgba(0,0,0,0.2);
+}
+
+.cta-button a:hover {
+  background-color: #15803d;
+  transform: scale(1.05);
+}
+
+.cta-button svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+/* ===== Final CTA Section ===== */
+.final-cta {
+  padding: 5rem 1rem;
+  background: var(--brand-3);
+  color: #fff;
+  text-align: center;
+}
+
+.final-cta__container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.final-cta__title {
+  font-family: serif;
+  font-size: 2.25rem;
+  font-weight: 700;
+}
+
+@media (min-width: 768px) {
+  .final-cta__title {
+    font-size: 2.5rem;
+  }
+}
+
+.final-cta__subtitle {
+  margin-top: 1rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  color: #bfdbfe; /* azul claro */
+  font-size: 1.125rem;
+}
+
+/* ===== FAQ ===== */
+
+.faq {
+  padding: 4rem 1rem;
+  background: #fff;
+}
+
+.faq-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.faq-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.faq-header h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #0b1f4b;
+  margin: 0;
+}
+
+@media (min-width: 640px) {
+  .faq-header h2 {
+    font-size: 2.5rem;
+  }
+}
+
+.faq-header p {
+  margin-top: 1rem;
+  font-size: 1.125rem;
+  color: #4b5563;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.faq-list {
+  max-width: 768px;
+  margin: 0 auto;
+}
+
+.faq-list details {
+  border-bottom: 1px solid #e5e7eb;
+  padding: 1rem 0;
+}
+
+.faq-list summary {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #374151;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  list-style: none;
+}
+
+.faq-list summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-list summary::after {
+  content: "⌄";
+  font-size: 1.25rem;
+  transition: transform 0.3s ease;
+}
+
+.faq-list[open] summary::after,
+.faq-list details[open] summary::after {
+  transform: rotate(180deg);
+}
+
+.faq-list p {
+  margin-top: 0.75rem;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #4b5563;
+  padding-right: 1rem;
+}
+
+
+
+/* ===== SOBRE MÍ ===== */
+.sobre-mi {
+  padding: 4rem 1rem;              /* py-16 */
+  background-color: #f9fafb;       /* bg-gray-50 */
+}
+
+.sobre-mi__container {
+  max-width: 1200px;               /* max-w-6xl */
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;                       /* gap-12 */
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .sobre-mi__container {
+    grid-template-columns: 2fr 3fr; /* md:grid-cols-5 con col-span */
+  }
+}
+
+.sobre-mi__media img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  aspect-ratio: 4/5;
+  border-radius: 0.75rem;          /* rounded-lg */
+  box-shadow: 0 25px 50px rgba(0,0,0,0.25); /* shadow-2xl */
+}
+
+.sobre-mi__content h2 {
+  font-size: 2rem;                 /* text-3xl */
+  font-weight: 700;
+  color: #0b1f4b;
+  margin: 0;
+}
+
+@media (min-width: 640px) {
+  .sobre-mi__content h2 {
+    font-size: 2.5rem;             /* sm:text-4xl */
+  }
+}
+
+.sobre-mi__content p {
+  margin-top: 1rem;
+  font-size: 1.125rem;             /* text-lg */
+  line-height: 1.75rem;            /* leading-relaxed */
+  color: #4b5563;                  /* text-gray-600 */
+}
+
+.sobre-mi__highlight {
+  margin-top: 2rem;
+  background-color: #dbeafe;       /* bg-blue-100 */
+  border-left: 4px solid #1747a6;
+  color: #0b1f4b;
+  padding: 1rem;
+  border-radius: 0 0.5rem 0.5rem 0; /* rounded-r-lg */
+}
+
+
+
+    /* =========
+       Proceso
+       ========= */
+    .process { background: var(--color-surface); }
+    .process__steps { display: grid; gap: 1rem; margin-top: 2rem; }
+    .step { display: grid; grid-template-columns: 40px 1fr; gap: 1rem; align-items: start; background: #fff; border: 1px solid var(--color-border); border-radius: 12px; padding: 1.25rem; }
+    .step__num { width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; background: #eaf1ff; color: #1d4ed8; font-weight: 800; font-family: var(--font-serif); }
+    .step h3 { margin: .1rem 0 .25rem; font-size: 1.1rem; font-weight: 700; }
+    .step p { margin: 0; color: var(--color-muted); }
+
+    @media (min-width: 900px){
+      .process__steps { grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    }
+
+    /* =========
+       Contacto / confianza
+       ========= */
+    .contact__grid { display: grid; gap: 1.5rem; }
+    .contact__panel { padding: 2rem; border-radius: var(--radius-2); }
+    .contact__panel--form { background: #fff; border: 1px solid var(--color-border); }
+    .contact__list { margin: 0; padding: 0; list-style: none; display: grid; gap: .75rem; }
+    .contact__item { display: flex; gap: .75rem; align-items: center; }
+    .contact__map { min-height: 260px; border: 0; border-radius: var(--radius-1); width: 100%; }
+    @media (min-width: 900px){
+      .contact__grid { grid-template-columns: 1fr 1fr; }
+      .contact__map { min-height: 100%; }
+    }
+
+    /* =========
+       Footer
+       ========= */
+    .footer { background: #0f172a; color: #cbd5e1; padding: 3rem 0; }
+    .footer__top { display: grid; gap: 2rem; border-bottom: 1px solid rgba(255,255,255,.08); padding-bottom: 2rem; }
+    .footer__brand { display: flex; align-items: center; gap: .6rem; }
+    .footer__brand strong { font-size: 1.1rem; }
+    .footer__menu { display: grid; gap: .5rem; }
+    .footer__menu a { color: #e2e8f0; }
+    .footer__bottom { display: grid; gap: .5rem; padding-top: 2rem; font-size: .9rem; color: #94a3b8; }
+    @media (min-width: 900px){
+      .footer__top { grid-template-columns: 1.2fr 1fr 1fr; align-items: start; }
+    }
+
+    /* =========
+       Botón flotante WhatsApp
+       ========= */
+    .whatsapp-fab { position: fixed; right: 1.5rem; bottom: 1.5rem; z-index: 1001; }
+    .whatsapp-fab .button { box-shadow: 0 6px 24px rgba(22,163,74,.35); font-size: 1rem; padding: 1rem 1.5rem; }
+
+    /* =========
+       Ajustes de scrolling con header sticky
+       ========= */
+    :target { scroll-margin-top: 100px; }
+
+    /* =========
+       Motion reducción
+       ========= */
+    @media (prefers-reduced-motion: reduce){
+      * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+    }
+  </style>
+
+  <!-- Datos estructurados (SEO Local) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LegalService",
+    "name": "Estudio Jurídico Zalazar & Paredes",
+    "image": "https://www.tudominio.com/og-image.jpg",
+    "url": "https://www.tudominio.com/",
+    "telephone": "+54 341 000 0000",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Calle 123",
+      "addressLocality": "Rosario",
+      "addressRegion": "Santa Fe",
+      "postalCode": "2000",
+      "addressCountry": "AR"
+    },
+    "areaServed": "Rosario y alrededores",
+    "sameAs": ["https://www.facebook.com/","https://www.instagram.com/"]
+  }
+  </script>
+</head>
+<body>
+
+  <!-- ========== HEADER (fijo) ========== -->
+<header class="header" role="banner">
+  <div class="u-container header__bar">
+    <a href="/" class="header__brand"aria-label="Inicio">
+      <div class="header__logo" aria-hidden="true">Z&P</div>
+      <span class="header__name">Zalazar & Paredes</span>
+    </a>
+
+    <!-- Toggle del menú -->
+    <input type="checkbox" id="menu-toggle" class="menu-toggle" aria-hidden="true" />
+    <label for="menu-toggle" class="menu-icon" aria-label="Abrir menú">
+      ☰
+    </label>
+
+    <nav class="header__nav" aria-label="Navegación principal">
+      <ul class="menu" role="list">
+        <li><a class="menu__link" href="/" aria-current="page">Inicio</a></li>
+        <li><a class="menu__link" href="/abogado-de-salud">Abogado de Salud</a></li>
+        <li><a class="menu__link" href="/abogado-laboral">Abogado Laboral</a></li>
+        <li><a class="menu__link" href="/casos-de-exito">Casos de éxito</a></li>
+        <li><a class="menu__link" href="/contacto">Contacto</a></li>
+        <!-- CTA dentro del menú en móviles -->
+        <li class="menu__cta">
+          <a class="button button--primary desktop"
+            href="https://web.whatsapp.com/send?phone=5403415873908&text=Hola%2C%20quiero%20hacer%20una%20consulta: "  target="_blank" aria-label="Consultar ahora por WhatsApp">
+            Consultar
+          </a>
+          <a class="button button--primary mobile"
+            href="https://wa.me/5403415873908?text=Hola%2C%20quiero%20hacer%20una%20consulta: "  target="_blank" aria-label="Consultar ahora por WhatsApp">
+            Consultar
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+  <main id="contenido">
+    <!-- ========== HERO ========== -->
+    <section id="inicio" class="hero" aria-labelledby="hero-title">
+      <div class="hero__bg" aria-hidden="true"></div>
+      <div class="u-container hero__inner">
+        <h1 id="hero-title" class="hero__title">Abogado de Salud en Rosario y Santa Fe – Amparos, Fertilización Asistida y Mala Praxis</h1>
+        <p class="hero__subtitle">Defendemos tu derecho a la salud: medicación, tratamientos oncológicos, prótesis y fertilización asistida. Atención inmediata y personalizada.</p>
+        <div class="hero__actions">
+          <a class="button button--primary desktop"
+            href="https://web.whatsapp.com/send?phone=5403415873908&text=Hola%2C%20quiero%20hacer%20una%20consulta: "  target="_blank">Consultar por WhatsApp</a>
+          <a class="button button--primary mobile"
+            href="https://wa.me/5403415873908?text=Hola%2C%20quiero%20hacer%20una%20consulta: "  target="_blank">Consultar por WhatsApp</a>
+          <a class="button button--ghost" href="#servicios">Ver servicios</a>
+        </div>
+        <p class="hero__seal">Trayectoria comprobada. Compromiso real.</p>
+      </div>
+    </section>
+
+    <!-- ========== AUTORIDAD INMEDIATA ========== -->
+    <section class="trust u-section u-section--tight" aria-label="Testimonio y medios">
+      <div class="u-container trust__grid">
+        <div class="trust__quote">
+          <svg class="trust__quote-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9.983 3v7.391c0 2.9-2.35 5.25-5.25 5.25s-5.25-2.35-5.25-5.25V3h10.5zM21.483 3v7.391c0 2.9-2.35 5.25-5.25 5.25s-5.25-2.35-5.25-5.25V3h10.5z"></path></svg>
+          <p class="trust__quote-text"><strong>“Resolvieron mi tratamiento a tiempo.</strong> El estudio se encargó de todo con mi obra social; me sentí acompañado en cada paso.” <br><strong>— Juan C., cliente de Salud</strong></p>
+        </div>
+        <div class="trust__logos" aria-label="Medios donde nuestro trabajo fue mencionado">
+          <!-- MEJORA: Logos de medios más realistas (SVG) -->
+          <div class="trust__logo" role="img" aria-label="La Capital"><svg viewBox="0 0 135 25"><text x="0" y="15" font-family="Times New Roman, serif" font-size="18" font-weight="bold">LA CAPITAL</text></svg></div>
+          <div class="trust__logo" role="img" aria-label="Página 12"><svg viewBox="0 0 135 25"><text x="0" y="18" font-family="Arial, sans-serif" font-size="22" font-weight="bold">Página/12</text></svg></div>
+          <div class="trust__logo" role="img" aria-label="Telefe Rosario"><svg viewBox="0 0 135 25"><text x="0" y="18" font-family="Arial, sans-serif" font-size="18" font-weight="bold">telefe</text><circle cx="80" cy="12" r="4" fill="#000"/><circle cx="90" cy="12" r="4" fill="#000"/><circle cx="100" cy="12" r="4" fill="#000"/></svg></div>
+        </div>
+      </div>
+    </section>
+    <!-- ========== SOBRE MÍ ========== -->
+
+    <section id="sobre-mi" class="sobre-mi">
+  <div class="sobre-mi__container">
+    <div class="sobre-mi__media">
+      <img 
+        src="https://picsum.photos/id/1005/400/500" 
+        alt="Retrato del abogado Federico Zalazar"
+      />
+    </div>
+    <div class="sobre-mi__content">
+      <h2>Sobre Federico Zalazar – Especialista en Derecho de la Salud</h2>
+      <p>
+        Soy Federico Zalazar, abogado especializado en derecho sanitario. Con experiencia en amparos, fertilización asistida, medicamentos oncológicos y mala praxis.
+      </p>
+      <p>
+        Mi compromiso es que tengas acceso a la medicación, tratamientos y prestaciones que te corresponden por ley.
+      </p>
+      <p>
+        Atiendo casos en <strong>Rosario y en toda la provincia de Santa Fe, Argentina</strong>
+      </p>
+      <div class="sobre-mi__highlight">
+        <p>📌 <strong>Primera consulta sin compromiso.</strong></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+    <!-- ========== SERVICIOS PRINCIPALES ========== -->
+    
+    <section id="servicios" class="u-section" aria-labelledby="servicios-title">
+  <div class="u-container">
+    <h2 id="servicios-title" class="section__title">Áreas de Especialización</h2>
+    <p class="section__subtitle">Asesoramiento práctico y amparos de salud por negativa de cobertura. Hablá con quienes te van a llevar el caso.</p>
+
+    <div class="services__grid" role="list" aria-label="Listado de servicios">
+
+      <!-- Acceso a medicación -->
+      <article class="card service-card" role="listitem" aria-label="Acceso a medicación">
+        <a class="service-card__link" href="/abogado-salud#medicacion" aria-label="Acceso a medicación - ver">
+          <div class="service-card__media" aria-hidden="true">
+            <svg viewBox="0 0 64 64" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M57.341 6.659C51.524.843 42.521.413 37.233 5.704L20.708 22.223l.005.006a1.852 1.852 0 0 0-.098 2.387L5.298 39.932C.587 44.645.969 52.666 6.151 57.85c2.753 2.752 6.307 4.15 9.74 4.15c3.03 0 5.967-1.09 8.177-3.299l15.317-15.316a1.85 1.85 0 0 0 2.386-.1l.005.004l16.521-16.521c5.289-5.288 4.861-14.291-.956-20.109M22.654 57.287C20.904 59.036 18.503 60 15.892 60c-3.025 0-6.06-1.3-8.326-3.564c-4.394-4.396-4.777-11.164-.854-15.09l15.301-15.3l15.942 15.941l-15.301 15.3"/>
+          </svg>
+          </div>
+          <div class="service-card__label">Acceso a medicación</div>
+        </a>
+      </article>
+
+      <!-- Prestaciones por discapacidad -->
+      <article class="card service-card" role="listitem" aria-label="Prestaciones por discapacidad">
+        <a class="service-card__link" href="/abogado-salud#discapacidad" aria-label="Prestaciones por discapacidad - ver">
+          <div class="service-card__media" aria-hidden="true">
+            <svg viewBox="0 0 32 32" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M22.621 23.668c-0.172-0.096-0.378-0.152-0.597-0.152-0.471 0-0.882 0.262-1.093 0.648l-0.003 0.006c-1.512 2.749-4.389 4.581-7.694 4.581-4.833 0-8.751-3.918-8.751-8.751 0-2.853 1.366-5.388 3.479-6.985l0.022-0.016c0.304-0.23 0.499-0.592 0.499-0.999 0-0.69-0.56-1.25-1.25-1.25-0.283 0-0.545 0.094-0.754 0.253l0.003-0.002c-2.744 2.074-4.499 5.332-4.499 9 0 6.213 5.037 11.25 11.25 11.25 4.248 0 7.947-2.355 9.861-5.831l0.029-0.058c0.096-0.172 0.152-0.378 0.152-0.596 0-0.471-0.262-0.882-0.647-1.094l-0.006-0.003zM31.213 24.697c-0.139-0.549-0.628-0.948-1.211-0.948-0.108 0-0.213 0.014-0.313 0.040l0.009-0.002-2.885 0.721-2.701-7.912c-0.174-0.496-0.638-0.846-1.184-0.846h-8.855l-0.385-2.5h4.312c0.69 0 1.25-0.56 1.25-1.25s-0.56-1.25-1.25-1.25v0h-4.697l-0.603-3.92c0.967-0.59 1.604-1.639 1.604-2.837 0-1.828-1.482-3.311-3.311-3.311s-3.311 1.482-3.311 3.311c0 1.558 1.076 2.864 2.525 3.217l0.023 0.005 1.534 9.975c0.095 0.604 0.612 1.060 1.235 1.060 0 0 0 0 0 0h9.033l2.783 8.154c0.174 0.496 0.638 0.846 1.184 0.846 0.107 0 0.212-0.014 0.311-0.039l-0.009 0.002 4-1c0.548-0.14 0.947-0.63 0.947-1.213 0-0.108-0.014-0.212-0.039-0.312l0.002 0.009z"/>
+          </svg>
+          </div>
+          <div class="service-card__label">Prestaciones por discapacidad</div>
+        </a>
+      </article>
+
+      <!-- Cirugías y prótesis -->
+      <article class="card service-card" role="listitem" aria-label="Cirugías y prótesis">
+        <a class="service-card__link" href="/abogado-salud#cirugias" aria-label="Cirugías y prótesis - ver">
+          <div class="service-card__media" aria-hidden="true">
+            <svg viewBox="0 0 180.147 180.147" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M166.578,0H103.57c-4.143,0-7.5,3.357-7.5,7.5c0,4.142,3.357,7.5,7.5,7.5h4.237l6.42,89.992
+              c0.069,0.967,0.325,1.912,0.754,2.782l13.024,26.423v30.95h-0.439c-4.143,0-7.5,3.357-7.5,7.5s3.357,7.5,7.5,7.5h15.861
+              c4.143,0,7.5-3.357,7.5-7.5s-3.357-7.5-7.5-7.5h-0.422v-30.95l13.025-26.423c0.429-0.87,0.684-1.815,0.754-2.782L163.204,15h3.374
+              c4.143,0,7.5-3.358,7.5-7.5C174.078,3.357,170.72,0,166.578,0z M135.506,115.484l-6.421-13.025l-1.394-19.533h15.629l-1.394,19.533
+              L135.506,115.484z M126.621,67.926l-3.776-52.925h25.322l-3.776,52.925H126.621z"/>
+            <path d="M76.578,0H13.57c-4.142,0-7.5,3.357-7.5,7.5c0,4.142,3.358,7.5,7.5,7.5h4.237l6.421,89.992
+              c0.069,0.967,0.325,1.912,0.754,2.782l13.024,26.422v30.951h-0.438c-4.142,0-7.5,3.357-7.5,7.5s3.358,7.5,7.5,7.5h15.861
+              c4.142,0,7.5-3.357,7.5-7.5s-3.358-7.5-7.5-7.5h-0.423v-30.951l13.025-26.422c0.429-0.87,0.685-1.815,0.754-2.782L73.205,15h3.374
+              c4.142,0,7.5-3.358,7.5-7.5C84.078,3.357,80.72,0,76.578,0z M45.505,115.485l-6.421-13.026l-1.393-19.533H53.32l-1.394,19.533
+              L45.505,115.485z M36.621,67.926l-3.776-52.925h25.322L54.39,67.926H36.621z"/>
+          </svg>
+          </div>
+          <div class="service-card__label">Cirugías y prótesis</div>
+        </a>
+      </article>
+
+      <!-- Fertilización asistida -->
+      <article class="card service-card" role="listitem" aria-label="Fertilización asistida">
+        <a class="service-card__link" href="/abogado-salud#fertilizacion" aria-label="Fertilización asistida - ver">
+          <div class="service-card__media" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" 
+           stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M19 21C19 20.663 18.9818 20.3293 18.9463 20M5 3C5 3.33701 5.01817 3.67071 5.0537 4M5 21C5 16.8566 7.74671 13.2152 11.7307 12.077L12.2693 11.923C16.2533 10.7848 19 7.14339 19 3M15 4H5.0537M12.5 8H6.46206M9 20H18.9463M11.5 16H17.5379M18.9463 20C18.7899 18.5509 18.2974 17.187 17.5379 16M17.5379 16C16.3482 14.1405 14.5033 12.7152 12.2693 12.077L11.7307 11.923C9.49674 11.2848 7.65184 9.8595 6.46206 8M5.0537 4C5.21006 5.44909 5.70259 6.81301 6.46206 8"/>
+          </svg>
+          </div>
+          <div class="service-card__label">Fertilización asistida</div>
+        </a>
+      </article>
+
+      <!-- Tratamientos oncológicos -->
+      <article class="card service-card" role="listitem" aria-label="Tratamientos oncológicos">
+        <a class="service-card__link" href="/abogado-salud#oncologicos" aria-label="Tratamientos oncológicos - ver">
+          <div class="service-card__media" aria-hidden="true">
+            <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path fill="currentColor" d="M255.992,0C184.108,0,116.46,64.412,141.82,188.497c5.047,24.648,18.6,52.267,37.076,80.704
+              c23.1-20.859,45.639-42.536,65.43-63.834c-6.338-7.181-12.344-14.297-17.921-21.305c-45.946-57.778-38.06-128.52,29.588-128.52
+              c67.664,0,75.549,70.742,29.604,128.52C201.036,290.416,18.769,420.408,18.769,420.408l83.534,19.642l1.465,71.95
+              c0,0,241.028-199.419,266.404-323.503C395.541,64.412,327.876,0,255.992,0z"/>
+            <path fill="currentColor" d="M336.192,295.28c-18.17,25.898-41.014,53.889-68.409,83.914C336.911,452.99,408.232,512,408.232,512
+              l7.563-71.95l77.436-19.642C493.231,420.408,414.281,364.104,336.192,295.28z"/>
+          </svg>
+          </div>
+          <div class="service-card__label">Tratamientos oncológicos</div>
+        </a>
+      </article>
+
+      <!-- Sucesiones -->
+      <article class="card service-card" role="listitem" aria-label="Sucesiones">
+        <a class="service-card__link" href="/abogado-familia#sucesiones" aria-label="Sucesiones - ver">
+          <div class="service-card__media" aria-hidden="true">
+            <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path fill="currentColor" d="M78.642,118.933c22.879,0,41.415-18.551,41.415-41.414c0-22.888-18.536-41.423-41.415-41.423
+              c-22.887,0-41.422,18.535-41.422,41.423C37.219,100.383,55.755,118.933,78.642,118.933z"/>
+            <path fill="currentColor" d="M255.706,228.731v0.062c0.101,0,0.193-0.031,0.294-0.031c0.101,0,0.194,0.031,0.294,0.031v-0.062
+              c15.563-0.317,28.082-12.976,28.082-28.601c0-15.648-12.52-28.299-28.082-28.617v-0.062c-0.1,0-0.193,0.031-0.294,0.031
+              c-0.101,0-0.193-0.031-0.294-0.031v0.062c-15.563,0.318-28.082,12.969-28.082,28.617
+              C227.624,215.754,240.143,228.413,255.706,228.731z"/>
+            <path fill="currentColor" d="M433.358,118.933c22.887,0,41.423-18.551,41.423-41.414c0-22.888-18.536-41.423-41.423-41.423
+              c-22.879,0-41.414,18.535-41.414,41.423C391.944,100.383,410.48,118.933,433.358,118.933z"/>
+            <path fill="currentColor" d="M512,319.675V180.463c0-20.076-21.834-41.91-41.903-41.91h-5.799l-28.818,28.818l-28.214-28.214
+              c-17.839,2.609-33.564,13.665-41.918,30.018l-33.494,97.967c-1.154,2.245-3.298,3.84-5.792,4.281
+              c-2.493,0.442-5.048-0.31-6.914-2.036l-20.835-18.04c-6.232-5.769-14.409-8.974-22.902-8.974H256h-19.41
+              c-8.494,0-16.67,3.206-22.903,8.974l-20.835,18.04c-1.866,1.726-4.422,2.478-6.914,2.036c-2.494-0.442-4.638-2.036-5.792-4.281
+              l-33.494-97.967c-9.6-18.791-28.926-30.622-50.032-30.622H78.216H41.903C21.834,138.553,0,160.387,0,180.463v139.211
+              c0,10.035,8.13,18.172,18.165,18.172c4.939,0,0,0,12.682,0l6.906,118.724c0,10.677,8.664,19.333,19.341,19.333
+              c4.506,0,12.814,0,21.122,0c8.307,0,16.615,0,21.121,0c10.677,0,19.341-8.656,19.341-19.333l6.906-118.724l-0.086-84.765
+              c0-1.339,0.914-2.493,2.222-2.818c1.309-0.31,2.648,0.309,3.26,1.502l26.573,65.401c3.205,6.256,9.152,10.654,16.074,11.886
+              c6.921,1.23,14.021-0.844,19.186-5.614l25.426-18.729c0.852-0.782,2.083-0.983,3.136-0.542c1.061,0.472,1.742,1.518,1.742,2.663
+              l0.094,73.508l4.777,82.187c0,7.387,6,13.379,13.395,13.379c3.112,0,8.865,0,14.618,0c5.753,0,11.506,0,14.618,0
+              c7.394,0,13.394-5.992,13.394-13.379l4.777-82.187l0.093-73.508c0-1.146,0.681-2.192,1.742-2.663
+              c1.053-0.442,2.284-0.24,3.136,0.542l25.426,18.729c5.164,4.77,12.264,6.844,19.187,5.614c6.921-1.231,12.868-5.629,16.073-11.886
+              l26.572-65.401c0.612-1.192,1.951-1.812,3.26-1.502c1.308,0.325,2.222,1.479,2.222,2.818l-0.031,32.332l-27.881,86.648
+              c-0.659,2.051-0.302,4.296,0.967,6.039c1.27,1.742,3.298,2.772,5.451,2.772h23.91l4.405,75.699
+              c0,10.677,8.664,19.333,19.341,19.333c4.506,0,12.814,0,21.121,0c8.308,0,16.615,0,21.122,0c10.677,0,19.34-8.656,19.34-19.333
+              l4.406-75.699h26.418c2.152,0,4.181-1.03,5.451-2.772c1.27-1.743,1.626-3.988,0.968-6.039L500.1,336.67
+              C507.037,334.107,512,327.495,512,319.675z M85.424,159.087v74.592H63.389v-74.592H85.424z"/>
+          </svg>
+          </div>
+          <div class="service-card__label">Sucesiones</div>
+        </a>
+      </article>
+
+    </div>
+
+    <div class="services__cta" role="note" aria-label="Consulta personalizada">
+      <p style="margin:0 0 .6rem;">Si tu caso no figura, escribinos: escuchamos, evaluamos y te decimos cómo avanzar.</p>
+      <a class="button button--primary desktop" href="https://web.whatsapp.com/send?phone=5403415873908&text=Hola,%20quiero%20consultar%20sobre%20mi%20caso"  target="_blank" aria-label="Consultanos por WhatsApp">Consultanos por WhatsApp</a>
+      <a class="button button--primary mobile" href="https://wa.me/5403415873908?text=Hola,%20quiero%20consultar%20sobre%20mi%20caso"  target="_blank" aria-label="Consultanos por WhatsApp">Consultanos por WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<!-- ========== CÓMO TRABAJAMOS ========== -->
+<section class="process u-section" aria-labelledby="process-title">
+  <div class="u-container" style="text-align: center;">
+    <h2 id="process-title" class="section__title">Nuestro Proceso Simplificado</h2>
+
+    <div class="process__steps" role="list">
+      <article class="step" role="listitem">
+        <div class="step__num" aria-hidden="true">1</div>
+        <div>
+          <h3>Contacto y Evaluación</h3>
+          <p>Escuchamos tu caso sin costo y analizamos su viabilidad.</p>
+        </div>
+      </article>
+      <article class="step" role="listitem">
+        <div class="step__num" aria-hidden="true">2</div>
+        <div>
+          <h3>Diseño de Estrategia</h3>
+          <p>Revisamos la documentación y te explicamos los pasos a seguir.</p>
+        </div>
+      </article>
+      <article class="step" role="listitem">
+        <div class="step__num" aria-hidden="true">3</div>
+        <div>
+          <h3>Defensa Activa</h3>
+          <p>Te representamos en todo el proceso hasta obtener un resultado.</p>
+        </div>
+      </article>
+    </div>
+
+    <div style="margin-top: 2rem;">
+      <a
+                class="button button--primary desktop"
+                href="https://web.whatsapp.com/send?phone=5403415873908&text=Hola%2C%20quiero%20agendar%20una%20consulta."  target="_blank"
+                aria-label="Agendar consulta ahora por WhatsApp"
+                >Agendá tu consulta</a
+              >
+              <a
+                class="button button--primary mobile"
+                href="https://wa.me/5403415873908?text=Hola%2C%20quiero%20agendar%20una%20consulta."  target="_blank"
+                aria-label="Agendar consulta ahora por WhatsApp"
+                >Agendá tu consulta</a
+              >
+    </div>
+  </div>
+</section>
+
+    <!-- ========== CASOS DE ÉXITO ========== -->
+    <section id="casos-exito" class="cases u-section" aria-labelledby="casos-title">
+      <div class="u-container">
+        <h2 id="casos-title" class="section__title">Historias reales de pacientes que defendieron su derecho</h2>
+        <p class="section__subtitle">Resultados concretos que marcan la diferencia en la vida de las personas.
+
+</p>
+
+        <div class="cases__grid" role="list">
+          <article class="card case" role="listitem">
+            <div class="case__content">
+              <span class="u-badge">Cobertura</span>
+              <h3 class="case__title">Fallo judicial obliga a cobertura de estudio Optimus Biomarkers</h3>
+              <p class="case__summary">Una afiliada logró acceder al estudio genético esencial para su tratamiento, luego de que su prepaga negara la cobertura. Nuestro equipo obtuvo el amparo que garantizó el 100%.</p>
+            </div>
+            <p class="case__meta">Nota relacionada: <a href="#/" aria-label="Leer nota periodística sobre PAMI">Ver nota periodística</a></p>
+          </article>
+          <article class="card case" role="listitem">
+            <div class="case__content">
+              <span class="u-badge">Prótesis</span>
+              <h3 class="case__title">Afiliado obtiene prótesis importada para cirugía de rodilla</h3>
+              <p class="case__summary">Logramos que un trabajador acceda a la prótesis importada indicada por su médico, pese a la negativa de la obra social que pretendía usar material nacional de menor calidad.</p>
+            </div>
+            <p class="case__meta">Detalle del caso: <a href="#/">Leer caso completo</a></p>
+          </article>
+          <article class="card case" role="listitem">
+            <div class="case__content">
+              <span class="u-badge">Fertilidad</span>
+              <h3 class="case__title">Fallo inédito ordena cobertura de criopreservación de óvulos</h3>
+              <p class="case__summary">Una joven con menopausia precoz consiguió que su prepaga cubra al 100% el costoso tratamiento de fertilidad, garantizando así su derecho a ser madre en el futuro.</p>
+            </div>
+            <p class="case__meta">Resolución: <a href="#/">Leer caso completo</a></p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+<!-- ===== Final CTA Section =====  -->
+
+<section class="final-cta">
+<div class="final-cta__container">
+  <h2 class="final-cta__title">¿Listo para tu consulta?</h2>
+  <p class="final-cta__subtitle">
+    Hablá con nosotros ahora mismo. Estamos para defender tus derechos.
+  </p>
+  <div class="final-cta__buttons">
+    <a 
+      href="https://web.whatsapp.com/send?phone=5403415873908&text=Hola%2C%20quiero%20hacer%20una%20consulta: " 
+      class="button button--primary desktop"  target="_blank"
+    >
+      Contactar por WhatsApp
+    </a>
+    <a 
+      href="https://wa.me/5403415873908?text=Hola%2C%20quiero%20hacer%20una%20consulta: " target="_blank"
+      class="button button--primary mobile"
+    >
+      Contactar por WhatsApp
+    </a>
+    <a 
+      href="tel:+5403415873908" 
+      class="button button--outline"
+    >
+      Llamar ahora
+    </a>
+  </div>
+</div>
+</section>
+
+    <!-- ========== FAQ ========== -->
+    <section id="faq" class="faq">
+  <div class="faq-container">
+    <div class="faq-header">
+      <h2>Preguntas frecuentes sobre derecho a la salud</h2>
+      <p>Respuestas claras a las dudas más comunes para que tomes la mejor decisión.</p>
+    </div>
+    <div class="faq-list">
+      <details open>
+        <summary>¿Cuánto tiempo lleva un amparo de salud?</summary>
+        <p>Generalmente entre 20 y 45 días, dependiendo de la urgencia del caso y del juzgado interviniente. En situaciones de vida o muerte, se pueden obtener medidas cautelares en 24-72 horas.</p>
+      </details>
+      <details>
+        <summary>¿Puedo reclamar a mi obra social por fertilización asistida?</summary>
+        <p>Sí. La ley obliga a obras sociales y prepagas a cubrir tratamientos de reproducción médicamente asistida, bajo ciertas condiciones. Si te niegan la cobertura, podemos ayudarte.</p>
+      </details>
+      <details>
+        <summary>¿Qué hago si me niegan una prótesis?</summary>
+        <p>Podés iniciar un reclamo administrativo o judicial. Es fundamental no dejar pasar el tiempo. En la mayoría de los casos, se consigue la cobertura total vía amparo de salud.</p>
+      </details>
+      <details>
+        <summary>¿Necesito un abogado para reclamar medicación?</summary>
+        <p>Si bien podés iniciar un reclamo por tu cuenta, la asistencia de un abogado es crucial, sobre todo cuando la obra social no responde o rechaza la cobertura. El amparo judicial suele ser la vía más rápida y efectiva.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+
+
+    <!-- ========== CONFIANZA / CONTACTO EXTENDIDO ========== -->
+    <section id="contacto" class="u-section" aria-labelledby="contact-title">
+      <div class="u-container contact__grid">
+        <div class="contact__panel contact__panel--form">
+          <h2 id="contact-title" class="section__title">Defendé tu derecho a la salud hoy mismo</h2>
+          <p class="section__subtitle">Contactate para una evaluación de tu caso. Estoy para ayudarte.</p>
+
+          <h3 style="margin:1.5rem 0 .5rem;">Datos de Contacto</h3>
+          <ul class="contact__list" aria-label="Medios de contacto">
+            <li class="contact__item">Tel.: <a href="tel:+5403415873908">+54 0341 587-3908</a></li>
+            <li class="contact__item">Email: <a href="mailto:contacto@tudominio.com">contacto@tudominio.com</a></li>
+            <li class="contact__item">Dirección: <a href="https://maps.google.com/?q=Rosario%2C%20Santa%20Fe" target="_blank" rel="noopener">El jacaranda 6237, barrio tierra de sueños</a></li>
+          </ul>
+        </div>
+
+        <div class="contact__panel">
+          <iframe class="contact__map"
+                  title="Mapa del estudio en Google Maps"
+                  loading="lazy"
+                  referrerpolicy="no-referrer-when-downgrade"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3343.168875701595!2d-60.69436592344937!3d-33.07834147855386!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95b7af38d1826935%3A0x6bfc770f77fe7eab!2sEl%20Jacarand%C3%A1%206237%2C%20S2126%20La%20Carolina%2C%20Santa%20Fe!5e0!3m2!1ses-419!2sar!4v1757173354032!5m2!1ses-419!2sa">
+          </iframe>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer" role="contentinfo">
+    <div class="u-container">
+      <div class="footer__top">
+        <div>
+          <a href="/" class="footer__brand">
+            <div aria-hidden="true" class="header__logo">Z&P</div>
+            <strong>Zalazar & Paredes</strong>
+          </a>
+          <p class="u-muted" style="margin:.5rem 0 0;">Defensa en salud y trabajo. Rosario, Santa Fe.</p>
+        </div>
+        <nav aria-label="Enlaces rápidos">
+          <div class="footer__menu">
+            <a href="/" aria-current="page">Inicio</a>
+            <a href="/abogado-de-salud">Abogado de Salud</a>
+            <a href="/abogado-laboral">Abogado Laboral</a>
+            <a href="/casos-de-exito">Casos de éxito</a>
+            <a href="/contacto">Contacto</a>
+            </div>
+        </nav>
+        <div>
+          <p style="margin:0 0 .5rem;"><strong>Contacto Directo</strong></p>
+          <p class="u-muted" style="margin:0;"><a href="tel:+543410000000">Tel: +54 0341 587-3908</a></p>
+          <p class="u-muted desktop" style="margin:.25rem 0 0;"><a href="https://web.whatsapp.com/send?phone=5403415873908">WhatsApp: +54 9 0341 587-3908</a></p>
+          <p class="u-muted mobile" style="margin:.25rem 0 0;"><a href="https://wa.me/5403415873908">WhatsApp: +54 9 0341 587-3908</a></p>
+          <p class="u-muted" style="margin:.25rem 0 0;">El jacaranda 6237, barrio tierra de sueños, localidad alvear</p>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p class="u-muted">La información presentada tiene fines generales y no constituye asesoramiento jurídico. Cada caso es único.</p>
+        <p class="u-muted">© <span id="anio-actual"></span> Zalazar & Paredes. Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <WhatsAppButton />
+
+  </div>
+</body>
+</html>
