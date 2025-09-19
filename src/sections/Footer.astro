@@ -1,0 +1,117 @@
+---
+// src/sections/Footer.astro
+import Logo from '../components/Logo.astro';
+import { contact } from "@/config/contact";
+import { siteConfig } from "@/config/site";
+import { getTelLink, getWhatsAppLink, formatFullAddress } from "@/utils/contact";
+
+export interface Props {
+  menuItems: { label: string; href: string }[];
+}
+
+const {
+  menuItems = [],
+} = Astro.props;
+
+---
+
+<footer class="footer" role="contentinfo">
+  <div class="u-container">
+    <div class="footer__top">
+      <div>
+        <a href="/" class="footer__brand">
+          <Logo
+            text={siteConfig.brand.short}
+            name={siteConfig.brand.name}
+            size="md"
+            showName={true}
+            variant="light"
+          />
+        </a>
+        <p class="u-muted">{siteConfig.brand.description}</p>
+      </div>
+
+      <nav aria-label="Enlaces rápidos">
+        <div class="footer__menu">
+          {menuItems.map((item) => <a href={item.href}>{item.label}</a>)}
+        </div>
+      </nav>
+
+      <div>
+        <p><strong>Contacto Directo</strong></p>
+        <p>
+      Tel: <a href={getTelLink(contact.phone)}>{contact.phone}</a>
+    </p>
+    
+    <p class="desktop">
+      <a href={getWhatsAppLink(contact.phone, contact.whatsappMessage, true)}>
+        WhatsApp: {contact.phone}
+      </a>
+    </p>
+    
+    <p class="mobile">
+      <a href={getWhatsAppLink(contact.phone, contact.whatsappMessage)}>
+        WhatsApp: {contact.phone}
+      </a>
+    </p>
+    
+    <p>
+      Dirección: <a href={contact.address.mapsLink}>
+        {formatFullAddress(contact.address)}
+      </a>
+    </p>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <p class="u-muted">{siteConfig.legal}</p>
+      <p class="u-muted">
+        © {new Date().getFullYear()}
+        {siteConfig.brand.name}. Todos los derechos reservados.
+      </p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  /* ========= Footer ========= */
+  .footer {
+    background: #0f172a;
+    color: #cbd5e1;
+    padding: 3rem 0;
+  }
+  .footer__top {
+    display: grid;
+    gap: 2rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding-bottom: 2rem;
+  }
+  .footer__brand {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  .footer__brand strong {
+    font-size: 1.1rem;
+  }
+  .footer__menu {
+    display: grid;
+    gap: 0.5rem;
+  }
+  .footer__menu a {
+    color: #e2e8f0;
+  }
+  .footer__bottom {
+    display: grid;
+    gap: 0.5rem;
+    padding-top: 2rem;
+    font-size: 0.9rem;
+    color: #94a3b8;
+  }
+  @media (min-width: 900px) {
+    .footer__top {
+      grid-template-columns: 1.2fr 1fr 1fr;
+      align-items: start;
+    }
+  }
+</style>

@@ -1,0 +1,57 @@
+---
+// src/components/Button.astro
+interface Props {
+  href?: string;
+  as?: 'a' | 'button';
+  variant?: 'primary' | 'secondary' | 'outline';
+  block?: boolean;
+  device?: 'desktop' | 'mobile' | 'all';
+  external?: boolean; // si true automáticamente target="_blank" rel="noopener noreferrer"
+  ariaLabel?: string;
+  type?: 'button' | 'submit' | 'reset';
+  className?: string;
+}
+
+const {
+  href,
+  as = 'a',
+  variant = 'primary',
+  block = false,
+  device = 'all',
+  external = false,
+  ariaLabel,
+  type = 'button',
+  className = '',
+  ...rest
+} = Astro.props;
+
+// Elemento a renderizar
+const Tag = as;
+
+// Construimos el class string EN FORMA EXPLÍCITA (robusto y fácil de depurar)
+const classParts = [
+  'button',
+  `button--${variant}`,
+  block ? 'button--block' : '',
+  device === 'desktop' ? 'desktop' : device === 'mobile' ? 'mobile' : '',
+  className || ''
+].filter(Boolean);
+
+const classes = classParts.join(' ');
+
+// Target / Rel si es externo
+const target = external ? '_blank' : rest.target;
+const rel = external ? 'noopener noreferrer' : rest.rel;
+---
+
+<Tag
+  {...(Tag === 'a' ? { href } : {})}
+  {...(Tag === 'button' ? { type } : {})}
+  class={classes}
+  target={Tag === 'a' ? target : undefined}
+  rel={Tag === 'a' ? rel : undefined}
+  aria-label={ariaLabel}
+  {...rest}
+>
+  <slot />
+</Tag>

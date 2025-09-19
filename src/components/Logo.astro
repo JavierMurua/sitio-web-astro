@@ -1,0 +1,63 @@
+---
+export interface Props {
+  text?: string;        // "Z&P"
+  name?: string;        // "Zalazar & Paredes"
+  size?: "sm" | "md" | "lg"; // para controlar dimensiones del cuadrado
+  showName?: boolean;   // si se muestra o no el nombre al lado
+  as?: "span" | "div";  // wrapper interno para el bloque cuadrado
+  variant?: "dark" | "light"; // controla color del texto
+}
+
+const {
+  text = "Z&P",
+  name = "Zalazar & Paredes",
+  size = "md",
+  showName = true,
+  as = "div",
+  variant = "dark"
+} = Astro.props;
+
+const Tag = as;
+---
+
+<span class="logo">
+  <Tag class:list={["logo__symbol", `logo__symbol--${size}`]} aria-hidden="true">
+    {text}
+  </Tag>
+   {showName && (
+    <span class:list={["logo__name", `logo__name--${variant}`]}>
+      {name}
+    </span>
+  )}
+</span>
+
+<style>
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.logo__symbol {
+  border-radius: 8px;
+  background: linear-gradient(135deg, #183c7a, #0b1f4b);
+  display: grid;
+  place-items: center;
+  color: #fff;
+  font-weight: 700;
+  font-family: var(--font-serif);
+}
+
+/* Tamaños */
+.logo__symbol--sm { width: 32px; height: 32px; font-size: 0.85rem; }
+.logo__symbol--md { width: 40px; height: 40px; font-size: 1rem; }
+.logo__symbol--lg { width: 56px; height: 56px; font-size: 1.25rem; }
+
+.logo__name {
+  font-weight: 700;
+  font-size: 1.125rem;
+}
+
+.logo__name--dark { color: #0b1f4b; }
+.logo__name--light { color: #ffffff; }
+</style>
