@@ -52,25 +52,79 @@ const { title, description, date, tags, image } = post.data;
     <section class="blog-content">
       <slot />
     </section>
+
+    <!-- CTA al final del post -->
+  <div class="blog-cta">
+    <p>
+      Si te interesa este tema o querés asesoramiento personalizado, 
+      <a href="/contacto">contactanos</a>. Estamos para ayudarte y aclarar todas tus dudas.
+    </p>
+  </div>
   </article>
 </MainLayout>
 
 <style>
-  .blog-article {
+.blog-article {
   font-family: var(--font-sans);
   line-height: 1.75;
   font-size: var(--step-0);
   color: var(--color-text, #1e293b);
+  max-width: 800px;
+  margin-inline: auto;
+  padding: 2rem 1rem;
 }
+
+@media (min-width: 960px) {
+  .blog-article {
+    padding: 3rem 0;
+  }
+}
+
 .blog-title {
   font-family: var(--font-serif);
   font-size: var(--step-4);
   font-weight: 800;
   color: var(--color-title, #0f172a);
+  margin-bottom: 0.5rem;
 }
+
 .blog-description {
   font-size: var(--step-1);
   color: var(--color-muted);
+  margin-bottom: 1rem;
+}
+
+.blog-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+  font-size: 0.95rem;
+  color: var(--color-meta, #64748b);
+  margin-bottom: 1.5rem;
+}
+
+.blog-tags {
+  display: flex;
+  flex-wrap: wrap; /* permite que las etiquetas hagan wrap */
+  gap: 0.5rem 0.75rem; /* espacio horizontal y vertical */
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.blog-tags a {
+  background: var(--brand-1);
+  color: var(--on-brand);
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: filter 0.2s ease, background 0.2s ease;
+}
+
+.blog-tags a:hover {
+  filter: brightness(1.1);
 }
 
 .blog-content :global(h2) {
@@ -80,6 +134,7 @@ const { title, description, date, tags, image } = post.data;
   margin-bottom: 0.5rem;
   color: var(--color-title);
 }
+
 .blog-content :global(h3) {
   font-size: var(--step-1);
   font-weight: 600;
@@ -95,6 +150,18 @@ const { title, description, date, tags, image } = post.data;
 .blog-content :global(strong) {
   color: var(--brand-1);
   font-weight: 700;
+}
+
+.blog-content :global(a) {
+  color: var(--brand-2);
+  text-decoration: underline;
+  transition: filter 0.2s ease;
+  font-weight: 600;
+}
+
+.blog-content :global(a:hover) {
+  filter: brightness(1.1);
+  color: var(--brand-1);
 }
 
 .blog-content :global(img) {
@@ -123,27 +190,24 @@ const { title, description, date, tags, image } = post.data;
   font-family: monospace;
 }
 
-.blog-tags a {
-  background: var(--brand-1);
-  color: var(--on-brand);
-  padding: 0.25rem 0.75rem;
-  border-radius: 9999px;
-  font-size: 0.85rem;
-  transition: filter 0.2s ease;
-}
-.blog-tags a:hover {
-  filter: brightness(1.1);
+/* CTA al final del post */
+.blog-cta {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 2px solid var(--brand-1);
+  font-weight: 600;
+  color: var(--color-text);
 }
 
-.blog-article {
-  max-width: 800px;
-  margin-inline: auto;
-  padding: 2rem 1rem;
+.blog-cta a {
+  color: var(--brand-2);
+  text-decoration: underline;
+  transition: filter 0.2s ease;
 }
-@media (min-width: 960px) {
-  .blog-article {
-    padding: 3rem 0;
-  }
+
+.blog-cta a:hover {
+  filter: brightness(1.1);
+  color: var(--brand-1);
 }
 
 </style>

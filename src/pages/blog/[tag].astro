@@ -1,0 +1,137 @@
+---
+// src/pages/blog/tags/[tag].astro
+import { getCollection, type CollectionEntry } from "astro:content";
+import MainLayout from "@/layouts/MainLayout.astro";
+import { TAGS } from "@/content/config";
+
+export async function getStaticPaths() {
+  return TAGS.map((tag) => ({ params: { tag } }));
+}
+
+const { tag } = Astro.params as { tag: typeof TAGS[number] };
+
+if (!TAGS.includes(tag)) {
+  throw new Error(`❌ Etiqueta inválida: ${tag}`);
+}
+
+const posts: CollectionEntry<"blog">[] = (await getCollection("blog"))
+  .filter((post) => post.data.tags?.includes(tag))
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+---
+
+<MainLayout 
+  title={`Artículos sobre "${tag}"`} 
+  description={`Lee artículos y novedades relacionadas con "${tag}" en nuestro blog`}
+>
+  <section class="blog-index">
+    <h1 aria-label={`Artículos etiquetados con ${tag}`}>#{tag}</h1>
+    <p class="lead">Artículos relacionados con <strong>{tag}</strong>.</p>
+
+    {posts.length === 0 ? (
+      <p>No hay artículos disponibles aún.</p>
+    ) : (
+      <ul class="blog-list" role="list">
+        {posts.map((post) => (
+          <li class="blog-list-item">
+            <article>
+              <h2>
+                <a href={`/blog/${post.slug}`}>{post.data.title}</a>
+              </h2>
+              <time datetime={post.data.date.toISOString()}>
+                {post.data.date.toLocaleDateString("es-AR", {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })}
+              </time>
+              {post.data.description && <p>{post.data.description}</p>}
+            </article>
+          </li>
+        ))}
+      </ul>
+    )}
+  </section>
+</MainLayout>
+
+<style>
+    .blog-index {
+  max-width: 800px;
+  margin-inline: auto;
+  padding: 2rem 1rem;
+  font-family: var(--font-sans, system-ui, sans-serif);
+  color: var(--color-text, #1e293b);
+}
+
+.blog-index h1 {
+  font-family: var(--font-serif, Georgia, serif);
+  font-size: var(--step-3, 2rem);
+  font-weight: 800;
+  color: var(--color-title, #0f172a);
+  margin-bottom: 0.5rem;
+}
+
+.blog-index .lead {
+  font-size: var(--step-0, 1rem);
+  color: var(--color-muted, #64748b);
+  margin-bottom: 2rem;
+}
+
+.blog-list {
+  display: grid;
+  gap: 1.5rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.blog-list-item {
+  background: var(--color-surface, #fff);
+  border: 1px solid var(--color-border, #e2e8f0);
+  border-radius: var(--radius-2, 8px);
+  padding: 1.5rem;
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.blog-list-item:hover {
+  border-color: var(--brand-1, #2563eb);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+}
+
+.blog-list-item h2 {
+  margin: 0;
+  font-size: var(--step-1, 1.25rem);
+  font-weight: 700;
+  color: var(--color-title, #0f172a);
+}
+
+.blog-list-item h2 a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.blog-list-item h2 a:hover {
+  color: var(--brand-1, #2563eb);
+}
+
+.blog-list-item time {
+  display: block;
+  font-size: 0.875rem;
+  color: var(--color-muted, #64748b);
+  margin: 0.5rem 0;
+}
+
+.blog-list-item p {
+  margin: 0.5rem 0 0;
+  font-size: var(--step-0, 1rem);
+  line-height: 1.6;
+  color: var(--color-text, #1e293b);
+}
+
+/* Responsivo */
+@media (min-width: 768px) {
+  .blog-list {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+</style>

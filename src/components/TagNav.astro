@@ -1,0 +1,52 @@
+---
+// src/components/TagNav.astro
+import { TAGS } from '@/content/config';
+
+const { activeTag } = Astro.props;
+---
+
+<nav class="tag-nav" aria-label="Navegación por etiquetas">
+  <ul role="list">
+    {
+      TAGS.map((tag) => (
+        <li>
+          <a href={`/blog/${tag}`} class:list={{ active: activeTag === tag }}>
+            #{tag}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</nav>
+
+<style>
+  .tag-nav ul {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    padding: 0;
+    margin: 1rem 0;
+    list-style: none;
+  }
+
+  .tag-nav a {
+    padding: 0.35rem 0.75rem;
+    border-radius: 999px;
+    background: var(--color-surface);
+    color: var(--color-muted);
+    font-size: 0.85rem;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .tag-nav a:hover {
+    background: var(--brand-1);
+    color: var(--on-brand);
+  }
+
+  .tag-nav a.active {
+    background: var(--brand-2);
+    color: var(--on-brand);
+    font-weight: 600;
+  }
+</style>
