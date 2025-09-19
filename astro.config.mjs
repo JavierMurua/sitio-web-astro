@@ -20,4 +20,11 @@ export default defineConfig({
   server: {
     host: true
   },
+  vite: {
+    resolve: {
+      alias: {
+        '@': '/src', // 🔹 Aquí definimos el alias
+      },
+    },
+  },
 });
