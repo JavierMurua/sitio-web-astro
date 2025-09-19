@@ -1,0 +1,17 @@
+---
+export interface Props {
+  post: any;
+}
+const { post } = Astro.props;
+---
+
+<article class="blog-card">
+  <a href={`/blog/${post.slug}`}>
+    {post.data.image && <img src={post.data.image} alt={post.data.title} />}
+    <h2>{post.data.title}</h2>
+    <p>{post.data.description}</p>
+    <time datetime={post.data.date.toISOString()}>
+      {post.data.date.toLocaleDateString("es-AR")}
+    </time>
+  </a>
+</article>

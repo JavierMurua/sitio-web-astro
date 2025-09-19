@@ -1,0 +1,28 @@
+---
+// src/pages/blog/[slug].astro
+import { getCollection, getEntry } from "astro:content";
+import BlogLayout from "@/layouts/BlogLayout.astro";
+
+// getStaticPaths permite a Astro saber qué rutas generar
+export async function getStaticPaths() {
+  const posts = await getCollection("blog");
+
+  return posts.map((post) => ({
+    params: { slug: post.slug },  // el valor de Astro.params.slug
+  }));
+}
+
+const { slug } = Astro.params;
+const post = await getEntry("blog", slug as string);
+
+if (!post) {
+  throw new Error(`❌ Post no encontrado: ${slug}`);
+}
+
+const { Content } = await post.render();
+---
+
+<BlogLayout post={post}>
+  <Content />
+</BlogLayout>
+
