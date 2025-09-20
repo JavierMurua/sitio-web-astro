@@ -1,0 +1,74 @@
+---
+import { icons, type IconName } from '@/config/icons';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+  name: IconName;
+  size?: number | string;
+  class?: string;
+  title?: string;
+  decorative?: boolean;
+  color?: string;
+}
+
+const {
+  name,
+  size = 24,
+  class: className = '',
+  title,
+  decorative = false,
+  color = 'currentColor',
+} = Astro.props;
+
+const rawSvg = icons[name] as string | ImageMetadata;
+
+// Detectamos si es string o asset
+const isRawSvg = typeof rawSvg === 'string';
+
+const svgString: string = isRawSvg
+  ? rawSvg
+  : (rawSvg as ImageMetadata)?.src ?? '';
+
+// Si es string manipulamos el fill
+const svgContent = isRawSvg
+  ? svgString.replace(/fill=".*?"/g, `fill="${color}"`)
+  : '';
+---
+
+{isRawSvg ? (
+  <span
+    class={`icon ${className}`}
+    style={`display:inline-block; width:${typeof size === 'number' ? size + 'px' : size}; height:${typeof size === 'number' ? size + 'px' : size}; color:${color};`}
+    role={decorative ? undefined : 'img'}
+    aria-hidden={decorative ? 'true' : undefined}
+    aria-label={!decorative && title ? title : undefined}
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="icon__svg"
+      style="width:100%; height:100%;"
+      set:html={svgContent}
+    />
+  </span>
+) : svgString ? (
+  <img
+    src={svgString}
+    alt={decorative ? '' : title ?? ''}
+    class={`icon ${className}`}
+    width={typeof size === 'number' ? size : undefined}
+    height={typeof size === 'number' ? size : undefined}
+    style={typeof size === 'string' ? `width:${size}; height:${size};` : undefined}
+    aria-hidden={decorative ? 'true' : undefined}
+  />
+) : null}
+
+<style>
+.icon {
+  display: inline-block;
+  line-height: 0;
+  vertical-align: middle;
+}
+.icon__svg {
+  display: block;
+}
+</style>
