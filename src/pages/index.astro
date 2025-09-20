@@ -3,100 +3,36 @@ import MainLayout from "../layouts/MainLayout.astro";
 import WhatsAppButton from "../components/WhatsAppButton.astro";
 import Hero from "@/sections/Hero.astro";
 import heroImage from '@/assets/images/estatua-justicia-cobre-despacho-abogados-hero.png';
+import Trust from '@/sections/Trust.astro';
+import radioCut from '@/assets/logos/radio_cut.png';
+import elCiudadano from '@/assets/logos/el_ciudadano.jpg';
 
 ---
 
 <MainLayout>
   <body>
 
-    <Hero
-  title="Defendemos tus derechos en Salud y Trabajo"
-  subtitle="Estudio jurídico en Rosario. Especialistas en reclamos contra obras sociales y prepagas."
-  image={heroImage}
-  ctaPrimary={{ text: "Consultar por WhatsApp" }}
-  ctaSecondary={{ text: "Ver servicios", href: "#servicios" }}
-  seal="Trayectoria comprobada. Compromiso real."
+    
+    <main id="contenido">
+      <Hero
+    title="Defendemos tus derechos en Salud y Trabajo"
+    subtitle="Estudio jurídico en Rosario. Especialistas en reclamos contra obras sociales y prepagas."
+    image={heroImage}
+    ctaPrimary={{ text: "Consultar por WhatsApp" }}
+    ctaSecondary={{ text: "Ver servicios", href: "#servicios" }}
+    seal="Trayectoria comprobada. Compromiso real."
+  />
+
+
+<Trust
+  quote="Resolvieron mi tratamiento a tiempo. El estudio se encargó de todo con mi obra social; me sentí acompañado en cada paso."
+  author="Juan C., cliente de Salud"
+  logos={[
+    { src: radioCut, alt: "Radio Cut" },
+    { src: elCiudadano, alt: "El Ciudadano" }
+  ]}
 />
 
-    <main id="contenido">
-      <!-- ========== HERO ========== -->
-      <section class="hero" aria-labelledby="hero-title">
-        <div class="hero__bg" aria-hidden="true"></div>
-        <div class="u-container hero__inner">
-          <h1 id="hero-title" class="hero__title">
-            Defendemos tus derechos en Salud y en el Trabajo
-          </h1>
-          <p class="hero__subtitle">
-            Estudio jurídico en Rosario. Especialistas en reclamos contra obras
-            sociales, prepagas.
-          </p>
-          <div class="hero__actions">
-            <a
-              class="button button--primary desktop"
-              href="https://web.whatsapp.com/send?phone=5403415873908&text=Hola%2C%20quiero%20hacer%20una%20consulta: "  target="_blank"
-              >Consultar por WhatsApp</a
-            >
-            <a
-              class="button button--primary mobile"
-              href="https://wa.me/5403415873908?text=Hola%2C%20quiero%20hacer%20una%20consulta: "  target="_blank"
-              >Consultar por WhatsApp</a
-            >
-            <a class="button button--secondary" href="#servicios"
-              >Ver servicios</a
-            >
-          </div>
-          <p class="hero__seal">Trayectoria comprobada. Compromiso real.</p>
-        </div>
-      </section>
-
-      <!-- ========== AUTORIDAD INMEDIATA ========== -->
-<section
-  class="trust u-section u-section--tight"
-  aria-label="Testimonio y medios"
->
-  <div class="u-container trust__grid">
-    <!-- Testimonio -->
-    <div class="trust__quote">
-      <!-- <svg
-        class="trust__quote-icon"
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 24 24"
-        fill="currentColor"
-        aria-hidden="true"
-      >
-        <path
-          d="M9.983 3v7.391c0 2.9-2.35 5.25-5.25 5.25s-5.25-2.35-5.25-5.25V3h10.5zM21.483 3v7.391c0 2.9-2.35 5.25-5.25 5.25s-5.25-2.35-5.25-5.25V3h10.5z"
-        ></path>
-      </svg> -->
-      <p class="trust__quote-text">
-        <strong>“Resolvieron mi tratamiento a tiempo.</strong> El estudio se
-        encargó de todo con mi obra social; me sentí acompañado en cada paso.”
-        <br /><strong>— Juan C., cliente de Salud</strong>
-      </p>
-    </div>
-
-    <!-- Logos reales -->
-    <div
-      class="trust__logos"
-      aria-label="Medios donde nuestro trabajo fue mencionado"
-    >
-      <div class="trust__logo">
-        <img
-          src="/radio_cut.png"
-          alt="Radio Cut"
-          loading="lazy"
-        />
-      </div>
-      <div class="trust__logo">
-        <img
-          src="/el_ciudadano.jpg"
-          alt="El Ciudadano"
-          loading="lazy"
-        />
-      </div>
-    </div>
-  </div>
-</section>
 
 
       <!-- ========== SERVICIOS PRINCIPALES ========== -->
@@ -883,111 +819,6 @@ import heroImage from '@/assets/images/estatua-justicia-cobre-despacho-abogados-
         color: var(--color-muted);
         margin: 0 0 2rem;
         max-width: 60ch;
-      }
-
-
-      /* =========
-       Hero
-       ========= */
-      .hero {
-        position: relative;
-        background: #0b1f4b;
-        color: var(--on-brand);
-        text-align: center;
-      }
-      .hero__inner {
-        position: relative;
-        z-index: 1;
-        padding: 4rem 0;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
-      .hero__bg {
-        position: absolute;
-        inset: 0;
-        background:
-          linear-gradient(rgba(11, 31, 75, 0.65), rgba(11, 31, 75, 0.95)),
-          url("/src/assets/images/estatua-justicia-cobre-despacho-abogados-hero.png")
-            center/cover no-repeat;
-        filter: grayscale(0.2);
-        opacity: 0.8;
-      }
-      .hero__title {
-        font-family: var(--font-serif);
-        font-size: var(--step-4);
-        line-height: 1.1;
-        margin: 0 0 0.75rem;
-        letter-spacing: -0.02em;
-        max-width: 20ch;
-      }
-      .hero__subtitle {
-        font-size: var(--step-1);
-        margin: 0 0 1.5rem;
-        color: #e5efff;
-        max-width: 50ch;
-      }
-      .hero__actions {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.75rem;
-        justify-content: center;
-      }
-      .hero__seal {
-        margin-top: 1.5rem;
-        font-size: var(--step--1);
-        color: #d9e3ff;
-      }
-
-      @media (min-width: 960px) {
-        .hero__inner {
-          padding: 6rem 0;
-        }
-      }
-
-      /* =========
-       Autoridad inmediata
-       ========= */
-      .trust {
-        background: #0b1f4b;
-        
-      }
-      .trust__grid {
-        display: grid;
-        gap: 2rem;
-        align-items: center;
-      }
-      .trust__quote {
-        display: flex;
-        gap: 0.75rem;
-        align-items: flex-start;
-        border-left: 3px solid var(--on-brand);
-        padding-left: 8px;
-
-      }
-      .trust__quote-icon {
-        flex: 0 0 28px;
-        height: 28px;
-        color: var(--color-muted);
-      }
-      .trust__quote-text {
-        color: var(--on-brand);
-        margin: 0;
-        font-size: var(--step-0);
-      }
-      .trust__logos {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 1rem;
-        align-items: center;
-      }
-
-
-      @media (min-width: 800px) {
-        .trust__grid {
-          grid-template-columns: 1.2fr 1fr;
-          gap: 3rem;
-        }
       }
 
       /* ===========================

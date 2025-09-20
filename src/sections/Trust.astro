@@ -1,0 +1,103 @@
+---
+// src\sections\Trust.astro
+
+interface Logo {
+  src: string | ImageMetadata;
+  alt: string;
+}
+
+interface Props {
+  quote: string;
+  author: string;
+  logos?: Logo[];
+  showHeadings?: boolean;
+}
+
+const { quote, author, logos = [], showHeadings = true } = Astro.props;
+---
+
+<section class="trust u-section u-section--tight" aria-label="Testimonio y medios">
+  <div class="u-container trust__grid">
+    <!-- Columna Testimonio -->
+    <div>
+      {showHeadings && <h3 class="trust__heading">Resultados reales:</h3>}
+      <div class="trust__quote">
+        <p class="trust__quote-text">
+          “{quote}”<br />
+          <strong>— {author}</strong>
+        </p>
+      </div>
+    </div>
+
+    <!-- Columna Logos -->
+    {logos.length > 0 && (
+      <div>
+        {showHeadings && <h3 class="trust__heading">Somos noticia:</h3>}
+        <div class="trust__logos" aria-label="Medios donde nuestro trabajo fue mencionado">
+          {logos.map(({ src, alt }) => {
+            const logoUrl = typeof src === 'string' ? src : src.src;
+            return (
+              <div class="trust__logo">
+                <img src={logoUrl} alt={alt} loading="lazy" />
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    )}
+  </div>
+</section>
+
+<style>
+.trust {
+  background: var(--brand-3);
+  color: var(--on-brand);
+}
+
+.trust__grid {
+  display: grid;
+  gap: 2rem;
+}
+
+.trust__heading {
+    font-size: var(--step-0);
+    font-weight: 700;
+    margin: 0 0 0.75rem;
+    color: var(--color-muted);
+}
+
+.trust__quote {
+    display: flex;
+    align-items: center;
+  padding-left: 12px;
+  padding-top: 10px;
+}
+
+.trust__quote-text {
+    margin: 0;
+    font-size: var(--step-0);
+    line-height: 1.5;
+    border-left: 3px solid var(--on-brand);
+    padding-left: 12px;
+}
+
+.trust__logos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 1rem;
+  align-items: center;
+}
+
+.trust__logo img {
+  max-height: 150px;
+  object-fit: contain;
+  margin: auto;
+}
+
+@media (min-width: 800px) {
+  .trust__grid {
+    grid-template-columns: 1.2fr 1fr;
+    gap: 3rem;
+  }
+}
+</style>
