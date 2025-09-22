@@ -21,38 +21,36 @@ const {
 } = Astro.props;
 
 const rawSvg = icons[name] as string | ImageMetadata;
-
-// Detectamos si es string o asset
 const isRawSvg = typeof rawSvg === 'string';
 
-const svgString: string = isRawSvg
-  ? rawSvg
-  : (rawSvg as ImageMetadata)?.src ?? '';
+let svgContent = '';
+let svgUrl = '';
 
-// Si es string manipulamos el fill
-const svgContent = isRawSvg
-  ? svgString.replace(/fill=".*?"/g, `fill="${color}"`)
-  : '';
+if (isRawSvg) {
+  // 🔑 Normalizamos: quitamos width/height y reemplazamos fills
+  svgContent = (rawSvg as string)
+    .replace(/\s(width|height)="[^"]*"/g, '')
+    .replace(/fill=".*?"/g, 'fill="currentColor"')
+    .replace(/<path(?![^>]*fill)/g, '<path fill="currentColor"');
+} else {
+  svgUrl = (rawSvg as ImageMetadata)?.src ?? '';
+}
 ---
 
 {isRawSvg ? (
   <span
     class={`icon ${className}`}
-    style={`display:inline-block; width:${typeof size === 'number' ? size + 'px' : size}; height:${typeof size === 'number' ? size + 'px' : size}; color:${color};`}
+    style={`display:inline-block; width:${
+      typeof size === 'number' ? size + 'px' : size
+    }; height:${typeof size === 'number' ? size + 'px' : size}; color:${color};`}
     role={decorative ? undefined : 'img'}
     aria-hidden={decorative ? 'true' : undefined}
     aria-label={!decorative && title ? title : undefined}
-  >
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      class="icon__svg"
-      style="width:100%; height:100%;"
-      set:html={svgContent}
-    />
-  </span>
-) : svgString ? (
+    set:html={svgContent}
+  />
+) : svgUrl ? (
   <img
-    src={svgString}
+    src={svgUrl}
     alt={decorative ? '' : title ?? ''}
     class={`icon ${className}`}
     width={typeof size === 'number' ? size : undefined}
@@ -67,8 +65,6 @@ const svgContent = isRawSvg
   display: inline-block;
   line-height: 0;
   vertical-align: middle;
-}
-.icon__svg {
-  display: block;
+  color: inherit; /* 🔑 hereda color del contenedor */
 }
 </style>

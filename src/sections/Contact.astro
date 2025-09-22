@@ -1,0 +1,241 @@
+---
+// src/sections/Contact.astro
+
+import Icon from "@/components/Icon.astro";
+import type { ContactItem } from "@/config/contactAdapter";
+
+
+interface Props {
+  id?: string;
+  title: string;
+  subtitle?: string;
+  layout?: "simple" | "detailed";
+  items: ContactItem[];
+  mapSrc: string;
+}
+
+const {
+  id = "contact",
+  title,
+  subtitle,
+  layout = "simple",
+  items,
+  mapSrc,
+} = Astro.props;
+---
+
+<section id={id} class={`contact contact--${layout}`}>
+  <div class="u-container">
+    <div class={`contact__container contact__container--${layout}`}>
+      <!-- Info -->
+      <div class="contact__info">
+        <h2 class="contact__title">{title}</h2>
+        {subtitle && <p class="contact__subtitle">{subtitle}</p>}
+
+        {layout === "simple" && (
+          <ul class="contact__list" aria-label="Medios de contacto">
+            {items.map(({ label, href, value, icon }) => (
+              <li class="contact__item">
+                {icon && (
+                  <div class="contact-icon">
+                    <Icon name={icon} size={20} decorative />
+                  </div>
+                )}
+                <span class="contact__label">{label}:</span>
+                {href ? (
+                  <a href={href}>{value}</a>
+                ) : (
+                  <span>{value}</span>
+                )}
+              </li>
+            ))}
+          </ul>
+        )}
+
+        {layout === "detailed" && (
+          <>
+            {items.map(({ type, label, value, href, description, icon }) => (
+              <div class="contact-card">
+                {icon && (
+                  <div class="contact-icon">
+                    <Icon name={icon} size={28} decorative />
+                  </div>
+                )}
+                <div>
+                  <h3 class="contact-subtitle">{label}</h3>
+                  {href ? (
+                    <a href={href} class="contact-link">{value}</a>
+                  ) : (
+                    <p class={type === "schedule" ? "contact-schedule" : "contact-text"}>
+                      {value}
+                    </p>
+                  )}
+                  {description && <p class="contact-text">{description}</p>}
+                </div>
+              </div>
+            ))}
+          </>
+        )}
+      </div>
+
+      <!-- Map -->
+      <div class={`contact__map ${layout === "detailed" ? "contact-map" : ""}`}>
+        <iframe
+          class={layout === "detailed" ? "map-frame" : "contact__map-frame"}
+          title="Mapa del estudio en Google Maps"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          src={mapSrc}
+        />
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+.contact {
+  margin-block: 3rem;
+}
+
+.contact__title {
+  font-size: 1.75rem;
+  font-weight: 700;
+}
+
+.contact__subtitle {
+  margin-bottom: 1.5rem;
+  color: var(--color-text-muted, #555);
+}
+
+/* ==== Simple layout ==== */
+.contact--simple .contact__container {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.contact--simple .contact__info {
+  padding: 2rem;
+  background: #fff;
+  border: 1px solid var(--color-border, #ddd);
+  border-radius: var(--radius-2, 8px);
+}
+
+.contact__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.contact__item {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.contact__icon {
+  flex-shrink: 0;
+  color: #183c7a;
+}
+
+.contact__map-frame {
+  min-height: 260px;
+  border: 0;
+  border-radius: var(--radius-1, 6px);
+  width: 100%;
+}
+
+@media (min-width: 900px) {
+  .contact--simple .contact__container {
+    grid-template-columns: 1fr 1fr;
+  }
+  .contact__map-frame {
+    min-height: 100%;
+  }
+}
+
+/* ==== Detailed layout ==== */
+.contact-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1rem;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  transition: box-shadow 0.3s ease;
+  margin-bottom: 1.5rem;
+}
+.contact-card:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+}
+
+.contact-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #183c7a;
+}
+
+.contact-subtitle {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #0b1f4b;
+  margin-bottom: 0.25rem;
+}
+
+.contact-link {
+  color: #183c7a;
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+.contact-link:hover {
+  text-decoration: underline;
+}
+
+.contact-text {
+  font-size: 0.875rem;
+  color: #6b7280;
+  margin-top: 0.25rem;
+}
+
+.contact-schedule {
+  font-size: 1rem;
+  color: #111827;
+  font-weight: 500;
+}
+
+.contact-map {
+  height: 400px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  border: 4px solid #fff;
+}
+
+.contact--detailed .contact__container {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: 1fr;
+  align-items: center;
+}
+
+@media (min-width: 1024px) {
+  .contact--detailed .contact__container {
+    grid-template-columns: 1.2fr 1fr;
+  }
+  .contact-map {
+    height: 650px;
+  }
+}
+
+.map-frame {
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+
+</style>

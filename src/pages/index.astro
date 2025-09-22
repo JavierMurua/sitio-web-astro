@@ -1,72 +1,51 @@
 ---
-import MainLayout from "../layouts/MainLayout.astro";
-import WhatsAppButton from "../components/WhatsAppButton.astro";
-import Hero from "@/sections/Hero.astro";
+import MainLayout from '../layouts/MainLayout.astro';
+import WhatsAppButton from '../components/WhatsAppButton.astro';
+import Hero from '@/sections/Hero.astro';
 import heroImage from '@/assets/images/estatua-justicia-cobre-despacho-abogados-hero.png';
 import Trust from '@/sections/Trust.astro';
 import radioCut from '@/assets/logos/radio_cut.png';
 import elCiudadano from '@/assets/logos/el_ciudadano.jpg';
-
+import Contact from '@/sections/Contact.astro';
+import { getContactItems } from '@/config/contactAdapter';
+import { contact } from '@/config/contact';
 ---
 
 <MainLayout>
   <body>
-
-    
     <main id="contenido">
       <Hero
-    title="Defendemos tus derechos en Salud y Trabajo"
-    subtitle="Estudio jurídico en Rosario. Especialistas en reclamos contra obras sociales y prepagas."
-    image={heroImage}
-    ctaPrimary={{ text: "Consultar por WhatsApp" }}
-    ctaSecondary={{ text: "Ver servicios", href: "#servicios" }}
-    seal="Trayectoria comprobada. Compromiso real."
-  />
+        title="Defendemos tus derechos en Salud y Trabajo"
+        subtitle="Estudio jurídico en Rosario. Especialistas en reclamos contra obras sociales y prepagas."
+        image={heroImage}
+        ctaPrimary={{ text: 'Consultar por WhatsApp' }}
+        ctaSecondary={{ text: 'Ver servicios', href: '#servicios' }}
+        seal="Trayectoria comprobada. Compromiso real."
+      />
 
-
-<Trust
-  quote="Resolvieron mi tratamiento a tiempo. El estudio se encargó de todo con mi obra social; me sentí acompañado en cada paso."
-  author="Juan C., cliente de Salud"
-  logos={[
-    { src: radioCut, alt: "Radio Cut" },
-    { src: elCiudadano, alt: "El Ciudadano" }
-  ]}
-/>
-
-
+      <Trust
+        quote="Resolvieron mi tratamiento a tiempo. El estudio se encargó de todo con mi obra social; me sentí acompañado en cada paso."
+        author="Juan C., cliente de Salud"
+        logos={[
+          { src: radioCut, alt: 'Radio Cut' },
+          { src: elCiudadano, alt: 'El Ciudadano' },
+        ]}
+      />
 
       <!-- ========== SERVICIOS PRINCIPALES ========== -->
 
-      <section
-        id="servicios"
-        class="u-section"
-        aria-labelledby="servicios-title"
-      >
+      <section id="servicios" class="u-section" aria-labelledby="servicios-title">
         <div class="u-container">
-          <h2 id="servicios-title" class="section__title">
-            Casos que resolvemos a diario
-          </h2>
+          <h2 id="servicios-title" class="section__title">Casos que resolvemos a diario</h2>
           <p class="section__subtitle">
-            Asesoramiento práctico y representación en salud, laboral y asuntos
-            civiles. Hablá con quienes te van a llevar el caso.
+            Asesoramiento práctico y representación en salud, laboral y asuntos civiles. Hablá con
+            quienes te van a llevar el caso.
           </p>
 
-          <div
-            class="services__grid"
-            role="list"
-            aria-label="Listado de servicios"
-          >
+          <div class="services__grid" role="list" aria-label="Listado de servicios">
             <!-- Acceso a medicación -->
-            <article
-              class="card service-card"
-              role="listitem"
-              aria-label="Acceso a medicación"
-            >
-              <a
-                class="service-card__link"
-                href=""
-                aria-label="Acceso a medicación - ver"
-              >
+            <article class="card service-card" role="listitem" aria-label="Acceso a medicación">
+              <a class="service-card__link" href="" aria-label="Acceso a medicación - ver">
                 <div class="service-card__media" aria-hidden="true">
                   <svg
                     viewBox="0 0 64 64"
@@ -106,23 +85,13 @@ import elCiudadano from '@/assets/logos/el_ciudadano.jpg';
                     ></path>
                   </svg>
                 </div>
-                <div class="service-card__label">
-                  Prestaciones por discapacidad
-                </div>
+                <div class="service-card__label">Prestaciones por discapacidad</div>
               </a>
             </article>
 
             <!-- Cirugías y prótesis -->
-            <article
-              class="card service-card"
-              role="listitem"
-              aria-label="Cirugías y prótesis"
-            >
-              <a
-                class="service-card__link"
-                href=""
-                aria-label="Cirugías y prótesis - ver"
-              >
+            <article class="card service-card" role="listitem" aria-label="Cirugías y prótesis">
+              <a class="service-card__link" href="" aria-label="Cirugías y prótesis - ver">
                 <div class="service-card__media" aria-hidden="true">
                   <svg
                     viewBox="0 0 180.147 180.147"
@@ -151,16 +120,8 @@ import elCiudadano from '@/assets/logos/el_ciudadano.jpg';
             </article>
 
             <!-- Fertilización asistida -->
-            <article
-              class="card service-card"
-              role="listitem"
-              aria-label="Fertilización asistida"
-            >
-              <a
-                class="service-card__link"
-                href=""
-                aria-label="Fertilización asistida - ver"
-              >
+            <article class="card service-card" role="listitem" aria-label="Fertilización asistida">
+              <a class="service-card__link" href="" aria-label="Fertilización asistida - ver">
                 <div class="service-card__media" aria-hidden="true">
                   <svg
                     viewBox="0 0 24 24"
@@ -187,17 +148,9 @@ import elCiudadano from '@/assets/logos/el_ciudadano.jpg';
               role="listitem"
               aria-label="Tratamientos oncológicos"
             >
-              <a
-                class="service-card__link"
-                href=""
-                aria-label="Tratamientos oncológicos - ver"
-              >
+              <a class="service-card__link" href="" aria-label="Tratamientos oncológicos - ver">
                 <div class="service-card__media" aria-hidden="true">
-                  <svg
-                    viewBox="0 0 512 512"
-                    xmlns="http://www.w3.org/2000/svg"
-                    aria-hidden="true"
-                  >
+                  <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                     <path
                       fill="currentColor"
                       d="M255.992,0C184.108,0,116.46,64.412,141.82,188.497c5.047,24.648,18.6,52.267,37.076,80.704
@@ -222,11 +175,7 @@ import elCiudadano from '@/assets/logos/el_ciudadano.jpg';
               role="listitem"
               aria-label="Despidos e indemnizaciones"
             >
-              <a
-                class="service-card__link"
-                href=""
-                aria-label="Despidos e indemnizaciones - ver"
-              >
+              <a class="service-card__link" href="" aria-label="Despidos e indemnizaciones - ver">
                 <div class="service-card__media" aria-hidden="true">
                   <svg
                     viewBox="0 -64 640 640"
@@ -239,25 +188,15 @@ import elCiudadano from '@/assets/logos/el_ciudadano.jpg';
                     ></path>
                   </svg>
                 </div>
-                <div class="service-card__label">
-                  Despidos e indemnizaciones
-                </div>
+                <div class="service-card__label">Despidos e indemnizaciones</div>
               </a>
             </article>
 
             <!-- Accidentes y Enfermedades -->
             <article class="card service-card" role="listitem" aria-label="ART">
-              <a
-                class="service-card__link"
-                href=""
-                aria-label="ART - ver"
-              >
+              <a class="service-card__link" href="" aria-label="ART - ver">
                 <div class="service-card__media" aria-hidden="true">
-                  <svg
-                    viewBox="0 0 472 472"
-                    xmlns="http://www.w3.org/2000/svg"
-                    aria-hidden="true"
-                  >
+                  <svg viewBox="0 0 472 472" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                     <path
                       fill="currentColor"
                       d="M452.842,431.982l-10.925-32.184c-19.086-56.186-68.4-95.763-126.107-103.326
@@ -288,22 +227,10 @@ import elCiudadano from '@/assets/logos/el_ciudadano.jpg';
             </article>
 
             <!-- Accidentes de transito -->
-            <article
-              class="card service-card"
-              role="listitem"
-              aria-label="Daños"
-            >
-              <a
-                class="service-card__link"
-                href="#"
-                aria-label="Daños - ver"
-              >
+            <article class="card service-card" role="listitem" aria-label="Daños">
+              <a class="service-card__link" href="#" aria-label="Daños - ver">
                 <div class="service-card__media" aria-hidden="true">
-                  <svg
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                    aria-hidden="true"
-                  >
+                  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                     <svg
                       viewBox="0 0 24 24"
                       fill="currentColor"
@@ -316,48 +243,40 @@ import elCiudadano from '@/assets/logos/el_ciudadano.jpg';
                         d="M2 14.803v6.447c0 .414.336.75.75.75h1.614a.75.75 0 0 0 .74-.627L5.5 19h13l.395 2.373a.75.75 0 0 0 .74.627h1.615a.75.75 0 0 0 .75-.75v-6.447a5.954 5.954 0 0 0-1-3.303l-.78-1.17a1.994 1.994 0 0 1-.178-.33h.994a.75.75 0 0 0 .671-.415l.25-.5A.75.75 0 0 0 21.287 8H19.6l-.31-1.546a2.5 2.5 0 0 0-1.885-1.944C15.943 4.17 14.141 4 12 4c-2.142 0-3.943.17-5.405.51a2.5 2.5 0 0 0-1.886 1.944L4.399 8H2.714a.75.75 0 0 0-.67 1.085l.25.5a.75.75 0 0 0 .67.415h.995a1.999 1.999 0 0 1-.178.33L3 11.5c-.652.978-1 2.127-1 3.303zm15.961-4.799a4 4 0 0 0 .34.997H5.699c.157-.315.271-.65.34-.997l.632-3.157a.5.5 0 0 1 .377-.39C8.346 6.157 10 6 12 6c2 0 3.654.156 4.952.458a.5.5 0 0 1 .378.389l.631 3.157zM5.5 16a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zM20 14.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"
                       ></path>
                     </svg>
-                </div>
+                  </svg>
                   <div class="service-card__label">Accidentes de transito</div>
+                </div>
               </a>
-            </article>
 
-            <!-- Sucesiones -->
-            <article
-              class="card service-card"
-              role="listitem"
-              aria-label="Sucesiones"
-            >
-              <a
-                class="service-card__link"
-                href=""
-                aria-label="Sucesiones - ver"
-              >
-                <div class="service-card__media" aria-hidden="true">
-                  <svg
-                    viewBox="0 0 512 512"
-                    xmlns="http://www.w3.org/2000/svg"
-                    aria-hidden="true"
-                  >
-                    <path
-                      fill="currentColor"
-                      d="M78.642,118.933c22.879,0,41.415-18.551,41.415-41.414c0-22.888-18.536-41.423-41.415-41.423
+              <!-- Sucesiones -->
+              <article class="card service-card" role="listitem" aria-label="Sucesiones">
+                <a class="service-card__link" href="" aria-label="Sucesiones - ver">
+                  <div class="service-card__media" aria-hidden="true">
+                    <svg
+                      viewBox="0 0 512 512"
+                      xmlns="http://www.w3.org/2000/svg"
+                      aria-hidden="true"
+                    >
+                      <path
+                        fill="currentColor"
+                        d="M78.642,118.933c22.879,0,41.415-18.551,41.415-41.414c0-22.888-18.536-41.423-41.415-41.423
             c-22.887,0-41.422,18.535-41.422,41.423C37.219,100.383,55.755,118.933,78.642,118.933z"
-                    ></path>
-                    <path
-                      fill="currentColor"
-                      d="M255.706,228.731v0.062c0.101,0,0.193-0.031,0.294-0.031c0.101,0,0.194,0.031,0.294,0.031v-0.062
+                      ></path>
+                      <path
+                        fill="currentColor"
+                        d="M255.706,228.731v0.062c0.101,0,0.193-0.031,0.294-0.031c0.101,0,0.194,0.031,0.294,0.031v-0.062
             c15.563-0.317,28.082-12.976,28.082-28.601c0-15.648-12.52-28.299-28.082-28.617v-0.062c-0.1,0-0.193,0.031-0.294,0.031
             c-0.101,0-0.193-0.031-0.294-0.031v0.062c-15.563,0.318-28.082,12.969-28.082,28.617
             C227.624,215.754,240.143,228.413,255.706,228.731z"
-                    ></path>
-                    <path
-                      fill="currentColor"
-                      d="M433.358,118.933c22.887,0,41.423-18.551,41.423-41.414c0-22.888-18.536-41.423-41.423-41.423
+                      ></path>
+                      <path
+                        fill="currentColor"
+                        d="M433.358,118.933c22.887,0,41.423-18.551,41.423-41.414c0-22.888-18.536-41.423-41.423-41.423
             c-22.879,0-41.414,18.535-41.414,41.423C391.944,100.383,410.48,118.933,433.358,118.933z"
-                    ></path>
-                    <path
-                      fill="currentColor"
-                      d="M512,319.675V180.463c0-20.076-21.834-41.91-41.903-41.91h-5.799l-28.818,28.818l-28.214-28.214
+                      ></path>
+                      <path
+                        fill="currentColor"
+                        d="M512,319.675V180.463c0-20.076-21.834-41.91-41.903-41.91h-5.799l-28.818,28.818l-28.214-28.214
             c-17.839,2.609-33.564,13.665-41.918,30.018l-33.494,97.967c-1.154,2.245-3.298,3.84-5.792,4.281
             c-2.493,0.442-5.048-0.31-6.914-2.036l-20.835-18.04c-6.232-5.769-14.409-8.974-22.902-8.974H256h-19.41
             c-8.494,0-16.67,3.206-22.903,8.974l-20.835,18.04c-1.866,1.726-4.422,2.478-6.914,2.036c-2.494-0.442-4.638-2.036-5.792-4.281
@@ -374,127 +293,43 @@ import elCiudadano from '@/assets/logos/el_ciudadano.jpg';
             c0,10.677,8.664,19.333,19.341,19.333c4.506,0,12.814,0,21.121,0c8.308,0,16.615,0,21.122,0c10.677,0,19.34-8.656,19.34-19.333
             l4.406-75.699h26.418c2.152,0,4.181-1.03,5.451-2.772c1.27-1.743,1.626-3.988,0.968-6.039L500.1,336.67
             C507.037,334.107,512,327.495,512,319.675z M85.424,159.087v74.592H63.389v-74.592H85.424z"
-                    ></path>
-                  </svg>
-                </div>
-                <div class="service-card__label">Sucesiones</div>
-              </a>
+                      ></path>
+                    </svg>
+                  </div>
+                  <div class="service-card__label">Sucesiones</div>
+                </a>
+              </article>
             </article>
-
-
-            </div>
-            <div
-              class="services__cta"
-              role="note"
-              aria-label="Consulta personalizada"
-            >
-            <p style="margin:0 0 .6rem;">
-                Si tu caso no figura, escribinos: escuchamos, evaluamos y te
-                decimos cómo avanzar.
+            <div class="services__cta" role="note" aria-label="Consulta personalizada">
+              <p style="margin:0 0 .6rem;">
+                Si tu caso no figura, escribinos: escuchamos, evaluamos y te decimos cómo avanzar.
               </p>
               <a
-              class="button button--primary desktop"
-              href="https://web.whatsapp.com/send?phone=5403415873908&text=Hola%2C%20necesito%20orientaci%C3%B3n%20sobre%20un%20tema%20legal. "  target="_blank"
-              aria-label="Consultanos por WhatsApp"
-              >Consultanos por WhatsApp</a
+                class="button button--primary desktop"
+                href="https://web.whatsapp.com/send?phone=5403415873908&text=Hola%2C%20necesito%20orientaci%C3%B3n%20sobre%20un%20tema%20legal. "
+                target="_blank"
+                aria-label="Consultanos por WhatsApp">Consultanos por WhatsApp</a
               >
               <a
-              class="button button--primary mobile"
-              href="https://wa.me/5403415873908?text=Hola%2C%20necesito%20orientaci%C3%B3n%20sobre%20un%20tema%20legal.: "  target="_blank"
-              aria-label="Consultanos por WhatsApp"
-              >Consultanos por WhatsApp</a
+                class="button button--primary mobile"
+                href="https://wa.me/5403415873908?text=Hola%2C%20necesito%20orientaci%C3%B3n%20sobre%20un%20tema%20legal.: "
+                target="_blank"
+                aria-label="Consultanos por WhatsApp">Consultanos por WhatsApp</a
               >
             </div>
           </div>
-        </section>
-
-        <!-- ========== CASOS DE ÉXITO ========== -->
-        <section
-          id="casos-exito"
-          class="cases u-section"
-          aria-labelledby="casos-title"
-        >
-          <div class="u-container">
-            <h2 id="casos-title" class="section__title">
-              Casos Reales, Resultados Concretos
-            </h2>
-            <p class="section__subtitle">
-              Resultados que refuerzan la confianza de nuestros clientes.
-            </p>
-
-            <div class="cases__grid" role="list">
-              <article class="card case" role="listitem">
-                <div class="case__content">
-                  <span class="u-badge">Cirugía</span>
-                  <h3 class="case__title">
-                    Logramos la cobertura total para cirugía de labio leporino y
-                    nariz
-                  </h3>
-                  <p class="case__summary">
-                    Una madre obtuvo por vía judicial que su hija acceda a la
-                    cirugía reconstructiva de queiloplastia y rinoplastia, tras
-                    la negativa injustificada de su obra social.
-                  </p>
-                </div>
-                <p class="case__meta none">
-                  Nota relacionada: <a
-                    href="#/"
-                    aria-label="Leer nota periodística sobre PAMI"
-                    >Ver nota periodística</a>
-                </p>
-              </article>
-              <article class="card case" role="listitem">
-                <div class="case__content">
-                  <span class="u-badge">Enfermedad</span>
-                  <h3 class="case__title">
-                    Indemnización por enfermedad profesional: más de $4,7
-                    millones
-                  </h3>
-                  <p class="case__summary">
-                    Logramos que un trabajador de 38 años reciba una
-                    indemnización justa por enfermedad profesional, exenta de
-                    impuestos y reconocida por la ART.
-                  </p>
-                </div>
-                <p class="case__meta none">
-                  Detalle del caso: <a href="#/">Leer caso completo</a>
-                </p>
-              </article>
-              <article class="card case" role="listitem">
-                <div class="case__content">
-                  <span class="u-badge">Cirugía</span>
-                  <h3 class="case__title">
-                    Sentencia ordena cobertura del 100% para hernioplastia
-                  </h3>
-                  <p class="case__summary">
-                    Conseguimos que un afiliado acceda a su cirugía de hernia
-                    sin costo, luego de que la obra social negara
-                    arbitrariamente la cobertura total.
-                  </p>
-                </div>
-                <p class="case__meta none">
-                  Resolución: <a href="#/">Leer caso completo</a>
-                </p>
-              </article>
-            </div>
-          </div>
-        </section>
+        </div>
 
         <!-- ========== POR QUÉ ELEGIRNOS ========== -->
 
-        <section
-          id="about"
-          class="about u-section"
-          aria-labelledby="about-title"
-        >
+        <section id="about" class="about u-section" aria-labelledby="about-title">
           <div class="u-container">
             <h2 id="about-title" class="section__title">
               Somos Federico y Daniel, los abogados que te van a acompañar
             </h2>
             <p class="section__subtitle">
-              Con nosotros hablás directamente con el abogado que llevará tu
-              caso. Más de 15 años de experiencia respaldan nuestro compromiso
-              real con tu bienestar.
+              Con nosotros hablás directamente con el abogado que llevará tu caso. Más de 15 años de
+              experiencia respaldan nuestro compromiso real con tu bienestar.
             </p>
 
             <div class="about-grid" role="list">
@@ -515,13 +350,10 @@ import elCiudadano from '@/assets/logos/el_ciudadano.jpg';
                 </div>
                 <div class="about-body">
                   <h3 class="about-title">Federico Zalazar</h3>
-                  <span class="about-specialty"
-                    >Especialista en Derecho de la Salud</span
-                  >
+                  <span class="about-specialty">Especialista en Derecho de la Salud</span>
                   <p class="about-text">
-                    "Mi misión es asegurar que recibas la atención médica que
-                    merecés, sin demoras ni excusas. Actúo con la urgencia y
-                    sensibilidad que tu salud requiere."
+                    "Mi misión es asegurar que recibas la atención médica que merecés, sin demoras
+                    ni excusas. Actúo con la urgencia y sensibilidad que tu salud requiere."
                   </p>
                 </div>
               </article>
@@ -543,13 +375,10 @@ import elCiudadano from '@/assets/logos/el_ciudadano.jpg';
                 </div>
                 <div class="about-body">
                   <h3 class="about-title">Daniel Paredes</h3>
-                  <span class="about-specialty"
-                    >Especialista en Derecho Laboral</span
-                  >
+                  <span class="about-specialty">Especialista en Derecho Laboral</span>
                   <p class="about-text">
-                    "Mi objetivo es proteger tus derechos como trabajador. Te
-                    asesoro y acompaño en cada etapa para que recibas lo que es
-                    justo."
+                    "Mi objetivo es proteger tus derechos como trabajador. Te asesoro y acompaño en
+                    cada etapa para que recibas lo que es justo."
                   </p>
                 </div>
               </article>
@@ -558,12 +387,14 @@ import elCiudadano from '@/assets/logos/el_ciudadano.jpg';
             <div class="about-cta">
               <a
                 class="button button--primary desktop"
-                href="https://web.whatsapp.com/send?phone=5403415873908&text=Hola%2C%20me%20gustar%C3%ADa%20asesor%C3%ADa%20con%20un%20abogado."  target="_blank"
+                href="https://web.whatsapp.com/send?phone=5403415873908&text=Hola%2C%20me%20gustar%C3%ADa%20asesor%C3%ADa%20con%20un%20abogado."
+                target="_blank"
                 aria-label="Consultar ahora por WhatsApp">Consultar ahora</a
               >
               <a
                 class="button button--primary mobile"
-                href="https://wa.me/5403415873908?text=Hola%2C%20me%20gustar%C3%ADa%20asesor%C3%ADa%20con%20un%20abogado."  target="_blank"
+                href="https://wa.me/5403415873908?text=Hola%2C%20me%20gustar%C3%ADa%20asesor%C3%ADa%20con%20un%20abogado."
+                target="_blank"
                 aria-label="Consultar ahora por WhatsApp">Consultar ahora</a
               >
             </div>
@@ -573,38 +404,28 @@ import elCiudadano from '@/assets/logos/el_ciudadano.jpg';
         <!-- ========== CÓMO TRABAJAMOS ========== -->
         <section class="process u-section" aria-labelledby="process-title">
           <div class="u-container" style="text-align: center;">
-            <h2 id="process-title" class="section__title">
-              Nuestro Proceso Simplificado
-            </h2>
+            <h2 id="process-title" class="section__title">Nuestro Proceso Simplificado</h2>
 
             <div class="process__steps" role="list">
               <article class="step" role="listitem">
                 <div class="step__num" aria-hidden="true">1</div>
                 <div>
                   <h3>Contacto y Evaluación</h3>
-                  <p>
-                    Escuchamos tu caso sin costo y analizamos su viabilidad.
-                  </p>
+                  <p>Escuchamos tu caso sin costo y analizamos su viabilidad.</p>
                 </div>
               </article>
               <article class="step" role="listitem">
                 <div class="step__num" aria-hidden="true">2</div>
                 <div>
                   <h3>Diseño de Estrategia</h3>
-                  <p>
-                    Revisamos la documentación y te explicamos los pasos a
-                    seguir.
-                  </p>
+                  <p>Revisamos la documentación y te explicamos los pasos a seguir.</p>
                 </div>
               </article>
               <article class="step" role="listitem">
                 <div class="step__num" aria-hidden="true">3</div>
                 <div>
                   <h3>Defensa Activa</h3>
-                  <p>
-                    Te representamos en todo el proceso hasta obtener un
-                    resultado.
-                  </p>
+                  <p>Te representamos en todo el proceso hasta obtener un resultado.</p>
                 </div>
               </article>
             </div>
@@ -612,125 +433,93 @@ import elCiudadano from '@/assets/logos/el_ciudadano.jpg';
             <div style="margin-top: 2rem;">
               <a
                 class="button button--primary desktop"
-                href="https://web.whatsapp.com/send?phone=5403415873908&text=Hola%2C%20quiero%20agendar%20una%20consulta."  target="_blank"
-                aria-label="Agendar consulta ahora por WhatsApp"
-                >Agendá tu consulta</a
+                href="https://web.whatsapp.com/send?phone=5403415873908&text=Hola%2C%20quiero%20agendar%20una%20consulta."
+                target="_blank"
+                aria-label="Agendar consulta ahora por WhatsApp">Agendá tu consulta</a
               >
               <a
                 class="button button--primary mobile"
-                href="https://wa.me/5403415873908?text=Hola%2C%20quiero%20agendar%20una%20consulta."  target="_blank"
-                aria-label="Agendar consulta ahora por WhatsApp"
-                >Agendá tu consulta</a
+                href="https://wa.me/5403415873908?text=Hola%2C%20quiero%20agendar%20una%20consulta."
+                target="_blank"
+                aria-label="Agendar consulta ahora por WhatsApp">Agendá tu consulta</a
               >
             </div>
           </div>
         </section>
 
-        <!-- ========== CONFIANZA / CONTACTO EXTENDIDO ========== -->
-        <section
-          id="contacto"
-          class="u-section"
-          aria-labelledby="contact-title"
-        >
-          <div class="u-container contact__grid">
-            <div class="contact__panel contact__panel--form">
-              <h2 id="contact-title" class="section__title">
-                Estamos aquí para ayudarte
-              </h2>
-              <p class="section__subtitle">
-                Contactanos para una evaluación de tu caso sin compromiso.
-              </p>
+        <!-- ========== CASOS DE ÉXITO ========== -->
+        <section id="casos-exito" class="cases u-section" aria-labelledby="casos-title">
+          <div class="u-container">
+            <h2 id="casos-title" class="section__title">Casos Reales, Resultados Concretos</h2>
+            <p class="section__subtitle">
+              Resultados que refuerzan la confianza de nuestros clientes.
+            </p>
 
-              <h3 style="margin:1.5rem 0 .5rem;">Datos de Contacto</h3>
-              <ul class="contact__list" aria-label="Medios de contacto">
-                <li class="contact__item">
-                  Tel.: <a href="tel:+5403415873908">+54 0341 587-3908</a>
-                </li>
-                <li class="contact__item">
-                  Email: <a href="mailto:contacto@tudominio.com"
-                    >contacto@tudominio.com</a>
-                </li>
-                <li class="contact__item">
-                  Dirección: <a
-                    href="https://maps.app.goo.gl/PBsXzMtSTBqJAxuU8"
-                    target="_blank"
-                    rel="noopener"
-                    >El jacaranda 6237, barrio tierra de sueños</a>
-                </li>
-              </ul>
-            </div>
-
-            <div class="contact__panel">
-              <iframe
-                class="contact__map"
-                title="Mapa del estudio en Google Maps"
-                loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3343.168875701595!2d-60.69436592344937!3d-33.07834147855386!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95b7af38d1826935%3A0x6bfc770f77fe7eab!2sEl%20Jacarand%C3%A1%206237%2C%20S2126%20La%20Carolina%2C%20Santa%20Fe!5e0!3m2!1ses-419!2sar!4v1757173354032!5m2!1ses-419!2sar"
-              >
-              </iframe>
+            <div class="cases__grid" role="list">
+              <article class="card case" role="listitem">
+                <div class="case__content">
+                  <span class="u-badge">Cirugía</span>
+                  <h3 class="case__title">
+                    Logramos la cobertura total para cirugía de labio leporino y nariz
+                  </h3>
+                  <p class="case__summary">
+                    Una madre obtuvo por vía judicial que su hija acceda a la cirugía reconstructiva
+                    de queiloplastia y rinoplastia, tras la negativa injustificada de su obra
+                    social.
+                  </p>
+                </div>
+                <p class="case__meta none">
+                  Nota relacionada: <a href="#/" aria-label="Leer nota periodística sobre PAMI"
+                    >Ver nota periodística</a
+                  >
+                </p>
+              </article>
+              <article class="card case" role="listitem">
+                <div class="case__content">
+                  <span class="u-badge">Enfermedad</span>
+                  <h3 class="case__title">
+                    Indemnización por enfermedad profesional: más de $4,7 millones
+                  </h3>
+                  <p class="case__summary">
+                    Logramos que un trabajador de 38 años reciba una indemnización justa por
+                    enfermedad profesional, exenta de impuestos y reconocida por la ART.
+                  </p>
+                </div>
+                <p class="case__meta none">
+                  Detalle del caso: <a href="#/">Leer caso completo</a>
+                </p>
+              </article>
+              <article class="card case" role="listitem">
+                <div class="case__content">
+                  <span class="u-badge">Cirugía</span>
+                  <h3 class="case__title">
+                    Sentencia ordena cobertura del 100% para hernioplastia
+                  </h3>
+                  <p class="case__summary">
+                    Conseguimos que un afiliado acceda a su cirugía de hernia sin costo, luego de
+                    que la obra social negara arbitrariamente la cobertura total.
+                  </p>
+                </div>
+                <p class="case__meta none">
+                  Resolución: <a href="#/">Leer caso completo</a>
+                </p>
+              </article>
             </div>
           </div>
         </section>
 
-      <!-- ========== FOOTER ========== -->
-      <footer class="footer" role="contentinfo">
-        <div class="u-container">
-          <div class="footer__top">
-            <div>
-              <a href="/" class="footer__brand">
-                <div aria-hidden="true" class="header__logo">Z&P</div>
-                <strong>Zalazar & Paredes</strong>
-              </a>
-              <p class="u-muted" style="margin:.5rem 0 0;">
-                Defensa en salud y trabajo. Rosario, Alvear, Pueblo Esther,
-                Villa Amelia, Roldán, Funes, Carcarañá y Santa Fe.
-              </p>
-            </div>
-            <nav aria-label="Enlaces rápidos">
-          <div class="footer__menu">
-            <a href="/" aria-current="page">Inicio</a>
-            <a href="/abogado-de-salud">Abogado de Salud</a>
-            <a href="/abogado-laboral">Abogado Laboral</a>
-            <a href="/casos-de-exito">Casos de éxito</a>
-            <a href="/contacto">Contacto</a>
-            </div>
-        </nav>
-            <div>
-              <p style="margin:0 0 .5rem;"><strong>Contacto Directo</strong></p>
-              <p class="u-muted" style="margin:0;">
-                <a href="tel:+5403415873908">Tel: +54 0341 587-3908</a>
-              </p>
-              <p class="u-muted desktop" style="margin:.25rem 0 0;"><a href="https://web.whatsapp.com/send?phone=5403415873908">WhatsApp: +54 9 0341 587-3908</a></p>
-          <p class="u-muted mobile" style="margin:.25rem 0 0;"><a href="https://wa.me/5403415873908">WhatsApp: +54 9 0341 587-3908</a></p>
-              <p class="u-muted" style="margin:.25rem 0 0;">
-                El jacaranda 6237, barrio tierra de sueños, localidad Alvear.
-              </p>
-            </div>
-          </div>
-          <div class="footer__bottom">
-            <p class="u-muted">
-              La información presentada tiene fines generales y no constituye
-              asesoramiento jurídico. Cada caso es único.
-            </p>
-            <p class="u-muted">
-              © <span id="anio-actual"></span> Zalazar & Paredes. Todos los derechos
-              reservados.
-            </p>
-          </div>
-        </div>
-      </footer>
+        <Contact
+          title="Estamos aquí para ayudarte"
+          subtitle="Contactanos para una evaluación de tu caso sin compromiso."
+          layout="simple"
+          items={getContactItems('simple')}
+          mapSrc={contact.address.embedMapUrl}
+        />
 
-      <WhatsAppButton />
+        <WhatsAppButton />
+      </section>
     </main>
-  </body>
-      <style>
-      
-
-
-
-
-
+    <style>
       /* =========
        Componentes base
        ========= */
@@ -950,7 +739,7 @@ import elCiudadano from '@/assets/logos/el_ciudadano.jpg';
       @media (max-width: 899px) {
         /* MEJORA UX: Pista visual para el scroll horizontal */
         .cases__grid::after {
-          content: "→ Deslizar para ver más";
+          content: '→ Deslizar para ver más';
           grid-column: 1 / -1;
           text-align: right;
           font-size: 0.85rem;
@@ -1123,93 +912,6 @@ import elCiudadano from '@/assets/logos/el_ciudadano.jpg';
           gap: 1.5rem;
         }
       }
-
-      /* =========
-       Contacto / confianza
-       ========= */
-      .contact__grid {
-        display: grid;
-        gap: 1.5rem;
-      }
-      .contact__panel {
-        border-radius: var(--radius-2);
-      }
-      .contact__panel--form {
-        padding: 2rem;
-        background: #fff;
-        border: 1px solid var(--color-border);
-      }
-      .contact__list {
-        margin: 0;
-        padding: 0;
-        list-style: none;
-        display: grid;
-        gap: 0.75rem;
-      }
-      .contact__item {
-        display: flex;
-        gap: 0.75rem;
-        align-items: center;
-      }
-      .contact__map {
-        min-height: 260px;
-        border: 0;
-        border-radius: var(--radius-1);
-        width: 100%;
-      }
-      @media (min-width: 900px) {
-        .contact__grid {
-          grid-template-columns: 1fr 1fr;
-        }
-        .contact__map {
-          min-height: 100%;
-        }
-      }
-
-      /* =========
-       Footer
-       ========= */
-      .footer {
-        display: none;
-        background: #0f172a;
-        color: #cbd5e1;
-        padding: 3rem 0;
-      }
-      .footer__top {
-        display: grid;
-        gap: 2rem;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-        padding-bottom: 2rem;
-      }
-      .footer__brand {
-        display: flex;
-        align-items: center;
-        gap: 0.6rem;
-      }
-      .footer__brand strong {
-        font-size: 1.1rem;
-      }
-      .footer__menu {
-        display: grid;
-        gap: 0.5rem;
-      }
-      .footer__menu a {
-        color: #e2e8f0;
-      }
-      .footer__bottom {
-        display: grid;
-        gap: 0.5rem;
-        padding-top: 2rem;
-        font-size: 0.9rem;
-        color: #94a3b8;
-      }
-      @media (min-width: 900px) {
-        .footer__top {
-          grid-template-columns: 1.2fr 1fr 1fr;
-          align-items: start;
-        }
-      }
-
     </style>
-  
-</MainLayout>
+  </body></MainLayout
+>
