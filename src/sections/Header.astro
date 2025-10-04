@@ -8,11 +8,10 @@ export interface Props {
   menuItems: { label: string; href: string; current?: boolean }[];
 }
 
-
 const { menuItems } = Astro.props;
 
 const cta = {
-  label: "Consultar", // Texto del botón
+  label: 'Consultar', // Texto del botón
 };
 ---
 
@@ -23,12 +22,7 @@ const cta = {
     </a>
 
     <!-- Toggle menú -->
-    <input
-      id="menu-toggle"
-      type="checkbox"
-      class="menu-toggle"
-      aria-hidden="true"
-    />
+    <input id="menu-toggle" type="checkbox" class="menu-toggle" aria-hidden="true" />
     <label for="menu-toggle" class="menu-icon" aria-label="Abrir menú">☰</label>
 
     <nav class="header__nav" aria-label="Navegación principal">
@@ -39,7 +33,7 @@ const cta = {
               <a
                 class="menu__link"
                 href={item.href}
-                aria-current={item.current ? "page" : undefined}
+                aria-current={item.current ? 'page' : undefined}
               >
                 {item.label}
               </a>
@@ -49,15 +43,24 @@ const cta = {
 
         <!-- CTA -->
         <li class="menu__cta">
-  <Button href={getWhatsAppLink(contact.phone, contact.whatsappMessage, true)} variant="primary" device="desktop" external={true}>
-    {cta.label}
-  </Button>
+          <Button
+            href={getWhatsAppLink(contact.phone, contact.whatsappMessage, true)}
+            variant="primary"
+            device="desktop"
+            external={true}
+          >
+            {cta.label}
+          </Button>
 
-  <Button href={getWhatsAppLink(contact.phone, contact.whatsappMessage)} variant="primary" device="mobile" external={true}>
-    {cta.label}
-  </Button>
-</li>
-
+          <Button
+            href={getWhatsAppLink(contact.phone, contact.whatsappMessage)}
+            variant="primary"
+            device="mobile"
+            external={true}
+          >
+            {cta.label}
+          </Button>
+        </li>
       </ul>
     </nav>
   </div>
@@ -136,7 +139,7 @@ const cta = {
     font-size: 1rem;
     text-decoration: none;
   }
-  .menu__link[aria-current="page"] {
+  .menu__link[aria-current='page'] {
     color: var(--brand-1);
   }
   .menu__cta {

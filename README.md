@@ -9,26 +9,29 @@ NOTE - Heavily Inspired by - https://www.wellthapp.com/
 To get started with this project, follow these steps:
 
 1. Clone the repository:
+
 ```bash
 bash
 git clone https://github.com/your-username/magical-motion.git
 ```
 
 2. Navigate to the project directory:
+
 ```bash
 cd magical-motion
 ```
 
 3. Install the dependencies
+
 ```bash
 npm install
 ```
 
 4. Start the development server:
+
 ```bash
 npm run dev
 ```
-
 
 The development server will start at `http://localhost:4321`. Any changes you make to the code will be automatically reflected in the browser.
 
@@ -76,10 +79,10 @@ Astro components use a mix of HTML, CSS, and JavaScript (or TypeScript). You can
 ## Building for Production
 
 To build the project for production, run the following command:
+
 ```bash
 npm run build
 ```
-
 
 This command will generate a production-ready build of your website in the `dist/` directory.
 

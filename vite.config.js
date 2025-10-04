@@ -8,6 +8,6 @@ export default defineConfig({
     strictPort: true, // evita que cambie de puerto si 4321 está ocupado
     hmr: {
       clientPort: 443, // para que el hot reload funcione con Ngrok (HTTPS)
-    }
+    },
   },
 });

@@ -1,6 +1,6 @@
-import { fontFamily as _fontFamily } from 'tailwindcss/defaultTheme'
+import { fontFamily as _fontFamily } from 'tailwindcss/defaultTheme';
 
-export const content = ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}']
+export const content = ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'];
 
 export const theme = {
   extend: {
@@ -16,8 +16,6 @@ export const theme = {
       serif: ['Merriweather', ..._fontFamily.serif],
     },
   },
-}
+};
 
-export const plugins = [
-  require('@tailwindcss/aspect-ratio'),
-]
+export const plugins = [require('@tailwindcss/aspect-ratio')];
