@@ -16,6 +16,7 @@ import { getPosts } from '@/config/postAdapter';
 
 import Services, { services, type Service } from '@/sections/Services.astro';
 import About from '@/sections/About.astro';
+import Process from '@/sections/Process.astro';
 
 const posts = await getPosts({ tag: 'noticias', limit: 3 });
 ---
@@ -45,52 +46,9 @@ const posts = await getPosts({ tag: 'noticias', limit: 3 });
 
       <About />
 
+      <Process />
 
-      <!-- ========== CÓMO TRABAJAMOS ========== -->
-      <section class="process u-section" aria-labelledby="process-title">
-        <div class="u-container" style="text-align: center;">
-          <h2 id="process-title" class="section__title">Nuestro Proceso Simplificado</h2>
 
-          <div class="process__steps" role="list">
-            <article class="step" role="listitem">
-              <div class="step__num" aria-hidden="true">1</div>
-              <div>
-                <h3>Contacto y Evaluación</h3>
-                <p>Escuchamos tu caso sin costo y analizamos su viabilidad.</p>
-              </div>
-            </article>
-            <article class="step" role="listitem">
-              <div class="step__num" aria-hidden="true">2</div>
-              <div>
-                <h3>Diseño de Estrategia</h3>
-                <p>Revisamos la documentación y te explicamos los pasos a seguir.</p>
-              </div>
-            </article>
-            <article class="step" role="listitem">
-              <div class="step__num" aria-hidden="true">3</div>
-              <div>
-                <h3>Defensa Activa</h3>
-                <p>Te representamos en todo el proceso hasta obtener un resultado.</p>
-              </div>
-            </article>
-          </div>
-
-          <div style="margin-top: 2rem;">
-            <a
-              class="button button--primary desktop-inline"
-              href="https://web.whatsapp.com/send?phone=5403415873908&text=Hola%2C%20quiero%20agendar%20una%20consulta."
-              target="_blank"
-              aria-label="Agendar consulta ahora por WhatsApp">Agendá tu consulta</a
-            >
-            <a
-              class="button button--primary mobile-inline"
-              href="https://wa.me/5403415873908?text=Hola%2C%20quiero%20agendar%20una%20consulta."
-              target="_blank"
-              aria-label="Agendar consulta ahora por WhatsApp">Agendá tu consulta</a
-            >
-          </div>
-        </div>
-      </section>
 
       <PostsSection
         title="Casos que trascendieron en los medios:"
@@ -259,54 +217,8 @@ const posts = await getPosts({ tag: 'noticias', limit: 3 });
       border-radius: var(--radius-2);
       padding: 1.25rem;
     }
+    
 
 
-    /* =========
-       Proceso
-       ========= */
-    .process {
-    }
-    .process__steps {
-      display: grid;
-      gap: 1rem;
-      margin-top: 2rem;
-    }
-    .step {
-      display: grid;
-      grid-template-columns: 40px 1fr;
-      gap: 1rem;
-      align-items: start;
-      background: #fff;
-      border: 1px solid var(--color-border);
-      border-radius: 12px;
-      padding: 1.25rem;
-    }
-    .step__num {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      display: grid;
-      place-items: center;
-      background: #eaf1ff;
-      color: #1d4ed8;
-      font-weight: 800;
-      font-family: var(--font-serif);
-    }
-    .step h3 {
-      margin: 0.1rem 0 0.25rem;
-      font-size: 1.1rem;
-      font-weight: 700;
-    }
-    .step p {
-      margin: 0;
-      color: var(--color-muted);
-    }
-
-    @media (min-width: 900px) {
-      .process__steps {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 1.5rem;
-      }
-    }
   </style>
 </MainLayout>
