@@ -1,0 +1,357 @@
+---
+import Button from "../components/Button.astro";
+
+// ====== Datos de los casos ======
+const casos = [
+  {
+    id: "caso-salud-fertilizacion",
+    categoria: "salud",
+    categoriaLabel: "Fertilidad",
+    titulo: "Cobertura garantizada de fertilización asistida y criopreservación de óvulos",
+    resultado: "Fallo a favor contra SANCOR Salud",
+    timeline: [
+      {
+        step: "1",
+        tipo: "red",
+        titulo: "El Problema",
+        texto: "María Lucía M., de 27 años, fue diagnosticada con menopausia precoz. Su obra social, SANCOR Salud, se negó a cubrir el tratamiento de criopreservación de óvulos, argumentando que no estaba explícitamente incluido en el PMO."
+      },
+      {
+        step: "2",
+        tipo: "yellow",
+        titulo: "Nuestra Acción Legal",
+        texto: "Presentamos una acción de amparo urgente, fundamentada en la Ley Nacional de Fertilización Asistida (Nº 26.862) y en el derecho a la salud integral."
+      },
+      {
+        step: "3",
+        tipo: "green",
+        titulo: "El Resultado",
+        texto: "El tribunal falló a nuestro favor, ordenando a SANCOR Salud la cobertura integral e inmediata del tratamiento y la medicación necesaria."
+      }
+    ]
+  },
+  {
+    id: "caso-laboral-indemnizacion",
+    categoria: "laboral",
+    categoriaLabel: "Accidente",
+    titulo: "Indemnización de $10.760.956 por accidente laboral y secuelas",
+    resultado: "Condena a Federación Patronal ART",
+    timeline: [
+      {
+        step: "1",
+        tipo: "red",
+        titulo: "El Problema",
+        texto: "R. Horacio, un operario de 39 años, sufrió un accidente laboral que le provocó una lesión en el hombro..."
+      },
+      {
+        step: "2",
+        tipo: "yellow",
+        titulo: "Nuestra Acción Legal",
+        texto: "Impugnamos el dictamen de la comisión médica y llevamos el caso a la justicia laboral..."
+      },
+      {
+        step: "3",
+        tipo: "green",
+        titulo: "El Resultado",
+        texto: "El tribunal laboral de Rosario condenó a la ART a pagar una indemnización de $10.760.956..."
+      }
+    ]
+  },
+  {
+    id: "caso-salud-cirugia",
+    categoria: "salud",
+    categoriaLabel: "Prótesis",
+    titulo: "Cobertura del 100% para cirugía de rodilla con prótesis importada",
+    resultado: "Medida cautelar favorable contra OSDE",
+    timeline: [
+      {
+        step: "1",
+        tipo: "red",
+        titulo: "El Problema",
+        texto: "Un afiliado con artrosis severa de rodilla necesitaba una cirugía de reemplazo con una prótesis específica importada..."
+      },
+      {
+        step: "2",
+        tipo: "yellow",
+        titulo: "Nuestra Acción Legal",
+        texto: "Iniciamos una medida cautelar de salud, demostrando con informes médicos la superioridad y necesidad de la prótesis importada..."
+      },
+      {
+        step: "3",
+        tipo: "green",
+        titulo: "El Resultado",
+        texto: "El juez ordenó a OSDE la cobertura inmediata y total (100%) de la cirugía, incluyendo la prótesis importada..."
+      }
+    ]
+  }
+];
+---
+
+<!-- ====== Casos de Éxito ====== -->
+<section class="cases">
+  <div class="container">
+    <h2 class="cases-title">Explorá nuestros casos de éxito por especialidad</h2>
+    <div class="cases-grid">
+      {casos.map(caso => (
+        <div class="case-card">
+          <span class={`case-tag ${caso.categoria}`}>{caso.categoriaLabel}</span>
+          <h3 class="case-title">{caso.titulo}</h3>
+          <p class="case-result">{caso.resultado}</p>
+          <a href={`#${caso.id}`} class="case-link">Ver detalle</a>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- ====== Detalle de cada caso ====== -->
+{casos.map(caso => (
+  <section id={caso.id} class="detail">
+    <div class="container">
+      <span class={`detail-category ${caso.categoria}`}>{caso.categoriaLabel}</span>
+      <h3 class="detail-title">{caso.titulo}</h3>
+
+      <div class="timeline">
+        {caso.timeline.map(step => (
+          <div class="timeline-step">
+            <div class={`step-icon ${step.tipo}`}>{step.step}</div>
+            <h4 class="step-title">{step.titulo}</h4>
+            <p class="step-text">{step.texto}</p>
+          </div>
+        ))}
+      </div>
+
+      <div class="cta-box">
+        <p class="cta-text">¿Tu caso es parecido?</p>
+        <Button
+          href="https://web.whatsapp.com/send?phone=5403415873908&text=Hola,%20quiero%20consultar%20sobre%20mi%20caso"
+          external
+          variant="primary"
+          device="desktop"
+          ariaLabel="Consultanos ya"
+        >
+          Consultanos ya
+        </Button>
+        <Button
+          href="https://wa.me/5403415873908?text=Hola,%20quiero%20consultar%20sobre%20mi%20caso"
+          external
+          variant="primary"
+          device="mobile"
+          ariaLabel="Consultanos ya"
+        >
+          Consultanos ya
+        </Button>
+      </div>
+    </div>
+  </section>
+))}
+
+<style>
+html {
+  scroll-behavior: smooth;
+}
+
+/* ====== Casos de Éxito ====== */
+.cases {
+  padding: 5rem 1rem;
+  background: #f9fafb;
+}
+
+.cases .container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.cases-title {
+  font-size: 2rem;
+  font-weight: 700;
+  font-family: Georgia, serif;
+  text-align: center;
+  color: #0b1f4b;
+}
+
+.cases-grid {
+  margin-top: 3rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+@media (min-width: 768px) {
+  .cases-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 1024px) {
+  .cases-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.case-card {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+}
+.case-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.case-tag {
+  display: inline-block;
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+}
+.case-tag.salud {
+  background: #dbeafe;
+  color: #1747a6;
+}
+.case-tag.laboral {
+  background: #dcfce7;
+  color: #16a34a;
+}
+
+.case-title {
+  margin-top: 1rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #0b1f4b;
+  flex-grow: 1;
+}
+.case-result {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #166534;
+}
+
+.case-btn {
+  margin-top: 1.5rem;
+  justify-content: center;
+  width: 100%;
+}
+
+.case-link {
+  margin-top: 1.5rem;
+  text-align: center;
+  display: block;
+  background: #f3f4f6;
+  color: #0b1f4b;
+  font-weight: 700;
+  padding: 0.6rem 1.2rem;
+  border-radius: 999px;
+  text-decoration: none;
+}
+.case-link:hover { background: #e5e7eb; }
+
+/* ====== Detalle de Caso ====== */
+.detail {
+  padding: 4rem 1rem;
+  background: #fff;
+  scroll-margin-top: 6rem;
+}
+.detail .container {
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+}
+.detail-category {
+  display: inline-block;
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  background: #dbeafe;
+  color: #1747a6;
+}
+.detail-category.laboral {
+  background: #dcfce7;
+  color: #16a34a;
+}
+.detail-title {
+  margin-top: 1rem;
+  font-family: Georgia, serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #0b1f4b;
+  line-height: 1.3;
+}
+
+/* Timeline */
+.timeline {
+  margin-top: 3rem;
+  position: relative;
+  padding-left: 2rem;
+}
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 1rem;
+  top: 0.5rem;
+  bottom: 0.5rem;
+  width: 2px;
+  background: #e5e7eb;
+}
+.timeline-step {
+  position: relative;
+  margin-bottom: 2.5rem;
+  padding-left: 2rem;
+}
+.step-icon {
+  position: absolute;
+  left: -0.5rem;
+  top: 0;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+.step-icon.red {
+  background: #fee2e2;
+  color: #dc2626;
+}
+.step-icon.yellow {
+  background: #fef9c3;
+  color: #ca8a04;
+}
+.step-icon.green {
+  background: #dcfce7;
+  color: #16a34a;
+}
+.step-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #0b1f4b;
+}
+.step-text {
+  margin-top: 0.5rem;
+  color: #4b5563;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* CTA */
+.cta-box {
+  margin-top: 3rem;
+  text-align: center;
+  background: #eff6ff;
+  padding: 1.5rem;
+  border-radius: 1rem;
+}
+.cta-text {
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: #0b1f4b;
+}
+</style>

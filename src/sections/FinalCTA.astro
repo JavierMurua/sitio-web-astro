@@ -1,0 +1,105 @@
+---
+import Button from '@/components/Button.astro';
+
+
+
+interface Props {
+  title?: string;
+  subtitle?: string;
+  phone?: string; // ej: "5403415873908"
+  message?: string; // mensaje de whatsapp prellenado
+}
+
+const {
+  title = "¿Listo para tu consulta?",
+  subtitle = "Hablá con nosotros ahora mismo. Estamos para defender tus derechos.",
+  phone = "5403415873908",
+  message = "Hola, quiero hacer una consulta:",
+} = Astro.props;
+
+// URLs dinámicas
+const whatsappWeb = `https://web.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(message)}`;
+const whatsappMobile = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+const phoneHref = `tel:+${phone}`;
+---
+
+<section class="final-cta">
+  <div class="final-cta__container">
+    <h2 class="final-cta__title">{title}</h2>
+    <p class="final-cta__subtitle">{subtitle}</p>
+
+    <div class="final-cta__buttons">
+      <Button
+        href={whatsappWeb}
+        variant="primary"
+        device="desktop"
+        external
+        ariaLabel="Contactar por WhatsApp (versión escritorio)"
+      >
+        Contactar por WhatsApp
+      </Button>
+
+      <Button
+        href={whatsappMobile}
+        variant="primary"
+        device="mobile"
+        external
+        ariaLabel="Contactar por WhatsApp (versión móvil)"
+      >
+        Contactar por WhatsApp
+      </Button>
+
+      <Button
+        href={phoneHref}
+        variant="outline"
+        ariaLabel="Llamar ahora"
+      >
+        Llamar ahora
+      </Button>
+    </div>
+  </div>
+</section>
+
+<style>
+.final-cta {
+  padding: 5rem 1rem;
+  background: var(--brand-3);
+  color: #fff;
+  text-align: center;
+}
+
+.final-cta__container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.final-cta__title {
+  font-family: serif;
+  font-size: 2.25rem;
+  font-weight: 700;
+}
+
+@media (min-width: 768px) {
+  .final-cta__title {
+    font-size: 2.5rem;
+  }
+}
+
+.final-cta__subtitle {
+  margin-top: 1rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  color: #bfdbfe;
+  font-size: 1.125rem;
+}
+
+.final-cta__buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+</style>
