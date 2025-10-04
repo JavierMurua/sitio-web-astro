@@ -1,0 +1,182 @@
+---
+// src/sections/Services.astro
+import Icon from "@/components/Icon.astro";
+import type { IconName } from "@/config/icons";
+import { contact, getWhatsAppLink } from "@/contact";
+
+export interface Service {
+  label: string;
+  icon: IconName;
+  category: "salud" | "laboral";
+}
+
+export const services: Service[] = [
+  { label: "Acceso a medicación", icon: "pill", category: "salud" },
+  { label: "Prestaciones por discapacidad", icon: "wheelchair", category: "salud" },
+  { label: "Cirugías y prótesis", icon: "crutches", category: "salud" },
+  { label: "Fertilización asistida", icon: "dna", category: "salud" },
+  { label: "Tratamientos oncológicos", icon: "ribbon", category: "salud" },
+  { label: "Despidos e indemnizaciones", icon: "handshakeSlash", category: "laboral" },
+  { label: "Accidentes y Enfermedades", icon: "technician", category: "laboral" },
+  { label: "Accidentes de tránsito", icon: "carAlt", category: "laboral" },
+  { label: "Sucesiones", icon: "family", category: "salud" },
+];
+
+interface Props {
+  services: Service[];
+  title?: string;
+  subtitle?: string;
+}
+
+const { services: servicesProp, title, subtitle } = Astro.props as Props;
+
+
+---
+
+<section id="servicios" class="u-section" aria-labelledby="servicios-title">
+  <div class="u-container">
+    <h2 id="servicios-title" class="section__title">{title ?? "Casos que resolvemos a diario"}</h2>
+    {subtitle && <p class="section__subtitle">{subtitle}</p>}
+
+    <div class="services__grid" role="list" aria-label="Listado de servicios">
+      {servicesProp.map(({ label, icon }) => {
+        const message = `Quiero hacer una consulta sobre ${label}`;
+        const whatsappDesktop = getWhatsAppLink(contact.phone, message, true);
+        const whatsappMobile = getWhatsAppLink(contact.phone, message, false);
+
+        return (
+          <>
+            <!-- Desktop link -->
+            <a
+              href={whatsappDesktop}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="card service-card desktop-flex"
+              role="listitem"
+              aria-label={`Consultar sobre ${label} (escritorio)`}
+            >
+              <div class="service-card__media" aria-hidden="true">
+                <Icon name={icon} size={38} decorative />
+              </div>
+              <div class="service-card__label">{label}</div>
+            </a>
+
+            <!-- Mobile link -->
+            <a
+              href={whatsappMobile}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="card service-card mobile-flex"
+              role="listitem"
+              aria-label={`Consultar sobre ${label} (móvil)`}
+            >
+              <div class="service-card__media" aria-hidden="true">
+                <Icon name={icon} size={38} decorative />
+              </div>
+              <div class="service-card__label">{label}</div>
+            </a>
+          </>
+        );
+      })}
+    </div>
+
+    <div class="services__cta" role="note" aria-label="Consulta personalizada">
+      <p style="margin:0 0 .6rem;">
+        Si tu caso no figura, escribinos: escuchamos, evaluamos y te decimos cómo avanzar.
+      </p>
+      <a
+        href={getWhatsAppLink(contact.phone, contact.whatsappMessage, true)}
+        class="button button--primary desktop-inline"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Consultanos por WhatsApp (escritorio)"
+      >
+        Consultanos por WhatsApp
+      </a>
+      <a
+        href={getWhatsAppLink(contact.phone, contact.whatsappMessage, false)}
+        class="button button--primary mobile-inline"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Consultanos por WhatsApp (móvil)"
+      >
+        Consultanos por WhatsApp
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+.services__grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  align-items: stretch;
+}
+
+.service-card {
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.75rem;
+  padding: 1.25rem;
+  border-radius: var(--radius-2);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  min-height: 150px;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.2s ease;
+}
+
+.service-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 20px rgba(11, 31, 75, 0.06);
+  border-color: var(--brand-1);
+}
+
+.service-card__link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  gap: 0.5rem;
+}
+
+.service-card__media {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #ffffff 50%, #eef7f0 100%);
+  border: 2px solid rgba(10, 120, 70, 0.06);
+  display: grid;
+  place-items: center;
+  transition:
+    transform 0.22s ease,
+    background 0.22s ease,
+    border-color 0.22s ease;
+  flex: 0 0 auto;
+  color: var(--brand-1);
+}
+
+.service-card:hover .service-card__media {
+  background: radial-gradient(circle, #ffffff 40%, #e4f5ea 100%);
+  transform: scale(1.05);
+}
+
+.service-card__label {
+  font-weight: 700;
+  font-size: var(--step--1);
+  color: var(--brand-3);
+}
+
+.services__cta {
+  margin-top: 1.75rem;
+  text-align: center;
+  background: var(--color-surface);
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius-2);
+  padding: 1.25rem;
+}
+</style>

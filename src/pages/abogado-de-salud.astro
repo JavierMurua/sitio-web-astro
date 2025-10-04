@@ -1,4 +1,7 @@
 ---
+import Services, { services, type Service } from "@/sections/Services.astro";
+const healthServices = services.filter((s: Service) => s.category === "salud");
+
 import WhatsAppButton from "../components/WhatsAppButton.astro";
 ---
 
@@ -812,6 +815,9 @@ import WhatsAppButton from "../components/WhatsAppButton.astro";
     </div>
   </div>
 </section>
+
+<!-- <Services services={healthServices} title="Servicios de Salud" />
+<Services services={services} title="Todos los servicios" /> -->
 
     <!-- ========== SERVICIOS PRINCIPALES ========== -->
     

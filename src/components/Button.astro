@@ -32,8 +32,8 @@ const Tag = as;
 const classParts = [
   'button',
   `button--${variant}`,
-  block ? 'button--block' : '',
-  device === 'desktop' ? 'desktop' : device === 'mobile' ? 'mobile' : '',
+  block ? (device === 'desktop' ? 'desktop-block' : device === 'mobile' ? 'mobile-block' : 'button--block') 
+        : (device === 'desktop' ? 'desktop-inline' : device === 'mobile' ? 'mobile-inline' : ''),
   className || ''
 ].filter(Boolean);
 
