@@ -1,7 +1,6 @@
 ---
 // src/pages/index.astro
 import MainLayout from '../layouts/MainLayout.astro';
-import WhatsAppButton from '../components/WhatsAppButton.astro';
 import Hero from '@/sections/Hero.astro';
 import heroImage from '@/assets/images/estatua-justicia-cobre-despacho-abogados-hero.png';
 import Trust from '@/sections/Trust.astro';
@@ -11,7 +10,7 @@ import Contact from '@/sections/Contact.astro';
 import { getContactItems } from '@/config/contactAdapter'; // Ya no se usa, revisar.
 import { contact } from '@/config/contact'; // Ya no se usa, revisar.
 
-import PostsSection from '@/sections/Posts.astro';
+import Posts from '@/sections/Posts.astro';
 import { getPosts } from '@/config/postAdapter';
 
 import Services, { services, type Service } from '@/sections/Services.astro';
@@ -22,45 +21,39 @@ const posts = await getPosts({ tag: 'noticias', limit: 3 });
 ---
 
 <MainLayout>
-  <body>
-    <main id="contenido">
-      <Hero
-        title="Defendemos tus derechos en Salud y Trabajo"
-        subtitle="Estudio jurídico en Rosario. Especialistas en reclamos contra obras sociales y prepagas."
-        image={heroImage}
-        ctaPrimary={{ text: 'Consultar por WhatsApp' }}
-        ctaSecondary={{ text: 'Ver servicios', href: '#servicios' }}
-        seal="Trayectoria comprobada. Compromiso real."
-      />
+  <Hero
+    title="Defendemos tus derechos en Salud y Trabajo"
+    subtitle="Estudio jurídico en Rosario. Especialistas en reclamos contra obras sociales y prepagas."
+    image={heroImage}
+    ctaPrimary={{ text: 'Consultar por WhatsApp' }}
+    ctaSecondary={{ text: 'Ver servicios', href: '#servicios' }}
+    seal="Trayectoria comprobada. Compromiso real."
+  />
 
-      <Trust
-        quote="Resolvieron mi tratamiento a tiempo. El estudio se encargó de todo con mi obra social; me sentí acompañado en cada paso."
-        author="Juan C., cliente de Salud"
-        logos={[
-          { src: radioCut, alt: 'Radio Cut' },
-          { src: elCiudadano, alt: 'El Ciudadano' },
-        ]}
-      />
+  <Trust
+    quote="Resolvieron mi tratamiento a tiempo. El estudio se encargó de todo con mi obra social; me sentí acompañado en cada paso."
+    author="Juan C., cliente de Salud"
+    logos={[
+      { src: radioCut, alt: 'Radio Cut' },
+      { src: elCiudadano, alt: 'El Ciudadano' },
+    ]}
+  />
 
-      <Services services={services} title="Todos los servicios" />
+  <Services services={services} title="Todos los servicios" />
 
-      <About />
+  <About />
 
-      <Process />
+  <Process />
 
-      <PostsSection
-        title="Casos que trascendieron en los medios:"
-        subtitle="Descubre entrevistas y artículos publicados en medios de comunicación que destacaron la labor de nuestro estudio en casos de gran impacto."
-        posts={posts}
-      />
+  <Posts
+    title="Casos que trascendieron en los medios:"
+    subtitle="Descubre entrevistas y artículos publicados en medios de comunicación que destacaron la labor de nuestro estudio en casos de gran impacto."
+    posts={posts}
+  />
 
-      <Contact
-        title="Estamos aquí para ayudarte"
-        subtitle="Contactanos para una evaluación de tu caso sin compromiso."
-        layout="simple"
-      />
-
-      <WhatsAppButton />
-    </main>
-  </body>
+  <Contact
+    title="Estamos aquí para ayudarte"
+    subtitle="Contactanos para una evaluación de tu caso sin compromiso."
+    layout="simple"
+  />
 </MainLayout>

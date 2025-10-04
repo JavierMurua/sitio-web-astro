@@ -1,0 +1,36 @@
+- [X] Favicon
+- [X] botón WA flotante
+- [X] cambiar estilo botón secundario
+- [X] categorías de casos
+- [X] Agregar regiones
+- [X] página de contacto
+- [X] Arreglar todos los menús
+- [X] CTA funcionando
+- [X] Agregar MainLayout.astro
+- [X] Arreglar CSS de página de contacto
+- [X] Revisar logos de medios
+- [X] Arreglar logo del footer
+- [X] Arreglar fixed del menú
+- [X] Revisar el archivo contact.ts para asegurarnos de que no tenga redundancias y funcione lo mejor posible para centralizar la información que, por ser exacta, no puede inventarse la IA.
+- [X] Convertir logo en componente.
+- [X] Crear botones como componente
+- [X] Convertir Hero en section
+- [X] Convertir trust en section
+- [X] Agregar las 3 entrevistas
+- [ ] Pensar qué hacer con las imagenes de los artículos
+- [ ] averiguar mejor tamaño para esas imagenes de los post
+- [ ] Asegurarse que todas las etiquetas del sitio web sean adecuadas 
+- [ ] Hacer que de la sección Trust, vaya a la sección de noticias en la que se muestran las estrevistas.
+- [ ] Crear la sección Contact y que se adapte tanto de apariencia sencilla para las páginas y en grande y detallado para la página contacto.
+- [ ] Crear imagen hero contacto.
+- [ ] Hacer que los servicios sean algún tipo de componente que me permita hacer distitnas cosas, en un principio sólo desviarían el tráfico a Whatsapp, cuando agregue info de el servicio en cada página del abogado, desviaría el tráfico a esa explicación del servicio y cuando haga páginas individuales para cada servicio, desviaría el trafico hacia ahí.
+- [ ] Tengo varios archivos relacionados con contact pero no sé cuál es el que de verdad funciona mejor, voy a revisarlos para asegurarme de que el que quede sea el mejor de todos.
+- [ ] Hacer que se puedan ver los artículos según sus tags.
+- [ ] Asegurarme que todas las secciones usen el componente Button.
+- [ ] Revisar de optimizar los íconos porque hay muchos archivos y no sé cuáles son los correctos.
+- [ ] Optimizar página de abogado de salud.
+- [ ] Optimizar página de abogado laboral.
+- [ ] Optimizar página de Casos de Éxito.
+- [ ] Optimizar página de contacto.
+- [ ] Agregar CTA final y FAQ a Index.
+- [ ] 
