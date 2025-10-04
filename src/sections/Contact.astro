@@ -1,17 +1,13 @@
 ---
 // src/sections/Contact.astro
-
 import Icon from "@/components/Icon.astro";
-import type { ContactItem } from "@/config/contactAdapter";
-
+import { getContactItems, contact, type ContactItem } from "@/contact";
 
 interface Props {
   id?: string;
   title: string;
   subtitle?: string;
   layout?: "simple" | "detailed";
-  items: ContactItem[];
-  mapSrc: string;
 }
 
 const {
@@ -19,9 +15,10 @@ const {
   title,
   subtitle,
   layout = "simple",
-  items,
-  mapSrc,
 } = Astro.props;
+
+const items: ContactItem[] = getContactItems(layout);
+const mapSrc = contact.address.embedMapUrl;
 ---
 
 <section id={id} class={`contact contact--${layout}`}>

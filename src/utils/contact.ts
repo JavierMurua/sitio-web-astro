@@ -5,7 +5,7 @@
  * Ejemplo: "+54 0341 587-3908" → "5403415873908"
  */
 export function cleanPhoneNumber(phone: string): string {
-  return phone.replace(/\D/g, "");
+  return phone.replace(/\D/g, '');
 }
 
 /**
@@ -22,16 +22,12 @@ export function getTelLink(phone: string): string {
  * - `desktop = true` → web.whatsapp.com
  * - `desktop = false` → wa.me
  */
-export function getWhatsAppLink(
-  phone: string,
-  message?: string,
-  desktop = false
-): string {
+export function getWhatsAppLink(phone: string, message?: string, desktop = false): string {
   const clean = cleanPhoneNumber(phone);
-  const encodedMsg = message ? encodeURIComponent(message) : "";
+  const encodedMsg = message ? encodeURIComponent(message) : '';
   return desktop
-    ? `https://web.whatsapp.com/send?phone=${clean}${encodedMsg ? `&text=${encodedMsg}` : ""}`
-    : `https://wa.me/${clean}${encodedMsg ? `?text=${encodedMsg}` : ""}`;
+    ? `https://web.whatsapp.com/send?phone=${clean}${encodedMsg ? `&text=${encodedMsg}` : ''}`
+    : `https://wa.me/${clean}${encodedMsg ? `?text=${encodedMsg}` : ''}`;
 }
 
 /**
