@@ -1,0 +1,123 @@
+---
+// src/sections/PostsSection.astro
+
+import type { BlogPost } from "@/config/postAdapter";
+
+interface Props {
+  id?: string;
+  title: string;
+  subtitle?: string;
+  posts: BlogPost[];
+  paginate?: boolean;
+}
+
+const { id = "posts", title, subtitle, posts, paginate = false } = Astro.props;
+---
+
+<section id={id} class="posts u-section" aria-labelledby={`${id}-title`}>
+  <div class="u-container">
+    <h2 id={`${id}-title`} class="section__title">{title}</h2>
+    {subtitle && <p class="section__subtitle">{subtitle}</p>}
+
+    <div class="posts__grid" role="list">
+      {posts.map((post) => (
+        <article class="card post" role="listitem">
+          <a
+            href={`/blog/${post.slug}/`}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="post__link"
+          >
+            <div class="post__content">
+              {post.data.tags && post.data.tags.length > 0 && (
+                <span class="u-badge">{post.data.tags[0]}</span>
+              )}
+              <h3 class="post__title">{post.data.title}</h3>
+              <p class="post__summary">{post.data.description}</p>
+            </div>
+            <p class="post__meta">
+              {post.data.author} · {post.data.date.toLocaleDateString("es-AR")}
+            </p>
+          </a>
+        </article>
+      ))}
+    </div>
+
+    {paginate && (
+      <nav class="pagination" aria-label="Paginación de artículos">
+        <a href="#" class="pagination__link">← Anteriores</a>
+        <a href="#" class="pagination__link">Siguientes →</a>
+      </nav>
+    )}
+  </div>
+</section>
+
+<style>
+.posts {
+  background: var(--color-surface);
+}
+
+.posts__grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+}
+
+.post {
+  background: #fff;
+  border-radius: var(--radius-1);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  overflow: hidden;
+}
+
+.post__link {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 1.25rem;
+  color: inherit;
+  text-decoration: none;
+}
+
+.post:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.post__title {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin: 0.5rem 0 0.25rem;
+}
+
+.post__summary {
+  margin: 0 0 1rem;
+  color: var(--color-muted);
+}
+
+.post__meta {
+  font-size: 0.85rem;
+  margin-top: auto;
+  color: var(--color-muted);
+}
+
+.pagination {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.pagination__link {
+  color: var(--brand-1);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.2s ease;
+}
+
+.pagination__link:hover {
+  color: var(--brand-2);
+}
+</style>

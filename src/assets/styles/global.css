@@ -56,9 +56,9 @@ a {
    =========================== */
 :root {
   /* Tipografías */
-  --font-sans: "Lato", system-ui, -apple-system, Segoe UI, Roboto, Ubuntu,
-    "Helvetica Neue", Arial, sans-serif;
-  --font-serif: "Lora", serif;
+  --font-sans:
+    'Lato', system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, 'Helvetica Neue', Arial, sans-serif;
+  --font-serif: 'Lora', serif;
 
   /* Colores */
   --color-bg: #ffffff;
@@ -129,27 +129,71 @@ a {
   border: 0;
 }
 
+.section__title {
+        font-family: var(--font-serif);
+        font-size: var(--step-3);
+        line-height: 1.2;
+        margin: 0 0 0.75rem;
+      }
+      .section__subtitle {
+        font-size: var(--step-0);
+        color: var(--color-muted);
+        margin: 0 0 2rem;
+        max-width: 60ch;
+      }
+
 /* ===========================
-   Utilidades responsivas
+   Utilidades responsivas modernas
    =========================== */
+
 /* Ocultar por defecto */
 .desktop,
-.mobile {
+.desktop-inline,
+.desktop-flex,
+.mobile,
+.mobile-inline,
+.mobile-flex {
   display: none;
 }
 
-/* Mostrar solo en escritorio */
+/* ===== Desktop ===== */
 @media (min-width: 769px) {
-  .desktop {
+  /* Elementos inline (botones, iconos) */
+  .desktop-inline {
     display: inline-flex;
+  }
+
+  /* Elementos block (tarjetas, secciones completas) */
+  .desktop-flex {
+    display: flex;
+  }
+
+  .desktop-block {
+    display: inline-block;
   }
 }
 
-/* Mostrar solo en móviles/tablets */
+/* ===== Mobile / Tablet ===== */
 @media (max-width: 768px) {
-  .mobile {
-    display: inline-flex;;
+  /* Elementos inline (botones, iconos) */
+  .mobile-inline {
+    display: inline-flex;
   }
+
+  /* Elementos block (tarjetas, secciones completas) */
+  .mobile-flex {
+    display: flex;
+  }
+
+  .mobile-block {
+    display: inline-block;
+  }
+}
+
+
+.desktop{
+  background-color: crimson !important;
+  color: darkorange !important;
 }
 
 /* ===========================

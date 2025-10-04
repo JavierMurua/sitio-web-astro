@@ -1,4 +1,5 @@
 ---
+// src/pages/index.astro
 import MainLayout from '../layouts/MainLayout.astro';
 import WhatsAppButton from '../components/WhatsAppButton.astro';
 import Hero from '@/sections/Hero.astro';
@@ -9,6 +10,13 @@ import elCiudadano from '@/assets/logos/el_ciudadano.jpg';
 import Contact from '@/sections/Contact.astro';
 import { getContactItems } from '@/config/contactAdapter';
 import { contact } from '@/config/contact';
+
+import PostsSection from '@/sections/Posts.astro';
+import { getPosts } from '@/config/postAdapter';
+
+import Services, { services, type Service } from '@/sections/Services.astro';
+
+const posts = await getPosts({ tag: 'noticias', limit: 3 });
 ---
 
 <MainLayout>
@@ -32,295 +40,9 @@ import { contact } from '@/config/contact';
         ]}
       />
 
-      <!-- ========== SERVICIOS PRINCIPALES ========== -->
+      <Services services={services} title="Todos los servicios" />
 
-      <section id="servicios" class="u-section" aria-labelledby="servicios-title">
-        <div class="u-container">
-          <h2 id="servicios-title" class="section__title">Casos que resolvemos a diario</h2>
-          <p class="section__subtitle">
-            Asesoramiento práctico y representación en salud, laboral y asuntos civiles. Hablá con
-            quienes te van a llevar el caso.
-          </p>
-
-          <div class="services__grid" role="list" aria-label="Listado de servicios">
-            <!-- Acceso a medicación -->
-            <article class="card service-card" role="listitem" aria-label="Acceso a medicación">
-              <a class="service-card__link" href="" aria-label="Acceso a medicación - ver">
-                <div class="service-card__media" aria-hidden="true">
-                  <svg
-                    viewBox="0 0 64 64"
-                    fill="currentColor"
-                    xmlns="http://www.w3.org/2000/svg"
-                    aria-hidden="true"
-                  >
-                    <path
-                      d="M57.341 6.659C51.524.843 42.521.413 37.233 5.704L20.708 22.223l.005.006a1.852 1.852 0 0 0-.098 2.387L5.298 39.932C.587 44.645.969 52.666 6.151 57.85c2.753 2.752 6.307 4.15 9.74 4.15c3.03 0 5.967-1.09 8.177-3.299l15.317-15.316a1.85 1.85 0 0 0 2.386-.1l.005.004l16.521-16.521c5.289-5.288 4.861-14.291-.956-20.109M22.654 57.287C20.904 59.036 18.503 60 15.892 60c-3.025 0-6.06-1.3-8.326-3.564c-4.394-4.396-4.777-11.164-.854-15.09l15.301-15.3l15.942 15.941l-15.301 15.3"
-                    ></path>
-                  </svg>
-                </div>
-                <div class="service-card__label">Acceso a medicación</div>
-              </a>
-            </article>
-
-            <!-- Prestaciones por discapacidad -->
-            <article
-              class="card service-card"
-              role="listitem"
-              aria-label="Prestaciones por discapacidad"
-            >
-              <a
-                class="service-card__link"
-                href=""
-                aria-label="Prestaciones por discapacidad - ver"
-              >
-                <div class="service-card__media" aria-hidden="true">
-                  <svg
-                    viewBox="0 0 32 32"
-                    fill="currentColor"
-                    xmlns="http://www.w3.org/2000/svg"
-                    aria-hidden="true"
-                  >
-                    <path
-                      d="M22.621 23.668c-0.172-0.096-0.378-0.152-0.597-0.152-0.471 0-0.882 0.262-1.093 0.648l-0.003 0.006c-1.512 2.749-4.389 4.581-7.694 4.581-4.833 0-8.751-3.918-8.751-8.751 0-2.853 1.366-5.388 3.479-6.985l0.022-0.016c0.304-0.23 0.499-0.592 0.499-0.999 0-0.69-0.56-1.25-1.25-1.25-0.283 0-0.545 0.094-0.754 0.253l0.003-0.002c-2.744 2.074-4.499 5.332-4.499 9 0 6.213 5.037 11.25 11.25 11.25 4.248 0 7.947-2.355 9.861-5.831l0.029-0.058c0.096-0.172 0.152-0.378 0.152-0.596 0-0.471-0.262-0.882-0.647-1.094l-0.006-0.003zM31.213 24.697c-0.139-0.549-0.628-0.948-1.211-0.948-0.108 0-0.213 0.014-0.313 0.040l0.009-0.002-2.885 0.721-2.701-7.912c-0.174-0.496-0.638-0.846-1.184-0.846h-8.855l-0.385-2.5h4.312c0.69 0 1.25-0.56 1.25-1.25s-0.56-1.25-1.25-1.25v0h-4.697l-0.603-3.92c0.967-0.59 1.604-1.639 1.604-2.837 0-1.828-1.482-3.311-3.311-3.311s-3.311 1.482-3.311 3.311c0 1.558 1.076 2.864 2.525 3.217l0.023 0.005 1.534 9.975c0.095 0.604 0.612 1.060 1.235 1.060 0 0 0 0 0 0h9.033l2.783 8.154c0.174 0.496 0.638 0.846 1.184 0.846 0.107 0 0.212-0.014 0.311-0.039l-0.009 0.002 4-1c0.548-0.14 0.947-0.63 0.947-1.213 0-0.108-0.014-0.212-0.039-0.312l0.002 0.009z"
-                    ></path>
-                  </svg>
-                </div>
-                <div class="service-card__label">Prestaciones por discapacidad</div>
-              </a>
-            </article>
-
-            <!-- Cirugías y prótesis -->
-            <article class="card service-card" role="listitem" aria-label="Cirugías y prótesis">
-              <a class="service-card__link" href="" aria-label="Cirugías y prótesis - ver">
-                <div class="service-card__media" aria-hidden="true">
-                  <svg
-                    viewBox="0 0 180.147 180.147"
-                    fill="currentColor"
-                    xmlns="http://www.w3.org/2000/svg"
-                    aria-hidden="true"
-                  >
-                    <path
-                      d="M166.578,0H103.57c-4.143,0-7.5,3.357-7.5,7.5c0,4.142,3.357,7.5,7.5,7.5h4.237l6.42,89.992
-              c0.069,0.967,0.325,1.912,0.754,2.782l13.024,26.423v30.95h-0.439c-4.143,0-7.5,3.357-7.5,7.5s3.357,7.5,7.5,7.5h15.861
-              c4.143,0,7.5-3.357,7.5-7.5s-3.357-7.5-7.5-7.5h-0.422v-30.95l13.025-26.423c0.429-0.87,0.684-1.815,0.754-2.782L163.204,15h3.374
-              c4.143,0,7.5-3.358,7.5-7.5C174.078,3.357,170.72,0,166.578,0z M135.506,115.484l-6.421-13.025l-1.394-19.533h15.629l-1.394,19.533
-              L135.506,115.484z M126.621,67.926l-3.776-52.925h25.322l-3.776,52.925H126.621z"
-                    ></path>
-                    <path
-                      d="M76.578,0H13.57c-4.142,0-7.5,3.357-7.5,7.5c0,4.142,3.358,7.5,7.5,7.5h4.237l6.421,89.992
-              c0.069,0.967,0.325,1.912,0.754,2.782l13.024,26.422v30.951h-0.438c-4.142,0-7.5,3.357-7.5,7.5s3.358,7.5,7.5,7.5h15.861
-              c4.142,0,7.5-3.357,7.5-7.5s-3.358-7.5-7.5-7.5h-0.423v-30.951l13.025-26.422c0.429-0.87,0.685-1.815,0.754-2.782L73.205,15h3.374
-              c4.142,0,7.5-3.358,7.5-7.5C84.078,3.357,80.72,0,76.578,0z M45.505,115.485l-6.421-13.026l-1.393-19.533H53.32l-1.394,19.533
-              L45.505,115.485z M36.621,67.926l-3.776-52.925h25.322L54.39,67.926H36.621z"
-                    ></path>
-                  </svg>
-                </div>
-                <div class="service-card__label">Cirugías y prótesis</div>
-              </a>
-            </article>
-
-            <!-- Fertilización asistida -->
-            <article class="card service-card" role="listitem" aria-label="Fertilización asistida">
-              <a class="service-card__link" href="" aria-label="Fertilización asistida - ver">
-                <div class="service-card__media" aria-hidden="true">
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    xmlns="http://www.w3.org/2000/svg"
-                    aria-hidden="true"
-                  >
-                    <path
-                      d="M19 21C19 20.663 18.9818 20.3293 18.9463 20M5 3C5 3.33701 5.01817 3.67071 5.0537 4M5 21C5 16.8566 7.74671 13.2152 11.7307 12.077L12.2693 11.923C16.2533 10.7848 19 7.14339 19 3M15 4H5.0537M12.5 8H6.46206M9 20H18.9463M11.5 16H17.5379M18.9463 20C18.7899 18.5509 18.2974 17.187 17.5379 16M17.5379 16C16.3482 14.1405 14.5033 12.7152 12.2693 12.077L11.7307 11.923C9.49674 11.2848 7.65184 9.8595 6.46206 8M5.0537 4C5.21006 5.44909 5.70259 6.81301 6.46206 8"
-                    ></path>
-                  </svg>
-                </div>
-                <div class="service-card__label">Fertilización asistida</div>
-              </a>
-            </article>
-
-            <!-- Tratamientos oncológicos -->
-            <article
-              class="card service-card"
-              role="listitem"
-              aria-label="Tratamientos oncológicos"
-            >
-              <a class="service-card__link" href="" aria-label="Tratamientos oncológicos - ver">
-                <div class="service-card__media" aria-hidden="true">
-                  <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                    <path
-                      fill="currentColor"
-                      d="M255.992,0C184.108,0,116.46,64.412,141.82,188.497c5.047,24.648,18.6,52.267,37.076,80.704
-              c23.1-20.859,45.639-42.536,65.43-63.834c-6.338-7.181-12.344-14.297-17.921-21.305c-45.946-57.778-38.06-128.52,29.588-128.52
-              c67.664,0,75.549,70.742,29.604,128.52C201.036,290.416,18.769,420.408,18.769,420.408l83.534,19.642l1.465,71.95
-              c0,0,241.028-199.419,266.404-323.503C395.541,64.412,327.876,0,255.992,0z"
-                    ></path>
-                    <path
-                      fill="currentColor"
-                      d="M336.192,295.28c-18.17,25.898-41.014,53.889-68.409,83.914C336.911,452.99,408.232,512,408.232,512
-              l7.563-71.95l77.436-19.642C493.231,420.408,414.281,364.104,336.192,295.28z"
-                    ></path>
-                  </svg>
-                </div>
-                <div class="service-card__label">Tratamientos oncológicos</div>
-              </a>
-            </article>
-
-            <!-- Despidos e indemnizaciones -->
-            <article
-              class="card service-card"
-              role="listitem"
-              aria-label="Despidos e indemnizaciones"
-            >
-              <a class="service-card__link" href="" aria-label="Despidos e indemnizaciones - ver">
-                <div class="service-card__media" aria-hidden="true">
-                  <svg
-                    viewBox="0 -64 640 640"
-                    xmlns="http://www.w3.org/2000/svg"
-                    aria-hidden="true"
-                  >
-                    <path
-                      fill="currentColor"
-                      d="M0,128.21V384H64a32,32,0,0,0,32-32V184L23.83,128.21ZM48,320.1a16,16,0,1,1-16,16A16,16,0,0,1,48,320.1Zm80,31.81h18.3l90.5,81.89a64,64,0,0,0,90-9.3l.2-.2,17.91,15.5a37.16,37.16,0,0,0,52.29-5.39l8.8-10.82L128,208.72Zm416-223.7V352.1a32,32,0,0,0,32,32h64V128.21ZM592,352.1a16,16,0,1,1,16-16A16,16,0,0,1,592,352.1ZM303.33,202.67l59.58-54.57a16,16,0,0,1,21.59,23.61L358.41,195.6,504,313.8a73.08,73.08,0,0,1,7.91,7.7V128L457.3,73.41A31.76,31.76,0,0,0,434.7,64H348.8a31.93,31.93,0,0,0-21.6,8.41l-88.07,80.64-25.64-19.81L289.09,64H205.3a32,32,0,0,0-22.6,9.41L162.36,93.72,45.47,3.38A16,16,0,0,0,23,6.19L3.38,31.46A16,16,0,0,0,6.19,53.91L594.53,508.63A16,16,0,0,0,617,505.82l19.65-25.27a16,16,0,0,0-2.82-22.45Z"
-                    ></path>
-                  </svg>
-                </div>
-                <div class="service-card__label">Despidos e indemnizaciones</div>
-              </a>
-            </article>
-
-            <!-- Accidentes y Enfermedades -->
-            <article class="card service-card" role="listitem" aria-label="ART">
-              <a class="service-card__link" href="" aria-label="ART - ver">
-                <div class="service-card__media" aria-hidden="true">
-                  <svg viewBox="0 0 472 472" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                    <path
-                      fill="currentColor"
-                      d="M452.842,431.982l-10.925-32.184c-19.086-56.186-68.4-95.763-126.107-103.326
-              c-21.408,23.559-49.274,37.939-79.797,37.939c-30.516,0-58.375-14.38-79.783-37.939
-              c-57.7,7.563-107.014,47.14-126.1,103.326l-10.925,32.184c-3.145,9.255-1.638,19.458,4.061,27.409
-              c5.692,7.945,14.869,12.656,24.645,12.656h376.224c9.777,0,18.954-4.712,24.645-12.656
-              C454.48,451.44,455.987,441.237,452.842,431.982z"
-                    ></path>
-                    <path
-                      fill="currentColor"
-                      d="M236.013,310.558c53.266,0,96.507-56.559,97.967-127.023H138.068
-              C139.528,253.999,182.769,310.558,236.013,310.558z"
-                    ></path>
-                    <path
-                      fill="currentColor"
-                      d="M116.133,152.296c3.184,1.57,6.709,2.532,10.498,2.532h217.396h1.398c3.781,0,7.315-0.962,10.491-2.532
-              c7.889-3.882,13.363-11.927,13.363-21.322c0-13.176-10.677-23.853-23.853-23.853h-1.878h-2.501
-              c-0.682-3.456-1.49-6.871-2.352-10.273c-6.507-25.631-18.256-49.476-34.778-67.32v17.324c0,8.781-7.121,15.902-15.902,15.902
-              c-8.783,0-15.902-7.121-15.902-15.902V6.079C265.782,3.238,259.004,1.272,251.921,0v64.191c0,8.781-7.119,15.902-15.902,15.902
-              c-8.781,0-15.902-7.121-15.902-15.902V0c-7.081,1.272-13.852,3.238-20.18,6.071v40.781c0,8.781-7.121,15.902-15.902,15.902
-              c-8.781,0-15.902-7.121-15.902-15.902V29.529c-16.516,17.836-28.257,41.665-34.762,67.282c-0.87,3.416-1.678,6.84-2.361,10.311
-              h-2.508h-1.871c-13.177,0-23.853,10.677-23.853,23.853C102.777,140.362,108.251,148.407,116.133,152.296z"
-                    ></path>
-                  </svg>
-                </div>
-                <div class="service-card__label">Accidentes y Enfermedades</div>
-              </a>
-            </article>
-
-            <!-- Accidentes de transito -->
-            <article class="card service-card" role="listitem" aria-label="Daños">
-              <a class="service-card__link" href="#" aria-label="Daños - ver">
-                <div class="service-card__media" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                    <svg
-                      viewBox="0 0 24 24"
-                      fill="currentColor"
-                      xmlns="http://www.w3.org/2000/svg"
-                      aria-hidden="true"
-                    >
-                      <path
-                        fill-rule="evenodd"
-                        clip-rule="evenodd"
-                        d="M2 14.803v6.447c0 .414.336.75.75.75h1.614a.75.75 0 0 0 .74-.627L5.5 19h13l.395 2.373a.75.75 0 0 0 .74.627h1.615a.75.75 0 0 0 .75-.75v-6.447a5.954 5.954 0 0 0-1-3.303l-.78-1.17a1.994 1.994 0 0 1-.178-.33h.994a.75.75 0 0 0 .671-.415l.25-.5A.75.75 0 0 0 21.287 8H19.6l-.31-1.546a2.5 2.5 0 0 0-1.885-1.944C15.943 4.17 14.141 4 12 4c-2.142 0-3.943.17-5.405.51a2.5 2.5 0 0 0-1.886 1.944L4.399 8H2.714a.75.75 0 0 0-.67 1.085l.25.5a.75.75 0 0 0 .67.415h.995a1.999 1.999 0 0 1-.178.33L3 11.5c-.652.978-1 2.127-1 3.303zm15.961-4.799a4 4 0 0 0 .34.997H5.699c.157-.315.271-.65.34-.997l.632-3.157a.5.5 0 0 1 .377-.39C8.346 6.157 10 6 12 6c2 0 3.654.156 4.952.458a.5.5 0 0 1 .378.389l.631 3.157zM5.5 16a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zM20 14.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"
-                      ></path>
-                    </svg>
-                  </svg>
-                  <div class="service-card__label">Accidentes de transito</div>
-                </div>
-              </a>
-
-              <!-- Sucesiones -->
-              <article class="card service-card" role="listitem" aria-label="Sucesiones">
-                <a class="service-card__link" href="" aria-label="Sucesiones - ver">
-                  <div class="service-card__media" aria-hidden="true">
-                    <svg
-                      viewBox="0 0 512 512"
-                      xmlns="http://www.w3.org/2000/svg"
-                      aria-hidden="true"
-                    >
-                      <path
-                        fill="currentColor"
-                        d="M78.642,118.933c22.879,0,41.415-18.551,41.415-41.414c0-22.888-18.536-41.423-41.415-41.423
-            c-22.887,0-41.422,18.535-41.422,41.423C37.219,100.383,55.755,118.933,78.642,118.933z"
-                      ></path>
-                      <path
-                        fill="currentColor"
-                        d="M255.706,228.731v0.062c0.101,0,0.193-0.031,0.294-0.031c0.101,0,0.194,0.031,0.294,0.031v-0.062
-            c15.563-0.317,28.082-12.976,28.082-28.601c0-15.648-12.52-28.299-28.082-28.617v-0.062c-0.1,0-0.193,0.031-0.294,0.031
-            c-0.101,0-0.193-0.031-0.294-0.031v0.062c-15.563,0.318-28.082,12.969-28.082,28.617
-            C227.624,215.754,240.143,228.413,255.706,228.731z"
-                      ></path>
-                      <path
-                        fill="currentColor"
-                        d="M433.358,118.933c22.887,0,41.423-18.551,41.423-41.414c0-22.888-18.536-41.423-41.423-41.423
-            c-22.879,0-41.414,18.535-41.414,41.423C391.944,100.383,410.48,118.933,433.358,118.933z"
-                      ></path>
-                      <path
-                        fill="currentColor"
-                        d="M512,319.675V180.463c0-20.076-21.834-41.91-41.903-41.91h-5.799l-28.818,28.818l-28.214-28.214
-            c-17.839,2.609-33.564,13.665-41.918,30.018l-33.494,97.967c-1.154,2.245-3.298,3.84-5.792,4.281
-            c-2.493,0.442-5.048-0.31-6.914-2.036l-20.835-18.04c-6.232-5.769-14.409-8.974-22.902-8.974H256h-19.41
-            c-8.494,0-16.67,3.206-22.903,8.974l-20.835,18.04c-1.866,1.726-4.422,2.478-6.914,2.036c-2.494-0.442-4.638-2.036-5.792-4.281
-            l-33.494-97.967c-9.6-18.791-28.926-30.622-50.032-30.622H78.216H41.903C21.834,138.553,0,160.387,0,180.463v139.211
-            c0,10.035,8.13,18.172,18.165,18.172c4.939,0,0,0,12.682,0l6.906,118.724c0,10.677,8.664,19.333,19.341,19.333
-            c4.506,0,12.814,0,21.122,0c8.307,0,16.615,0,21.121,0c10.677,0,19.341-8.656,19.341-19.333l6.906-118.724l-0.086-84.765
-            c0-1.339,0.914-2.493,2.222-2.818c1.309-0.31,2.648,0.309,3.26,1.502l26.573,65.401c3.205,6.256,9.152,10.654,16.074,11.886
-            c6.921,1.23,14.021-0.844,19.186-5.614l25.426-18.729c0.852-0.782,2.083-0.983,3.136-0.542c1.061,0.472,1.742,1.518,1.742,2.663
-            l0.094,73.508l4.777,82.187c0,7.387,6,13.379,13.395,13.379c3.112,0,8.865,0,14.618,0c5.753,0,11.506,0,14.618,0
-            c7.394,0,13.394-5.992,13.394-13.379l4.777-82.187l0.093-73.508c0-1.146,0.681-2.192,1.742-2.663
-            c1.053-0.442,2.284-0.24,3.136,0.542l25.426,18.729c5.164,4.77,12.264,6.844,19.187,5.614c6.921-1.231,12.868-5.629,16.073-11.886
-            l26.572-65.401c0.612-1.192,1.951-1.812,3.26-1.502c1.308,0.325,2.222,1.479,2.222,2.818l-0.031,32.332l-27.881,86.648
-            c-0.659,2.051-0.302,4.296,0.967,6.039c1.27,1.742,3.298,2.772,5.451,2.772h23.91l4.405,75.699
-            c0,10.677,8.664,19.333,19.341,19.333c4.506,0,12.814,0,21.121,0c8.308,0,16.615,0,21.122,0c10.677,0,19.34-8.656,19.34-19.333
-            l4.406-75.699h26.418c2.152,0,4.181-1.03,5.451-2.772c1.27-1.743,1.626-3.988,0.968-6.039L500.1,336.67
-            C507.037,334.107,512,327.495,512,319.675z M85.424,159.087v74.592H63.389v-74.592H85.424z"
-                      ></path>
-                    </svg>
-                  </div>
-                  <div class="service-card__label">Sucesiones</div>
-                </a>
-              </article>
-            </article>
-            <div class="services__cta" role="note" aria-label="Consulta personalizada">
-              <p style="margin:0 0 .6rem;">
-                Si tu caso no figura, escribinos: escuchamos, evaluamos y te decimos cómo avanzar.
-              </p>
-              <a
-                class="button button--primary desktop"
-                href="https://web.whatsapp.com/send?phone=5403415873908&text=Hola%2C%20necesito%20orientaci%C3%B3n%20sobre%20un%20tema%20legal. "
-                target="_blank"
-                aria-label="Consultanos por WhatsApp">Consultanos por WhatsApp</a
-              >
-              <a
-                class="button button--primary mobile"
-                href="https://wa.me/5403415873908?text=Hola%2C%20necesito%20orientaci%C3%B3n%20sobre%20un%20tema%20legal.: "
-                target="_blank"
-                aria-label="Consultanos por WhatsApp">Consultanos por WhatsApp</a
-              >
-            </div>
-          </div>
-        </div>
-
-        <!-- ========== POR QUÉ ELEGIRNOS ========== -->
+              <!-- ========== POR QUÉ ELEGIRNOS ========== -->
 
         <section id="about" class="about u-section" aria-labelledby="about-title">
           <div class="u-container">
@@ -386,13 +108,13 @@ import { contact } from '@/config/contact';
 
             <div class="about-cta">
               <a
-                class="button button--primary desktop"
+                class="button button--primary desktop-flex"
                 href="https://web.whatsapp.com/send?phone=5403415873908&text=Hola%2C%20me%20gustar%C3%ADa%20asesor%C3%ADa%20con%20un%20abogado."
                 target="_blank"
                 aria-label="Consultar ahora por WhatsApp">Consultar ahora</a
               >
               <a
-                class="button button--primary mobile"
+                class="button button--primary mobile-flex"
                 href="https://wa.me/5403415873908?text=Hola%2C%20me%20gustar%C3%ADa%20asesor%C3%ADa%20con%20un%20abogado."
                 target="_blank"
                 aria-label="Consultar ahora por WhatsApp">Consultar ahora</a
@@ -401,517 +123,373 @@ import { contact } from '@/config/contact';
           </div>
         </section>
 
-        <!-- ========== CÓMO TRABAJAMOS ========== -->
-        <section class="process u-section" aria-labelledby="process-title">
-          <div class="u-container" style="text-align: center;">
-            <h2 id="process-title" class="section__title">Nuestro Proceso Simplificado</h2>
+      <!-- ========== CÓMO TRABAJAMOS ========== -->
+      <section class="process u-section" aria-labelledby="process-title">
+        <div class="u-container" style="text-align: center;">
+          <h2 id="process-title" class="section__title">Nuestro Proceso Simplificado</h2>
 
-            <div class="process__steps" role="list">
-              <article class="step" role="listitem">
-                <div class="step__num" aria-hidden="true">1</div>
-                <div>
-                  <h3>Contacto y Evaluación</h3>
-                  <p>Escuchamos tu caso sin costo y analizamos su viabilidad.</p>
-                </div>
-              </article>
-              <article class="step" role="listitem">
-                <div class="step__num" aria-hidden="true">2</div>
-                <div>
-                  <h3>Diseño de Estrategia</h3>
-                  <p>Revisamos la documentación y te explicamos los pasos a seguir.</p>
-                </div>
-              </article>
-              <article class="step" role="listitem">
-                <div class="step__num" aria-hidden="true">3</div>
-                <div>
-                  <h3>Defensa Activa</h3>
-                  <p>Te representamos en todo el proceso hasta obtener un resultado.</p>
-                </div>
-              </article>
-            </div>
-
-            <div style="margin-top: 2rem;">
-              <a
-                class="button button--primary desktop"
-                href="https://web.whatsapp.com/send?phone=5403415873908&text=Hola%2C%20quiero%20agendar%20una%20consulta."
-                target="_blank"
-                aria-label="Agendar consulta ahora por WhatsApp">Agendá tu consulta</a
-              >
-              <a
-                class="button button--primary mobile"
-                href="https://wa.me/5403415873908?text=Hola%2C%20quiero%20agendar%20una%20consulta."
-                target="_blank"
-                aria-label="Agendar consulta ahora por WhatsApp">Agendá tu consulta</a
-              >
-            </div>
+          <div class="process__steps" role="list">
+            <article class="step" role="listitem">
+              <div class="step__num" aria-hidden="true">1</div>
+              <div>
+                <h3>Contacto y Evaluación</h3>
+                <p>Escuchamos tu caso sin costo y analizamos su viabilidad.</p>
+              </div>
+            </article>
+            <article class="step" role="listitem">
+              <div class="step__num" aria-hidden="true">2</div>
+              <div>
+                <h3>Diseño de Estrategia</h3>
+                <p>Revisamos la documentación y te explicamos los pasos a seguir.</p>
+              </div>
+            </article>
+            <article class="step" role="listitem">
+              <div class="step__num" aria-hidden="true">3</div>
+              <div>
+                <h3>Defensa Activa</h3>
+                <p>Te representamos en todo el proceso hasta obtener un resultado.</p>
+              </div>
+            </article>
           </div>
-        </section>
 
-        <!-- ========== CASOS DE ÉXITO ========== -->
-        <section id="casos-exito" class="cases u-section" aria-labelledby="casos-title">
-          <div class="u-container">
-            <h2 id="casos-title" class="section__title">Casos Reales, Resultados Concretos</h2>
-            <p class="section__subtitle">
-              Resultados que refuerzan la confianza de nuestros clientes.
-            </p>
-
-            <div class="cases__grid" role="list">
-              <article class="card case" role="listitem">
-                <div class="case__content">
-                  <span class="u-badge">Cirugía</span>
-                  <h3 class="case__title">
-                    Logramos la cobertura total para cirugía de labio leporino y nariz
-                  </h3>
-                  <p class="case__summary">
-                    Una madre obtuvo por vía judicial que su hija acceda a la cirugía reconstructiva
-                    de queiloplastia y rinoplastia, tras la negativa injustificada de su obra
-                    social.
-                  </p>
-                </div>
-                <p class="case__meta none">
-                  Nota relacionada: <a href="#/" aria-label="Leer nota periodística sobre PAMI"
-                    >Ver nota periodística</a
-                  >
-                </p>
-              </article>
-              <article class="card case" role="listitem">
-                <div class="case__content">
-                  <span class="u-badge">Enfermedad</span>
-                  <h3 class="case__title">
-                    Indemnización por enfermedad profesional: más de $4,7 millones
-                  </h3>
-                  <p class="case__summary">
-                    Logramos que un trabajador de 38 años reciba una indemnización justa por
-                    enfermedad profesional, exenta de impuestos y reconocida por la ART.
-                  </p>
-                </div>
-                <p class="case__meta none">
-                  Detalle del caso: <a href="#/">Leer caso completo</a>
-                </p>
-              </article>
-              <article class="card case" role="listitem">
-                <div class="case__content">
-                  <span class="u-badge">Cirugía</span>
-                  <h3 class="case__title">
-                    Sentencia ordena cobertura del 100% para hernioplastia
-                  </h3>
-                  <p class="case__summary">
-                    Conseguimos que un afiliado acceda a su cirugía de hernia sin costo, luego de
-                    que la obra social negara arbitrariamente la cobertura total.
-                  </p>
-                </div>
-                <p class="case__meta none">
-                  Resolución: <a href="#/">Leer caso completo</a>
-                </p>
-              </article>
-            </div>
+          <div style="margin-top: 2rem;">
+            <a
+              class="button button--primary desktop-inline"
+              href="https://web.whatsapp.com/send?phone=5403415873908&text=Hola%2C%20quiero%20agendar%20una%20consulta."
+              target="_blank"
+              aria-label="Agendar consulta ahora por WhatsApp">Agendá tu consulta</a
+            >
+            <a
+              class="button button--primary mobile-inline"
+              href="https://wa.me/5403415873908?text=Hola%2C%20quiero%20agendar%20una%20consulta."
+              target="_blank"
+              aria-label="Agendar consulta ahora por WhatsApp">Agendá tu consulta</a
+            >
           </div>
-        </section>
-
-        <Contact
-          title="Estamos aquí para ayudarte"
-          subtitle="Contactanos para una evaluación de tu caso sin compromiso."
-          layout="simple"
-          items={getContactItems('simple')}
-          mapSrc={contact.address.embedMapUrl}
-        />
-
-        <WhatsAppButton />
+        </div>
       </section>
+
+      <PostsSection
+        title="Casos que trascendieron en los medios:"
+        subtitle="Descubre entrevistas y artículos publicados en medios de comunicación que destacaron la labor de nuestro estudio en casos de gran impacto."
+        posts={posts}
+      />
+
+      <Contact
+        title="Estamos aquí para ayudarte"
+        subtitle="Contactanos para una evaluación de tu caso sin compromiso."
+        layout="simple"
+      />
+
+      <WhatsAppButton />
     </main>
-    <style>
-      /* =========
+  </body>
+  <style>
+    /* =========
        Componentes base
        ========= */
-      .button {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.5rem;
-        font-weight: 700;
-        border: 1px solid transparent;
-        border-radius: 999px;
-        padding: 0.8rem 1.25rem;
-        font-size: var(--step--1);
-        line-height: 1;
-        cursor: pointer;
-        transition: filter 0.2s ease;
-      }
-      .button--primary {
-        background: var(--brand-2);
-        color: var(--on-brand);
-      }
-      .button--secondary {
-        background: var(--brand-1);
-        color: var(--on-brand);
-      }
-      .button--outline {
-        background: transparent;
-        border-color: var(--on-brand);
-        color: var(--on-brand);
-      }
-      .button--block {
-        width: 100%;
-        justify-content: center;
-      }
-      .button:hover {
-        filter: brightness(1.1);
-      }
-      /* Por defecto, ocultamos ambos */
-      .desktop,
-      .mobile {
-        display: none;
-      }
+    .button {
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 700;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      padding: 0.8rem 1.25rem;
+      font-size: var(--step--1);
+      line-height: 1;
+      cursor: pointer;
+      transition: filter 0.2s ease;
+    }
+    .button--primary {
+      background: var(--brand-2);
+      color: var(--on-brand);
+    }
+    .button--secondary {
+      background: var(--brand-1);
+      color: var(--on-brand);
+    }
+    .button--outline {
+      background: transparent;
+      border-color: var(--on-brand);
+      color: var(--on-brand);
+    }
+    .button--block {
+      width: 100%;
+      justify-content: center;
+    }
+    .button:hover {
+      filter: brightness(1.1);
+    }
+    /* Por defecto, ocultamos ambos */
 
-      /* Mostrar solo en escritorio */
-      @media (min-width: 769px) {
-        .desktop {
-          display: inline-block;
-        }
-      }
+    .card {
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-1);
+      padding: 1.5rem;
+      transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+      /* MEJORA: Sombra más sutil y profesional */
+      box-shadow:
+        0 2px 4px rgba(0, 0, 0, 0.04),
+        0 4px 12px rgba(0, 0, 0, 0.06);
+    }
+    .card:hover {
+      /* MEJORA: Micro-interacción para dar sensación de calidad */
+      transform: translateY(-5px);
+      box-shadow:
+        0 4px 8px rgba(0, 0, 0, 0.05),
+        0 8px 24px rgba(0, 0, 0, 0.08);
+    }
 
-      /* Mostrar solo en móviles/tablets */
-      @media (max-width: 768px) {
-        .mobile {
-          display: inline-block;
-        }
-      }
+    .section__title {
+      font-family: var(--font-serif);
+      font-size: var(--step-3);
+      line-height: 1.2;
+      margin: 0 0 0.75rem;
+    }
+    .section__subtitle {
+      font-size: var(--step-0);
+      color: var(--color-muted);
+      margin: 0 0 2rem;
+      max-width: 60ch;
+    }
 
-      .card {
-        background: var(--color-bg);
-        border: 1px solid var(--color-border);
-        border-radius: var(--radius-1);
-        padding: 1.5rem;
-        transition:
-          transform 0.25s ease,
-          box-shadow 0.25s ease;
-        /* MEJORA: Sombra más sutil y profesional */
-        box-shadow:
-          0 2px 4px rgba(0, 0, 0, 0.04),
-          0 4px 12px rgba(0, 0, 0, 0.06);
-      }
-      .card:hover {
-        /* MEJORA: Micro-interacción para dar sensación de calidad */
-        transform: translateY(-5px);
-        box-shadow:
-          0 4px 8px rgba(0, 0, 0, 0.05),
-          0 8px 24px rgba(0, 0, 0, 0.08);
-      }
-
-      .section__title {
-        font-family: var(--font-serif);
-        font-size: var(--step-3);
-        line-height: 1.2;
-        margin: 0 0 0.75rem;
-      }
-      .section__subtitle {
-        font-size: var(--step-0);
-        color: var(--color-muted);
-        margin: 0 0 2rem;
-        max-width: 60ch;
-      }
-
-      /* ===========================
+    /* ===========================
    Servicios - adaptado al sitio
    =========================== */
-      .services__grid {
-        display: grid;
-        gap: 1.5rem;
-        /* responsive: tantas columnas como quepan, mínimo 180px */
-        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-        align-items: stretch;
-      }
+    .services__grid {
+      display: grid;
+      gap: 1.5rem;
+      /* responsive: tantas columnas como quepan, mínimo 180px */
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      align-items: stretch;
+    }
 
-      /* tarjeta de servicio coherente con .card existente */
-      .service-card {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        gap: 0.75rem;
-        padding: 1.25rem;
-        border-radius: var(--radius-2);
-        transition:
-          transform 0.25s ease,
-          box-shadow 0.25s ease,
-          border-color 0.2s ease;
-        background: var(--color-bg);
-        border: 1px solid var(--color-border);
-        min-height: 150px;
-      }
+    /* tarjeta de servicio coherente con .card existente */
+    .service-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 0.75rem;
+      padding: 1.25rem;
+      border-radius: var(--radius-2);
+      transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        border-color 0.2s ease;
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      min-height: 150px;
+    }
 
-      /* hover consistente con otras tarjetas del sitio */
-      .service-card:hover {
-        transform: translateY(-6px);
-        box-shadow: 0 8px 20px rgba(11, 31, 75, 0.06);
-        border-color: var(--brand-1);
-      }
-      .service-card__link {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
+    /* hover consistente con otras tarjetas del sitio */
+    .service-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 8px 20px rgba(11, 31, 75, 0.06);
+      border-color: var(--brand-1);
+    }
+    .service-card__link {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
 
-      /* icono circular */
-      .service-card__media {
-        width: 56px;
-        height: 56px;
-        border-radius: 999px;
-        background: radial-gradient(circle, #ffffff 50%, #eef7f0 100%);
-        border: 2px solid rgba(10, 120, 70, 0.06);
-        display: grid;
-        place-items: center;
-        transition:
-          transform 0.22s ease,
-          background 0.22s ease,
-          border-color 0.22s ease;
-        flex: 0 0 auto;
-      }
+    /* icono circular */
+    .service-card__media {
+      width: 56px;
+      height: 56px;
+      border-radius: 999px;
+      background: radial-gradient(circle, #ffffff 50%, #eef7f0 100%);
+      border: 2px solid rgba(10, 120, 70, 0.06);
+      display: grid;
+      place-items: center;
+      transition:
+        transform 0.22s ease,
+        background 0.22s ease,
+        border-color 0.22s ease;
+      flex: 0 0 auto;
+    }
 
-      /* SVG usa currentColor para adaptarse al tema */
-      .service-card__media svg {
-        width: 38px;
-        height: 38px;
-        color: var(--brand-1);
-      }
+    /* SVG usa currentColor para adaptarse al tema */
+    .service-card__media svg {
+      width: 38px;
+      height: 38px;
+      color: var(--brand-1);
+    }
 
-      /* etiqueta del servicio */
-      .service-card__label {
-        font-weight: 700;
-        font-size: var(--step--1);
-        color: var(--brand-3);
-      }
+    /* etiqueta del servicio */
+    .service-card__label {
+      font-weight: 700;
+      font-size: var(--step--1);
+      color: var(--brand-3);
+    }
 
-      /* CTA general debajo del grid */
-      .services__cta {
-        margin-top: 1.75rem;
-        text-align: center;
-        background: var(--color-surface);
-        border: 1px dashed var(--color-border);
-        border-radius: var(--radius-2);
-        padding: 1.25rem;
-      }
+    /* CTA general debajo del grid */
+    .services__cta {
+      margin-top: 1.75rem;
+      text-align: center;
+      background: var(--color-surface);
+      border: 1px dashed var(--color-border);
+      border-radius: var(--radius-2);
+      padding: 1.25rem;
+    }
 
-      /* =========
-       Casos de éxito
-       ========= */
-      .cases {
-        background: var(--color-surface);
-      }
-      .cases__grid {
-        display: grid;
-        grid-auto-flow: column;
-        grid-auto-columns: 85%;
-        gap: 1rem;
-        overflow-x: auto;
-        scroll-snap-type: x mandatory;
-        padding-bottom: 1rem;
-      }
-      .case {
-        scroll-snap-align: start;
-        display: flex;
-        flex-direction: column;
-      }
-      .case__content {
-        flex-grow: 1;
-      }
-      .case__title {
-        font-family: var(--font-serif);
-        font-weight: 600;
-        font-size: 1.1rem;
-        margin: 0.5rem 0 0.25rem;
-      }
-      .case__summary {
-        margin: 0 0 1rem;
-        color: var(--color-muted);
-        flex-grow: 1;
-      }
-      .case__meta {
-        font-size: 0.9rem;
-        margin-top: auto;
-      }
-      .case__meta a {
-        color: var(--brand-1);
-        text-decoration: underline;
-        text-underline-offset: 3px;
-        font-weight: 700;
-      }
-
-      @media (max-width: 899px) {
-        /* MEJORA UX: Pista visual para el scroll horizontal */
-        .cases__grid::after {
-          content: '→ Deslizar para ver más';
-          grid-column: 1 / -1;
-          text-align: right;
-          font-size: 0.85rem;
-          color: var(--color-muted);
-          margin-top: 0.5rem;
-          padding-right: 0.5rem;
-        }
-      }
-      @media (min-width: 900px) {
-        .cases__grid {
-          grid-auto-flow: row;
-          grid-template-columns: repeat(3, 1fr);
-          grid-auto-columns: unset;
-          overflow: visible;
-          gap: 1.5rem;
-        }
-      }
-
-      /* =========
+    /* =========
        Por qué elegirnos
        ========= */
 
-      .about {
-        /* contenedor principal, mantiene .u-section para paddings existentes */
-      }
-      .about .section__title {
-        margin-bottom: 0.25rem;
-      } /* pequeño ajuste de espaciado */
-      .about .section__subtitle {
-        margin-bottom: 2rem;
-        color: var(--color-muted);
-      }
+    .about {
+      background: var(--color-surface);
+      /* contenedor principal, mantiene .u-section para paddings existentes */
+    }
+    .about .section__title {
+      margin-bottom: 0.25rem;
+    } /* pequeño ajuste de espaciado */
+    .about .section__subtitle {
+      margin-bottom: 2rem;
+      color: var(--color-muted);
+    }
 
+    .about-grid {
+      display: grid;
+      gap: 1.5rem;
+      grid-template-columns: 1fr;
+      align-items: stretch;
+    }
+
+    @media (min-width: 900px) {
       .about-grid {
-        display: grid;
-        gap: 1.5rem;
-        grid-template-columns: 1fr;
-        align-items: stretch;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
       }
+    }
 
-      @media (min-width: 900px) {
-        .about-grid {
-          grid-template-columns: repeat(2, 1fr);
-          gap: 2rem;
-        }
-      }
+    .about-card {
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-2);
+      background: var(--color-bg);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+      /* usar la misma sombra corporativa que .card para consistencia */
+      box-shadow:
+        0 2px 4px rgba(0, 0, 0, 0.04),
+        0 4px 12px rgba(0, 0, 0, 0.06);
+    }
+    .about-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.07);
+    }
 
-      .about-card {
-        border: 1px solid var(--color-border);
-        border-radius: var(--radius-2);
-        background: var(--color-bg);
-        overflow: hidden;
-        display: flex;
-        flex-direction: column;
-        transition:
-          transform 0.25s ease,
-          box-shadow 0.25s ease;
-        /* usar la misma sombra corporativa que .card para consistencia */
-        box-shadow:
-          0 2px 4px rgba(0, 0, 0, 0.04),
-          0 4px 12px rgba(0, 0, 0, 0.06);
-      }
-      .about-card:hover {
-        transform: translateY(-6px);
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.07);
-      }
+    .about-media {
+      aspect-ratio: 4/3;
+      background: #f3f5f8;
+      display: block;
+    }
+    .about-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.35s ease;
+    }
+    .about-card:hover .about-media img {
+      transform: scale(1.04);
+    }
 
-      .about-media {
-        aspect-ratio: 4/3;
-        background: #f3f5f8;
-        display: block;
-      }
-      .about-media img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        display: block;
-        transition: transform 0.35s ease;
-      }
-      .about-card:hover .about-media img {
-        transform: scale(1.04);
-      }
+    .about-body {
+      padding: 1.25rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      flex-grow: 1;
+    }
 
-      .about-body {
-        padding: 1.25rem 1.5rem;
-        display: flex;
-        flex-direction: column;
-        gap: 0.5rem;
-        flex-grow: 1;
-      }
+    .about-title {
+      margin: 0;
+      font-family: var(--font-serif);
+      font-size: var(--step-1);
+      font-weight: 700;
+      color: var(--brand-3);
+    }
 
-      .about-title {
-        margin: 0;
-        font-family: var(--font-serif);
-        font-size: var(--step-1);
-        font-weight: 700;
-        color: var(--brand-3);
-      }
+    .about-specialty {
+      display: inline-block;
+      margin-top: 0.25rem;
+      margin-bottom: 0.4rem;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--brand-1); /* acento institucional (azul) */
+    }
 
-      .about-specialty {
-        display: inline-block;
-        margin-top: 0.25rem;
-        margin-bottom: 0.4rem;
-        font-size: 0.9rem;
-        font-weight: 700;
-        color: var(--brand-1); /* acento institucional (azul) */
-      }
+    .about-text {
+      margin: 0;
+      color: var(--color-muted);
+      line-height: 1.5;
+      font-size: var(--step--1);
+    }
 
-      .about-text {
-        margin: 0;
-        color: var(--color-muted);
-        line-height: 1.5;
-        font-size: var(--step--1);
-      }
+    /* pequeña utilidad para CTA dentro de la sección */
+    .about-cta {
+      margin-top: 1.25rem;
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
 
-      /* pequeña utilidad para CTA dentro de la sección */
-      .about-cta {
-        margin-top: 1.25rem;
-        display: flex;
-        gap: 0.75rem;
-        flex-wrap: wrap;
-        justify-content: center;
-      }
-
-      /* =========
+    /* =========
        Proceso
        ========= */
-      .process {
-        background: var(--color-surface);
-      }
-      .process__steps {
-        display: grid;
-        gap: 1rem;
-        margin-top: 2rem;
-      }
-      .step {
-        display: grid;
-        grid-template-columns: 40px 1fr;
-        gap: 1rem;
-        align-items: start;
-        background: #fff;
-        border: 1px solid var(--color-border);
-        border-radius: 12px;
-        padding: 1.25rem;
-      }
-      .step__num {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        display: grid;
-        place-items: center;
-        background: #eaf1ff;
-        color: #1d4ed8;
-        font-weight: 800;
-        font-family: var(--font-serif);
-      }
-      .step h3 {
-        margin: 0.1rem 0 0.25rem;
-        font-size: 1.1rem;
-        font-weight: 700;
-      }
-      .step p {
-        margin: 0;
-        color: var(--color-muted);
-      }
+    .process {
+    }
+    .process__steps {
+      display: grid;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+    .step {
+      display: grid;
+      grid-template-columns: 40px 1fr;
+      gap: 1rem;
+      align-items: start;
+      background: #fff;
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      padding: 1.25rem;
+    }
+    .step__num {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: #eaf1ff;
+      color: #1d4ed8;
+      font-weight: 800;
+      font-family: var(--font-serif);
+    }
+    .step h3 {
+      margin: 0.1rem 0 0.25rem;
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+    .step p {
+      margin: 0;
+      color: var(--color-muted);
+    }
 
-      @media (min-width: 900px) {
-        .process__steps {
-          grid-template-columns: repeat(3, 1fr);
-          gap: 1.5rem;
-        }
+    @media (min-width: 900px) {
+      .process__steps {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
       }
-    </style>
-  </body></MainLayout
->
+    }
+  </style>
+</MainLayout>
