@@ -8,13 +8,14 @@ import Trust from '@/sections/Trust.astro';
 import radioCut from '@/assets/logos/radio_cut.png';
 import elCiudadano from '@/assets/logos/el_ciudadano.jpg';
 import Contact from '@/sections/Contact.astro';
-import { getContactItems } from '@/config/contactAdapter';
-import { contact } from '@/config/contact';
+import { getContactItems } from '@/config/contactAdapter';  // Ya no se usa, revisar.
+import { contact } from '@/config/contact';  // Ya no se usa, revisar.
 
 import PostsSection from '@/sections/Posts.astro';
 import { getPosts } from '@/config/postAdapter';
 
 import Services, { services, type Service } from '@/sections/Services.astro';
+import About from '@/sections/About.astro';
 
 const posts = await getPosts({ tag: 'noticias', limit: 3 });
 ---
@@ -42,86 +43,8 @@ const posts = await getPosts({ tag: 'noticias', limit: 3 });
 
       <Services services={services} title="Todos los servicios" />
 
-              <!-- ========== POR QUÉ ELEGIRNOS ========== -->
+      <About />
 
-        <section id="about" class="about u-section" aria-labelledby="about-title">
-          <div class="u-container">
-            <h2 id="about-title" class="section__title">
-              Somos Federico y Daniel, los abogados que te van a acompañar
-            </h2>
-            <p class="section__subtitle">
-              Con nosotros hablás directamente con el abogado que llevará tu caso. Más de 15 años de
-              experiencia respaldan nuestro compromiso real con tu bienestar.
-            </p>
-
-            <div class="about-grid" role="list">
-              <article
-                class="about-card card"
-                role="listitem"
-                aria-label="Federico Zalazar - especialista en salud"
-              >
-                <div class="about-media" aria-hidden="true">
-                  <!-- RECUERDO: reemplazar por foto profesional propia -->
-                  <img
-                    src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1887&auto=format&fit=crop"
-                    alt="Retrato profesional de Federico Zalazar"
-                    width="800"
-                    height="600"
-                    loading="lazy"
-                  />
-                </div>
-                <div class="about-body">
-                  <h3 class="about-title">Federico Zalazar</h3>
-                  <span class="about-specialty">Especialista en Derecho de la Salud</span>
-                  <p class="about-text">
-                    "Mi misión es asegurar que recibas la atención médica que merecés, sin demoras
-                    ni excusas. Actúo con la urgencia y sensibilidad que tu salud requiere."
-                  </p>
-                </div>
-              </article>
-
-              <article
-                class="about-card card"
-                role="listitem"
-                aria-label="Daniel Paredes - especialista en laboral"
-              >
-                <div class="about-media" aria-hidden="true">
-                  <!-- RECUERDO: reemplazar por foto profesional propia -->
-                  <img
-                    src="https://st2.depositphotos.com/3143277/8644/i/450/depositphotos_86446164-stock-photo-business-man-in-office.jpg"
-                    alt="Retrato profesional de Daniel Paredes"
-                    width="800"
-                    height="600"
-                    loading="lazy"
-                  />
-                </div>
-                <div class="about-body">
-                  <h3 class="about-title">Daniel Paredes</h3>
-                  <span class="about-specialty">Especialista en Derecho Laboral</span>
-                  <p class="about-text">
-                    "Mi objetivo es proteger tus derechos como trabajador. Te asesoro y acompaño en
-                    cada etapa para que recibas lo que es justo."
-                  </p>
-                </div>
-              </article>
-            </div>
-
-            <div class="about-cta">
-              <a
-                class="button button--primary desktop-flex"
-                href="https://web.whatsapp.com/send?phone=5403415873908&text=Hola%2C%20me%20gustar%C3%ADa%20asesor%C3%ADa%20con%20un%20abogado."
-                target="_blank"
-                aria-label="Consultar ahora por WhatsApp">Consultar ahora</a
-              >
-              <a
-                class="button button--primary mobile-flex"
-                href="https://wa.me/5403415873908?text=Hola%2C%20me%20gustar%C3%ADa%20asesor%C3%ADa%20con%20un%20abogado."
-                target="_blank"
-                aria-label="Consultar ahora por WhatsApp">Consultar ahora</a
-              >
-            </div>
-          </div>
-        </section>
 
       <!-- ========== CÓMO TRABAJAMOS ========== -->
       <section class="process u-section" aria-labelledby="process-title">
@@ -337,112 +260,6 @@ const posts = await getPosts({ tag: 'noticias', limit: 3 });
       padding: 1.25rem;
     }
 
-    /* =========
-       Por qué elegirnos
-       ========= */
-
-    .about {
-      background: var(--color-surface);
-      /* contenedor principal, mantiene .u-section para paddings existentes */
-    }
-    .about .section__title {
-      margin-bottom: 0.25rem;
-    } /* pequeño ajuste de espaciado */
-    .about .section__subtitle {
-      margin-bottom: 2rem;
-      color: var(--color-muted);
-    }
-
-    .about-grid {
-      display: grid;
-      gap: 1.5rem;
-      grid-template-columns: 1fr;
-      align-items: stretch;
-    }
-
-    @media (min-width: 900px) {
-      .about-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 2rem;
-      }
-    }
-
-    .about-card {
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius-2);
-      background: var(--color-bg);
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      transition:
-        transform 0.25s ease,
-        box-shadow 0.25s ease;
-      /* usar la misma sombra corporativa que .card para consistencia */
-      box-shadow:
-        0 2px 4px rgba(0, 0, 0, 0.04),
-        0 4px 12px rgba(0, 0, 0, 0.06);
-    }
-    .about-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.07);
-    }
-
-    .about-media {
-      aspect-ratio: 4/3;
-      background: #f3f5f8;
-      display: block;
-    }
-    .about-media img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      transition: transform 0.35s ease;
-    }
-    .about-card:hover .about-media img {
-      transform: scale(1.04);
-    }
-
-    .about-body {
-      padding: 1.25rem 1.5rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-      flex-grow: 1;
-    }
-
-    .about-title {
-      margin: 0;
-      font-family: var(--font-serif);
-      font-size: var(--step-1);
-      font-weight: 700;
-      color: var(--brand-3);
-    }
-
-    .about-specialty {
-      display: inline-block;
-      margin-top: 0.25rem;
-      margin-bottom: 0.4rem;
-      font-size: 0.9rem;
-      font-weight: 700;
-      color: var(--brand-1); /* acento institucional (azul) */
-    }
-
-    .about-text {
-      margin: 0;
-      color: var(--color-muted);
-      line-height: 1.5;
-      font-size: var(--step--1);
-    }
-
-    /* pequeña utilidad para CTA dentro de la sección */
-    .about-cta {
-      margin-top: 1.25rem;
-      display: flex;
-      gap: 0.75rem;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
 
     /* =========
        Proceso

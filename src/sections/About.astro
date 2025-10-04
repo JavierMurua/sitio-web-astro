@@ -1,0 +1,194 @@
+---
+/**
+ * Componente About.astro
+ * Centraliza: data, estructura y estilos en un mismo archivo.
+ * Fácil de portar a otros proyectos.
+ */
+
+const aboutData = {
+  title: "Somos Federico y Daniel, los abogados que te van a acompañar",
+  subtitle:
+    "Con nosotros hablás directamente con el abogado que llevará tu caso. Más de 15 años de experiencia respaldan nuestro compromiso real con tu bienestar.",
+  people: [
+    {
+      name: "Federico Zalazar",
+      specialty: "Especialista en Derecho de la Salud",
+      image:
+        "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1887&auto=format&fit=crop",
+      alt: "Retrato profesional de Federico Zalazar",
+      description:
+        "Mi misión es asegurar que recibas la atención médica que merecés, sin demoras ni excusas. Actúo con la urgencia y sensibilidad que tu salud requiere.",
+    },
+    {
+      name: "Daniel Paredes",
+      specialty: "Especialista en Derecho Laboral",
+      image:
+        "https://st2.depositphotos.com/3143277/8644/i/450/depositphotos_86446164-stock-photo-business-man-in-office.jpg",
+      alt: "Retrato profesional de Daniel Paredes",
+      description:
+        "Mi objetivo es proteger tus derechos como trabajador. Te asesoro y acompaño en cada etapa para que recibas lo que es justo.",
+    },
+  ],
+  cta: {
+    text: "Consultar ahora",
+    desktop:
+      "https://web.whatsapp.com/send?phone=5403415873908&text=Hola%2C%20me%20gustar%C3%ADa%20asesor%C3%ADa%20con%20un%20abogado.",
+    mobile:
+      "https://wa.me/5403415873908?text=Hola%2C%20me%20gustar%C3%ADa%20asesor%C3%ADa%20con%20un%20abogado.",
+  },
+};
+---
+
+<section id="about" class="about u-section" aria-labelledby="about-title">
+  <div class="u-container">
+    <h2 id="about-title" class="section__title">{aboutData.title}</h2>
+    <p class="section__subtitle">{aboutData.subtitle}</p>
+
+    <div class="about-grid" role="list">
+      {aboutData.people.map((person) => (
+        <article
+          class="about-card card"
+          role="listitem"
+          aria-label={`${person.name} - ${person.specialty}`}
+        >
+          <div class="about-media" aria-hidden="true">
+            <img
+              src={person.image}
+              alt={person.alt}
+              width="800"
+              height="600"
+              loading="lazy"
+            />
+          </div>
+          <div class="about-body">
+            <h3 class="about-title">{person.name}</h3>
+            <span class="about-specialty">{person.specialty}</span>
+            <p class="about-text">{person.description}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <div class="about-cta">
+      <a
+        class="button button--primary desktop-flex"
+        href={aboutData.cta.desktop}
+        target="_blank"
+        aria-label={`${aboutData.cta.text} por WhatsApp`}
+      >
+        {aboutData.cta.text}
+      </a>
+      <a
+        class="button button--primary mobile-flex"
+        href={aboutData.cta.mobile}
+        target="_blank"
+        aria-label={`${aboutData.cta.text} por WhatsApp`}
+      >
+        {aboutData.cta.text}
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* =========
+     Por qué elegirnos (scoped al componente)
+     ========= */
+  .about {
+    background: var(--color-surface);
+  }
+
+  .about .section__title {
+    margin-bottom: 0.25rem;
+  }
+  .about .section__subtitle {
+    margin-bottom: 2rem;
+    color: var(--color-muted);
+  }
+
+  .about-grid {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: 1fr;
+    align-items: stretch;
+  }
+
+  @media (min-width: 900px) {
+    .about-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+    }
+  }
+
+  .about-card {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-2);
+    background: var(--color-bg);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04),
+      0 4px 12px rgba(0, 0, 0, 0.06);
+  }
+  .about-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.07);
+  }
+
+  .about-media {
+    aspect-ratio: 4/3;
+    background: #f3f5f8;
+    display: block;
+  }
+  .about-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.35s ease;
+  }
+  .about-card:hover .about-media img {
+    transform: scale(1.04);
+  }
+
+  .about-body {
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    flex-grow: 1;
+  }
+
+  .about-title {
+    margin: 0;
+    font-family: var(--font-serif);
+    font-size: var(--step-1);
+    font-weight: 700;
+    color: var(--brand-3);
+  }
+
+  .about-specialty {
+    display: inline-block;
+    margin-top: 0.25rem;
+    margin-bottom: 0.4rem;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--brand-1);
+  }
+
+  .about-text {
+    margin: 0;
+    color: var(--color-muted);
+    line-height: 1.5;
+    font-size: var(--step--1);
+  }
+
+  .about-cta {
+    margin-top: 1.25rem;
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+</style>
