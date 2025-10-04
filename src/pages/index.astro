@@ -8,8 +8,8 @@ import Trust from '@/sections/Trust.astro';
 import radioCut from '@/assets/logos/radio_cut.png';
 import elCiudadano from '@/assets/logos/el_ciudadano.jpg';
 import Contact from '@/sections/Contact.astro';
-import { getContactItems } from '@/config/contactAdapter';  // Ya no se usa, revisar.
-import { contact } from '@/config/contact';  // Ya no se usa, revisar.
+import { getContactItems } from '@/config/contactAdapter'; // Ya no se usa, revisar.
+import { contact } from '@/config/contact'; // Ya no se usa, revisar.
 
 import PostsSection from '@/sections/Posts.astro';
 import { getPosts } from '@/config/postAdapter';
@@ -48,8 +48,6 @@ const posts = await getPosts({ tag: 'noticias', limit: 3 });
 
       <Process />
 
-
-
       <PostsSection
         title="Casos que trascendieron en los medios:"
         subtitle="Descubre entrevistas y artículos publicados en medios de comunicación que destacaron la labor de nuestro estudio en casos de gran impacto."
@@ -65,160 +63,4 @@ const posts = await getPosts({ tag: 'noticias', limit: 3 });
       <WhatsAppButton />
     </main>
   </body>
-  <style>
-    /* =========
-       Componentes base
-       ========= */
-    .button {
-      align-items: center;
-      gap: 0.5rem;
-      font-weight: 700;
-      border: 1px solid transparent;
-      border-radius: 999px;
-      padding: 0.8rem 1.25rem;
-      font-size: var(--step--1);
-      line-height: 1;
-      cursor: pointer;
-      transition: filter 0.2s ease;
-    }
-    .button--primary {
-      background: var(--brand-2);
-      color: var(--on-brand);
-    }
-    .button--secondary {
-      background: var(--brand-1);
-      color: var(--on-brand);
-    }
-    .button--outline {
-      background: transparent;
-      border-color: var(--on-brand);
-      color: var(--on-brand);
-    }
-    .button--block {
-      width: 100%;
-      justify-content: center;
-    }
-    .button:hover {
-      filter: brightness(1.1);
-    }
-    /* Por defecto, ocultamos ambos */
-
-    .card {
-      background: var(--color-bg);
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius-1);
-      padding: 1.5rem;
-      transition:
-        transform 0.25s ease,
-        box-shadow 0.25s ease;
-      /* MEJORA: Sombra más sutil y profesional */
-      box-shadow:
-        0 2px 4px rgba(0, 0, 0, 0.04),
-        0 4px 12px rgba(0, 0, 0, 0.06);
-    }
-    .card:hover {
-      /* MEJORA: Micro-interacción para dar sensación de calidad */
-      transform: translateY(-5px);
-      box-shadow:
-        0 4px 8px rgba(0, 0, 0, 0.05),
-        0 8px 24px rgba(0, 0, 0, 0.08);
-    }
-
-    .section__title {
-      font-family: var(--font-serif);
-      font-size: var(--step-3);
-      line-height: 1.2;
-      margin: 0 0 0.75rem;
-    }
-    .section__subtitle {
-      font-size: var(--step-0);
-      color: var(--color-muted);
-      margin: 0 0 2rem;
-      max-width: 60ch;
-    }
-
-    /* ===========================
-   Servicios - adaptado al sitio
-   =========================== */
-    .services__grid {
-      display: grid;
-      gap: 1.5rem;
-      /* responsive: tantas columnas como quepan, mínimo 180px */
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      align-items: stretch;
-    }
-
-    /* tarjeta de servicio coherente con .card existente */
-    .service-card {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      gap: 0.75rem;
-      padding: 1.25rem;
-      border-radius: var(--radius-2);
-      transition:
-        transform 0.25s ease,
-        box-shadow 0.25s ease,
-        border-color 0.2s ease;
-      background: var(--color-bg);
-      border: 1px solid var(--color-border);
-      min-height: 150px;
-    }
-
-    /* hover consistente con otras tarjetas del sitio */
-    .service-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 8px 20px rgba(11, 31, 75, 0.06);
-      border-color: var(--brand-1);
-    }
-    .service-card__link {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    /* icono circular */
-    .service-card__media {
-      width: 56px;
-      height: 56px;
-      border-radius: 999px;
-      background: radial-gradient(circle, #ffffff 50%, #eef7f0 100%);
-      border: 2px solid rgba(10, 120, 70, 0.06);
-      display: grid;
-      place-items: center;
-      transition:
-        transform 0.22s ease,
-        background 0.22s ease,
-        border-color 0.22s ease;
-      flex: 0 0 auto;
-    }
-
-    /* SVG usa currentColor para adaptarse al tema */
-    .service-card__media svg {
-      width: 38px;
-      height: 38px;
-      color: var(--brand-1);
-    }
-
-    /* etiqueta del servicio */
-    .service-card__label {
-      font-weight: 700;
-      font-size: var(--step--1);
-      color: var(--brand-3);
-    }
-
-    /* CTA general debajo del grid */
-    .services__cta {
-      margin-top: 1.75rem;
-      text-align: center;
-      background: var(--color-surface);
-      border: 1px dashed var(--color-border);
-      border-radius: var(--radius-2);
-      padding: 1.25rem;
-    }
-    
-
-
-  </style>
 </MainLayout>
