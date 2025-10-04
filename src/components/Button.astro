@@ -55,3 +55,42 @@ const rel = external ? 'noopener noreferrer' : rest.rel;
 >
   <slot />
 </Tag>
+
+<style>
+  /* =========
+       Componentes base
+       ========= */
+.button {
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 700;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  padding: 0.8rem 1.25rem;
+  font-size: var(--step--1);
+  line-height: 1;
+  cursor: pointer;
+  transition: filter 0.2s ease;
+}
+.button--primary {
+  background: var(--brand-2);
+  color: var(--on-brand);
+}
+.button--secondary {
+  background: var(--brand-1);
+  color: var(--on-brand);
+}
+.button--outline {
+  background: transparent;
+  border-color: var(--on-brand);
+  color: var(--on-brand);
+}
+.button--block {
+  width: 100%;
+  justify-content: center;
+}
+.button:hover {
+  filter: brightness(1.1);
+}
+
+</style>

@@ -1,9 +1,5 @@
 ---
-/**
- * Componente Process.astro
- * Sección “Cómo trabajamos” (Nuestro Proceso Simplificado)
- * Todo el contenido, estructura y estilos están en un solo archivo para fácil mantenimiento.
- */
+import Button from "@/components/Button.astro";
 
 const processData = {
   title: "Nuestro Proceso Simplificado",
@@ -58,22 +54,25 @@ const processData = {
     </div>
 
     <div class="process__cta">
-      <a
-        class="button button--primary desktop-inline"
+      <Button
         href={processData.cta.desktop}
-        target="_blank"
-        aria-label={`${processData.cta.text} por WhatsApp`}
+        variant="primary"
+        device="desktop"
+        external
+        ariaLabel={`${processData.cta.text} por WhatsApp`}
       >
         {processData.cta.text}
-      </a>
-      <a
-        class="button button--primary mobile-inline"
+      </Button>
+
+      <Button
         href={processData.cta.mobile}
-        target="_blank"
-        aria-label={`${processData.cta.text} por WhatsApp`}
+        variant="primary"
+        device="mobile"
+        external
+        ariaLabel={`${processData.cta.text} por WhatsApp`}
       >
         {processData.cta.text}
-      </a>
+      </Button>
     </div>
   </div>
 </section>
@@ -111,7 +110,8 @@ const processData = {
     padding: 1.25rem;
     text-align: left;
     transition: transform 0.25s ease, box-shadow 0.25s ease;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04),
+    box-shadow:
+      0 2px 4px rgba(0, 0, 0, 0.04),
       0 4px 12px rgba(0, 0, 0, 0.06);
   }
 

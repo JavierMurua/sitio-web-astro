@@ -1,5 +1,6 @@
 ---
 // src/sections/Services.astro
+import Button from "@/components/Button.astro";
 import Icon from "@/components/Icon.astro";
 import type { IconName } from "@/config/icons";
 import { contact, getWhatsAppLink } from "@/contact";
@@ -81,27 +82,28 @@ const { services: servicesProp, title, subtitle } = Astro.props as Props;
     </div>
 
     <div class="services__cta" role="note" aria-label="Consulta personalizada">
-      <p style="margin:0 0 .6rem;">
+      <p class="services__cta-text">
         Si tu caso no figura, escribinos: escuchamos, evaluamos y te decimos cómo avanzar.
       </p>
-      <a
+      <Button
         href={getWhatsAppLink(contact.phone, contact.whatsappMessage, true)}
-        class="button button--primary desktop-inline"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Consultanos por WhatsApp (escritorio)"
+        variant="primary"
+        device="desktop"
+        external
+        ariaLabel="Consultanos por WhatsApp (escritorio)"
       >
         Consultanos por WhatsApp
-      </a>
-      <a
+      </Button>
+
+      <Button
         href={getWhatsAppLink(contact.phone, contact.whatsappMessage, false)}
-        class="button button--primary mobile-inline"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Consultanos por WhatsApp (móvil)"
+        variant="primary"
+        device="mobile"
+        external
+        ariaLabel="Consultanos por WhatsApp (móvil)"
       >
         Consultanos por WhatsApp
-      </a>
+      </Button>
     </div>
   </div>
 </section>
@@ -179,4 +181,8 @@ const { services: servicesProp, title, subtitle } = Astro.props as Props;
   border-radius: var(--radius-2);
   padding: 1.25rem;
 }
+
+.services__cta-text {
+    margin: 0 0 0.6rem;
+  }
 </style>

@@ -217,7 +217,7 @@ a {
 /* =========
        Componentes base
        ========= */
-.button {
+/* .button {
   align-items: center;
   gap: 0.5rem;
   font-weight: 700;
@@ -248,4 +248,4 @@ a {
 }
 .button:hover {
   filter: brightness(1.1);
-}
+} */

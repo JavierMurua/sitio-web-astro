@@ -1,9 +1,5 @@
 ---
-/**
- * Componente About.astro
- * Centraliza: data, estructura y estilos en un mismo archivo.
- * Fácil de portar a otros proyectos.
- */
+import Button from "@/components/Button.astro";
 
 const aboutData = {
   title: "Somos Federico y Daniel, los abogados que te van a acompañar",
@@ -70,22 +66,25 @@ const aboutData = {
     </div>
 
     <div class="about-cta">
-      <a
-        class="button button--primary desktop-flex"
+      <Button
         href={aboutData.cta.desktop}
-        target="_blank"
-        aria-label={`${aboutData.cta.text} por WhatsApp`}
+        variant="primary"
+        device="desktop"
+        external
+        ariaLabel={`${aboutData.cta.text} por WhatsApp`}
       >
         {aboutData.cta.text}
-      </a>
-      <a
-        class="button button--primary mobile-flex"
+      </Button>
+
+      <Button
         href={aboutData.cta.mobile}
-        target="_blank"
-        aria-label={`${aboutData.cta.text} por WhatsApp`}
+        variant="primary"
+        device="mobile"
+        external
+        ariaLabel={`${aboutData.cta.text} por WhatsApp`}
       >
         {aboutData.cta.text}
-      </a>
+      </Button>
     </div>
   </div>
 </section>
