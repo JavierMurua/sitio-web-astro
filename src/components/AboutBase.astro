@@ -1,0 +1,83 @@
+---
+import Button from "@/components/Button.astro";
+
+interface CTA {
+  text: string;
+  desktop: string;
+  mobile: string;
+}
+
+interface Props {
+  id?: string;
+  title: string;
+  subtitle?: string;
+  cta?: CTA;
+  className?: string;
+}
+
+const { id = "about", title, subtitle, cta, className = "", ...rest } = Astro.props;
+---
+
+<section id={id} class={`about-section ${className}`} {...rest}>
+  <div class="u-container">
+    <header class="about-header">
+      <h2 class="section__title">{title}</h2>
+      {subtitle && <p class="section__subtitle">{subtitle}</p>}
+    </header>
+
+    <div class="about-content">
+      <slot />  <!-- Aquí se inyecta el contenido específico (team o individual) -->
+    </div>
+
+    {cta && (
+      <div class="about-cta">
+        <Button
+          href={cta.desktop}
+          variant="primary"
+          device="desktop"
+          external
+          ariaLabel={`${cta.text} por WhatsApp`}
+        >
+          {cta.text}
+        </Button>
+
+        <Button
+          href={cta.mobile}
+          variant="primary"
+          device="mobile"
+          external
+          ariaLabel={`${cta.text} por WhatsApp`}
+        >
+          {cta.text}
+        </Button>
+      </div>
+    )}
+  </div>
+</section>
+
+<style>
+.about-section {
+  background: var(--color-surface);
+  padding: 4rem 1rem;
+}
+
+.about-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.section__title {
+  margin-bottom: 0.25rem;
+}
+
+.section__subtitle {
+  color: var(--color-muted);
+}
+.about-cta {
+  margin-top: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+}
+</style>

@@ -33,4 +33,5 @@
 - [ ] Optimizar página de Casos de Éxito.
 - [ ] Optimizar página de contacto.
 - [ ] Agregar CTA final y FAQ a Index.
+- [ ] Cambiar preguntas y respuestas del FAQ de casos-de-exito.
 - [ ] 

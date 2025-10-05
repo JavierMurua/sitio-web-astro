@@ -14,8 +14,8 @@ import Posts from '@/sections/Posts.astro';
 import { getPosts } from '@/config/postAdapter';
 
 import Services, { services, type Service } from '@/sections/Services.astro';
-import About from '@/sections/About.astro';
 import Process from '@/sections/Process.astro';
+import AboutTeam from '@/sections/AboutTeam.astro';
 
 const posts = await getPosts({ tag: 'noticias', limit: 3 });
 ---
@@ -41,7 +41,7 @@ const posts = await getPosts({ tag: 'noticias', limit: 3 });
 
   <Services services={services} title="Todos los servicios" />
 
-  <About />
+  <AboutTeam />
 
   <Process />
 

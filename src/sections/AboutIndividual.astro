@@ -1,0 +1,78 @@
+---
+import AboutBase from "@/components/AboutBase.astro";
+
+interface CTA {
+  text: string;
+  desktop: string;
+  mobile: string;
+}
+
+interface Props {
+  id?: string;
+  title: string;
+  image: string;
+  alt: string;
+  paragraphs: string[];
+  highlight?: string;
+  cta?: CTA;
+}
+
+const { id = "sobre-mi", title, image, alt, paragraphs, highlight, cta } = Astro.props;
+---
+
+<AboutBase id={id} title={title} cta={cta} className="sobre-mi">
+  <div class="sobre-mi__container">
+    <div class="sobre-mi__media">
+      <img src={image} alt={alt} loading="lazy" />
+    </div>
+    <div class="sobre-mi__content">
+      {paragraphs.map((p) => <p>{p}</p>)}
+      {highlight && (
+        <div class="sobre-mi__highlight">
+          <p>{highlight}</p>
+        </div>
+      )}
+    </div>
+  </div>
+</AboutBase>
+
+<style>
+.sobre-mi__container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .sobre-mi__container {
+    grid-template-columns: 2fr 3fr;
+  }
+}
+
+.sobre-mi__media img {
+  width: 100%;
+  aspect-ratio: 4/5;
+  object-fit: cover;
+  border-radius: 0.75rem;
+  box-shadow: 0 25px 50px rgba(0,0,0,0.25);
+}
+
+.sobre-mi__content p {
+  margin-top: 1rem;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  color: #4b5563;
+}
+
+.sobre-mi__highlight {
+  margin-top: 2rem;
+  background-color: #dbeafe;
+  border-left: 4px solid #1747a6;
+  color: #0b1f4b;
+  padding: 1rem;
+  border-radius: 0 0.5rem 0.5rem 0;
+}
+</style>
