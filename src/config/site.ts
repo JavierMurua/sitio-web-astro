@@ -17,7 +17,7 @@ export const siteConfig = {
   legal:
     "La información presentada tiene fines generales y no constituye asesoramiento jurídico.",
   social: {
-    twitter: "@tucuenta",
-    linkedin: "https://www.linkedin.com/company/tucuenta",
+    twitter: "",
+    linkedin: "",
   },
 };

@@ -1,5 +1,9 @@
 ---
 import AboutBase from "@/components/AboutBase.astro";
+import { Image } from "astro:assets";
+
+import federicoImage from "@/assets/images/federico-zalazar-01.webp";
+import danielImage from "@/assets/images/daniel-paredes-00.webp";
 
 const aboutData = {
   title: "Somos Federico y Daniel, los abogados que te van a acompañar",
@@ -9,8 +13,7 @@ const aboutData = {
     {
       name: "Federico Zalazar",
       specialty: "Especialista en Derecho de la Salud",
-      image:
-        "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1887&auto=format&fit=crop",
+      image: federicoImage,
       alt: "Retrato profesional de Federico Zalazar",
       description:
         "Mi misión es asegurar que recibas la atención médica que merecés, sin demoras ni excusas. Actúo con la urgencia y sensibilidad que tu salud requiere.",
@@ -18,8 +21,7 @@ const aboutData = {
     {
       name: "Daniel Paredes",
       specialty: "Especialista en Derecho Laboral",
-      image:
-        "https://st2.depositphotos.com/3143277/8644/i/450/depositphotos_86446164-stock-photo-business-man-in-office.jpg",
+      image: danielImage,
       alt: "Retrato profesional de Daniel Paredes",
       description:
         "Mi objetivo es proteger tus derechos como trabajador. Te asesoro y acompaño en cada etapa para que recibas lo que es justo.",
@@ -40,7 +42,15 @@ const aboutData = {
     {aboutData.people.map((person) => (
       <article class="about-card" role="listitem" aria-label={`${person.name} - ${person.specialty}`}>
         <div class="about-media">
-          <img src={person.image} alt={person.alt} width="800" height="600" loading="lazy" />
+          <Image
+            src={person.image}
+            alt={person.alt}
+            width={800}
+            height={600}
+            format="webp"
+            quality={90}
+            loading="lazy"
+          />
         </div>
         <div class="about-body">
           <h3 class="about-title">{person.name}</h3>
@@ -78,13 +88,14 @@ const aboutData = {
   transform: translateY(-6px);
   box-shadow: 0 8px 20px rgba(0,0,0,0.07);
 }
-.about-media img {
+.about-media :global(img) {
   width: 100%;
   height: 100%;
   object-fit: cover;
   transition: transform 0.35s ease;
+  display: block;
 }
-.about-card:hover .about-media img {
+.about-card:hover .about-media :global(img) {
   transform: scale(1.04);
 }
 .about-body {

@@ -1,28 +1,31 @@
 ---
-// src\pages\abogado-de-salud.astro
-import Services, { services, type Service } from '@/sections/Services.astro';
-const healthServices = services.filter((s: Service) => s.category === 'salud');
+// src/pages/abogado-de-salud.astro
 
 import MainLayout from '@/layouts/MainLayout.astro';
 import Hero from '@/sections/Hero.astro';
-import heroImage from '/src/assets/images/balanza-caduceo-derecho-salud.png';
 import Trust from '@/sections/Trust.astro';
+import AboutIndividual from '@/sections/AboutIndividual.astro';
+import Services, { services, type Service } from '@/sections/Services.astro';
+import Process from '@/sections/Process.astro';
+import Posts from '@/sections/Posts.astro';
+import Contact from '@/sections/Contact.astro';
+import FinalCTA from '@/sections/FinalCTA.astro';
+import Faq from '@/sections/Faq.astro';
+
+import heroImage from '/src/assets/images/balanza-caduceo-derecho-salud.png';
 import radioCut from '@/assets/logos/radio_cut.png';
 import elCiudadano from '@/assets/logos/el_ciudadano.jpg';
-import Contact from '@/sections/Contact.astro';
-import Faq from '@/sections/Faq.astro';
-import FinalCTA from '@/sections/FinalCTA.astro';
+import federicoImage from '@/assets/images/federico-zalazar-04.webp';
 
-import Posts from '@/sections/Posts.astro';
 import { getPosts } from '@/config/postAdapter';
-import Process from '@/sections/Process.astro';
-import AboutIndividual from '@/sections/AboutIndividual.astro';
+
+const healthServices = services.filter((s: Service) => s.category === 'salud');
 
 const posts = await getPosts({ tag: 'noticias', limit: 3 });
 
 const aboutData = {
   title: "Sobre Federico Zalazar – Especialista en Derecho de la Salud",
-  image: "https://picsum.photos/id/1005/400/500",
+  image: federicoImage,
   alt: "Retrato del abogado Federico Zalazar",
   paragraphs: [
     "Soy Federico Zalazar, abogado especializado en derecho sanitario. Con experiencia en amparos, fertilización asistida, medicamentos oncológicos y mala praxis.",
