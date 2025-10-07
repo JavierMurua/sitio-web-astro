@@ -36,4 +36,5 @@
 - [ ] Cambiar preguntas y respuestas del FAQ de casos-de-exito.
 - [ ] Modificar hardcodeado de WA en CTA de las páginas de los profesionales.
 - [ ] Hacer que las imágenes de los hero se acomoden en distintas pantallas para que los elementos principales se mantengan a la vista.
+- [ ] Revisar FAQ de casos-de-exito.
 - [ ] 
