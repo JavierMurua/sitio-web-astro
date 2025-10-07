@@ -6,10 +6,12 @@ interface Props {
   variant?: 'primary' | 'secondary' | 'outline';
   block?: boolean;
   device?: 'desktop' | 'mobile' | 'all';
-  external?: boolean; // si true automáticamente target="_blank" rel="noopener noreferrer"
+  external?: boolean;
   ariaLabel?: string;
   type?: 'button' | 'submit' | 'reset';
   className?: string;
+  target?: string;  // ✅ agregado
+  rel?: string;     // ✅ agregado
 }
 
 const {
@@ -23,7 +25,7 @@ const {
   type = 'button',
   className = '',
   ...rest
-} = Astro.props;
+} = Astro.props as Props;
 
 // Elemento a renderizar
 const Tag = as;
