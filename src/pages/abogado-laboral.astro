@@ -23,7 +23,6 @@ const laborServices = services.filter((s: Service) => s.category === 'laboral');
 
 const posts = await getPosts({ tag: 'noticias', limit: 3 });
 
-// ✅ Datos del abogado (AboutIndividual)
 const aboutData = {
   title: "Sobre Daniel Paredes – Especialista en Derecho Laboral, Accidentes y Enfermedades del trabajo",
   image: danielImage,
@@ -41,7 +40,6 @@ const aboutData = {
   },
 };
 
-// ✅ FAQ específica de salud/laboral
 const faqItems = [
   {
     question: "¿Cuánto me corresponde de indemnización por un accidente de trabajo en Rosario?",
