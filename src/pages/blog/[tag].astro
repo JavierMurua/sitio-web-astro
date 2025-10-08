@@ -1,30 +1,31 @@
 ---
-// src/pages/blog/tags/[tag].astro
+// src\pages\blog\[tag].astro
 import { getCollection, type CollectionEntry } from "astro:content";
 import MainLayout from "@/layouts/MainLayout.astro";
-import { TAGS } from "@/content/config";
 
 export async function getStaticPaths() {
-  return TAGS.map((tag) => ({ params: { tag } }));
+  const posts = await getCollection("blog");
+  const uniqueTags = Array.from(
+    new Set(posts.flatMap((post) => post.data.tags || []))
+  );
+
+  return uniqueTags.map((tag) => ({
+    params: { tag },
+  }));
 }
 
-const { tag } = Astro.params as { tag: typeof TAGS[number] };
-
-if (!TAGS.includes(tag)) {
-  throw new Error(`❌ Etiqueta inválida: ${tag}`);
-}
-
+const { tag } = Astro.params;
 const posts: CollectionEntry<"blog">[] = (await getCollection("blog"))
   .filter((post) => post.data.tags?.includes(tag))
   .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+const title = `Artículos sobre "${tag}"`;
+const description = `Lee artículos y novedades relacionadas con "${tag}" en nuestro blog.`;
 ---
 
-<MainLayout 
-  title={`Artículos sobre "${tag}"`} 
-  description={`Lee artículos y novedades relacionadas con "${tag}" en nuestro blog`}
->
+<MainLayout title={title} description={description}>
   <section class="blog-index">
-    <h1 aria-label={`Artículos etiquetados con ${tag}`}>#{tag}</h1>
+    <h1>#{tag}</h1>
     <p class="lead">Artículos relacionados con <strong>{tag}</strong>.</p>
 
     {posts.length === 0 ? (
@@ -33,19 +34,19 @@ const posts: CollectionEntry<"blog">[] = (await getCollection("blog"))
       <ul class="blog-list" role="list">
         {posts.map((post) => (
           <li class="blog-list-item">
-            <article>
-              <h2>
-                <a href={`/blog/${post.slug}`}>{post.data.title}</a>
-              </h2>
-              <time datetime={post.data.date.toISOString()}>
-                {post.data.date.toLocaleDateString("es-AR", {
-                  year: "numeric",
-                  month: "long",
-                  day: "numeric",
-                })}
-              </time>
-              {post.data.description && <p>{post.data.description}</p>}
-            </article>
+            <a href={`/blog/${post.slug}/`} class="blog-card">
+              <article>
+                <h2>{post.data.title}</h2>
+                <time datetime={post.data.date.toISOString()}>
+                  {post.data.date.toLocaleDateString("es-AR", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })}
+                </time>
+                {post.data.description && <p>{post.data.description}</p>}
+              </article>
+            </a>
           </li>
         ))}
       </ul>
@@ -54,84 +55,81 @@ const posts: CollectionEntry<"blog">[] = (await getCollection("blog"))
 </MainLayout>
 
 <style>
-    .blog-index {
-  max-width: 800px;
-  margin-inline: auto;
-  padding: 2rem 1rem;
-  font-family: var(--font-sans, system-ui, sans-serif);
-  color: var(--color-text, #1e293b);
+.blog-index {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2.5rem 1rem;
 }
 
 .blog-index h1 {
-  font-family: var(--font-serif, Georgia, serif);
-  font-size: var(--step-3, 2rem);
+  font-size: 2.25rem;
   font-weight: 800;
-  color: var(--color-title, #0f172a);
+  color: var(--brand-3);
   margin-bottom: 0.5rem;
 }
 
-.blog-index .lead {
-  font-size: var(--step-0, 1rem);
-  color: var(--color-muted, #64748b);
+.lead {
+  font-size: 1.125rem;
+  color: var(--color-muted);
   margin-bottom: 2rem;
 }
 
+/* GRID adaptable */
 .blog-list {
   display: grid;
-  gap: 1.5rem;
+  gap: 1.75rem;
   list-style: none;
   padding: 0;
-  margin: 0;
+  grid-template-columns: 1fr; 
 }
 
-.blog-list-item {
-  background: var(--color-surface, #fff);
-  border: 1px solid var(--color-border, #e2e8f0);
-  border-radius: var(--radius-2, 8px);
-  padding: 1.5rem;
-  transition: box-shadow 0.2s ease, border-color 0.2s ease;
-}
-
-.blog-list-item:hover {
-  border-color: var(--brand-1, #2563eb);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
-}
-
-.blog-list-item h2 {
-  margin: 0;
-  font-size: var(--step-1, 1.25rem);
-  font-weight: 700;
-  color: var(--color-title, #0f172a);
-}
-
-.blog-list-item h2 a {
-  text-decoration: none;
-  color: inherit;
-}
-
-.blog-list-item h2 a:hover {
-  color: var(--brand-1, #2563eb);
-}
-
-.blog-list-item time {
-  display: block;
-  font-size: 0.875rem;
-  color: var(--color-muted, #64748b);
-  margin: 0.5rem 0;
-}
-
-.blog-list-item p {
-  margin: 0.5rem 0 0;
-  font-size: var(--step-0, 1rem);
-  line-height: 1.6;
-  color: var(--color-text, #1e293b);
-}
-
-/* Responsivo */
-@media (min-width: 768px) {
+@media (min-width: 800px) {
   .blog-list {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
+.blog-card {
+  display: block;
+  background: #fff;
+  border: 1px solid var(--color-border, #e2e8f0);
+  border-radius: 10px;
+  padding: 1.75rem;
+  text-decoration: none;
+  color: inherit;
+  height: 100%;
+  transition: all 0.25s ease;
+}
+
+.blog-card:hover,
+.blog-card:focus {
+  border-color: var(--brand-1);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
+  transform: translateY(-4px);
+}
+
+.blog-card h2 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--brand-3);
+  margin: 0 0 0.25rem;
+  line-height: 1.3;
+}
+
+.blog-card:hover h2 {
+  color: var(--brand-1);
+}
+
+.blog-card time {
+  display: block;
+  font-size: 0.875rem;
+  color: var(--color-muted);
+  margin-bottom: 0.75rem;
+}
+
+.blog-card p {
+  margin: 0.5rem 0 0;
+  color: var(--color-text, #1e293b);
+  line-height: 1.6;
+}
 </style>

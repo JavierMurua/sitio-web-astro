@@ -20,7 +20,7 @@
 - [ ] Pensar qué hacer con las imagenes de los artículos
 - [ ] averiguar mejor tamaño para esas imagenes de los post
 - [ ] Asegurarse que todas las etiquetas del sitio web sean adecuadas 
-- [ ] Hacer que de la sección Trust, vaya a la sección de noticias en la que se muestran las estrevistas.
+- [ ] Hacer que de la sección Trust, vaya a la sección de noticias en la que se muestran las entrevistas.
 - [ ] Crear la sección Contact y que se adapte tanto de apariencia sencilla para las páginas y en grande y detallado para la página contacto.
 - [ ] Crear imagen hero contacto.
 - [ ] Hacer que los servicios sean algún tipo de componente que me permita hacer distitnas cosas, en un principio sólo desviarían el tráfico a Whatsapp, cuando agregue info de el servicio en cada página del abogado, desviaría el tráfico a esa explicación del servicio y cuando haga páginas individuales para cada servicio, desviaría el trafico hacia ahí.
@@ -37,4 +37,5 @@
 - [ ] Modificar hardcodeado de WA en CTA de las páginas de los profesionales.
 - [ ] Hacer que las imágenes de los hero se acomoden en distintas pantallas para que los elementos principales se mantengan a la vista.
 - [ ] Revisar FAQ de casos-de-exito.
+- [X] Comprar dominio.
 - [ ] 

@@ -32,7 +32,7 @@ const { title, description, date, tags, image } = post.data;
             <ul class="blog-tags" role="list">
               {tags.map((tag: string) => (
                 <li>
-                  <a href={`/blog/tags/${tag}`} aria-label={`Ver posts con la etiqueta ${tag}`}>
+                  <a href={`/blog/${tag}`} aria-label={`Ver posts con la etiqueta ${tag}`}>
                     {tag}
                   </a>
                 </li>

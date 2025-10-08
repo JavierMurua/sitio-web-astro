@@ -3,17 +3,19 @@
 
 import MainLayout from '@/layouts/MainLayout.astro';
 import Hero from '@/sections/Hero.astro';
-import heroImage from '@/assets/images/estatua-justicia-cobre-despacho-abogados-hero.png';
 import Trust from '@/sections/Trust.astro';
-import radioCut from '@/assets/logos/radio_cut.png';
-import elCiudadano from '@/assets/logos/el_ciudadano.jpg';
+import Cases from '@/sections/Cases.astro';
 import AboutTeam from '@/sections/AboutTeam.astro';
 import Process from '@/sections/Process.astro';
-import Contact from '@/sections/Contact.astro';
-import Cases from '@/sections/Cases.astro';
+import Posts from '@/sections/Posts.astro';
 import FinalCTA from '@/sections/FinalCTA.astro';
 import Faq from '@/sections/Faq.astro';
-import Posts from '@/sections/Posts.astro';
+import Contact from '@/sections/Contact.astro';
+
+import heroImage from '@/assets/images/estatua-justicia-cobre-despacho-abogados-hero.png';
+import radioCut from '@/assets/logos/radio_cut.png';
+import elCiudadano from '@/assets/logos/el_ciudadano.jpg';
+
 import { getPosts } from '@/config/postAdapter';
 
 const posts = await getPosts({ tag: 'noticias', limit: 3 });

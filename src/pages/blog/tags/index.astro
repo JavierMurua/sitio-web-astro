@@ -1,0 +1,39 @@
+---
+import { getCollection } from "astro:content";
+import MainLayout from "@/layouts/MainLayout.astro";
+
+const posts = await getCollection("blog");
+const tags = Array.from(new Set(posts.flatMap((p) => p.data.tags || [])));
+---
+
+<MainLayout title="Etiquetas del blog" description="Explorá artículos por tema o categoría.">
+  <section class="u-container u-section">
+    <h1>Etiquetas</h1>
+    <ul class="tag-list">
+      {tags.map((tag) => (
+        <li><a href={`/blog/tags/${tag.toLowerCase()}`}>#{tag}</a></li>
+      ))}
+    </ul>
+  </section>
+</MainLayout>
+
+<style>
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+.tag-list a {
+  background: var(--brand-3);
+  color: var(--on-brand);
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s ease;
+}
+.tag-list a:hover {
+  background: var(--brand-2);
+}
+</style>
