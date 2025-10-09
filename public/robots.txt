@@ -1,0 +1,13 @@
+import { getSitemapUrls } from "@/utils/sitemap"; // opcional si automatizas sitemap
+
+export async function GET() {
+  return new Response(
+`User-agent: *
+Allow: /
+
+Sitemap: https://estudiozalazarparedes.com/sitemap-index.xml
+`, {
+    headers: { "Content-Type": "text/plain" },
+  }
+  );
+}

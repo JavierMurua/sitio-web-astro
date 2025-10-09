@@ -28,7 +28,7 @@ const canonicalURL =
   canonical ??
   (Astro.site
     ? new URL(Astro.url.pathname, Astro.site).toString()
-    : siteConfig.seo.siteUrl);
+    : `${siteConfig.seo.siteUrl}${Astro.url.pathname}`);
 
 const imageURL = Astro.site
   ? new URL(image, Astro.site).toString()
@@ -42,7 +42,15 @@ const imageURL = Astro.site
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>{pageTitle}</title>
 <meta name="description" content={description} />
-{noIndex && <meta name="robots" content="noindex, nofollow" />}
+
+<!-- Robots -->
+{noIndex ? (
+  <meta name="robots" content="noindex, nofollow" />
+) : (
+  <meta name="robots" content="index, follow" />
+)}
+
+<!-- Canonical -->
 <link rel="canonical" href={canonicalURL} />
 
 <!-- =====================
@@ -53,7 +61,7 @@ const imageURL = Astro.site
 <link rel="shortcut icon" href="/zyp-favicon.png" />
 
 <!-- =====================
-     Open Graph
+     Open Graph / Facebook
      ===================== -->
 <meta property="og:type" content="website" />
 <meta property="og:url" content={canonicalURL} />
@@ -64,14 +72,23 @@ const imageURL = Astro.site
 <meta property="og:locale" content={siteConfig.seo.locale} />
 
 <!-- =====================
-     Twitter
+     Twitter Card
      ===================== -->
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:url" content={canonicalURL} />
 <meta name="twitter:title" content={pageTitle} />
 <meta name="twitter:description" content={description} />
 <meta name="twitter:image" content={imageURL} />
-<meta name="twitter:site" content={siteConfig.social.twitter} />
+{siteConfig.social.twitter && (
+  <meta name="twitter:site" content={siteConfig.social.twitter} />
+)}
+
+<!-- =====================
+     Extra meta
+     ===================== -->
+<meta name="theme-color" content="#003366" />
+<meta name="author" content={siteConfig.brand.name} />
+<meta name="generator" content="Astro" />
 
 <!-- =====================
      RSS Auto-discovery

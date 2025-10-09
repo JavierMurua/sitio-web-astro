@@ -17,6 +17,7 @@
 - [X] Convertir Hero en section
 - [X] Convertir trust en section
 - [X] Agregar las 3 entrevistas
+- [X] Comprar dominio.
 - [ ] Pensar qué hacer con las imagenes de los artículos
 - [ ] averiguar mejor tamaño para esas imagenes de los post
 - [ ] Asegurarse que todas las etiquetas del sitio web sean adecuadas 
@@ -37,5 +38,9 @@
 - [ ] Modificar hardcodeado de WA en CTA de las páginas de los profesionales.
 - [ ] Hacer que las imágenes de los hero se acomoden en distintas pantallas para que los elementos principales se mantengan a la vista.
 - [ ] Revisar FAQ de casos-de-exito.
-- [X] Comprar dominio.
+- [ ] Agregar segundo número de teléfono a contact/config.ts
+- [ ] Agregar el teléfono de Daniel donde corresponda.
+- [ ] Agregar a Search Console.
+- [ ] Verifiación GBP
+- [ ] Subir el acuerdo de servicios que aceptó Fede a Notebook.
 - [ ] 
