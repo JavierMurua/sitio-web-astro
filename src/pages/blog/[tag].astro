@@ -23,7 +23,7 @@ const title = `Artículos sobre "${tag}"`;
 const description = `Lee artículos y novedades relacionadas con "${tag}" en nuestro blog.`;
 ---
 
-<MainLayout title={title} description={description}>
+<MainLayout title={title} description={description} noIndex={true}>
   <section class="blog-index">
     <h1>#{tag}</h1>
     <p class="lead">Artículos relacionados con <strong>{tag}</strong>.</p>

@@ -31,7 +31,9 @@ interface Props {
 
 const { services: servicesProp, title, subtitle } = Astro.props as Props;
 
-
+// Obtener teléfonos
+const phoneSalud = contact.phones.find((p) => p.owner.includes("Federico"));
+const phoneLaboral = contact.phones.find((p) => p.owner.includes("Daniel"));
 ---
 
 <section id="servicios" class="u-section" aria-labelledby="servicios-title">
@@ -40,10 +42,18 @@ const { services: servicesProp, title, subtitle } = Astro.props as Props;
     {subtitle && <p class="section__subtitle">{subtitle}</p>}
 
     <div class="services__grid" role="list" aria-label="Listado de servicios">
-      {servicesProp.map(({ label, icon }) => {
-        const message = `Quiero hacer una consulta sobre ${label}`;
-        const whatsappDesktop = getWhatsAppLink(contact.phone, message, true);
-        const whatsappMobile = getWhatsAppLink(contact.phone, message, false);
+      {servicesProp.map(({ label, icon, category }) => {
+        // Determinar qué número usar según la categoría
+        const phone =
+          category === "salud" ? phoneSalud : phoneLaboral;
+
+        const message =
+          category === "salud"
+            ? `${phoneSalud?.whatsappMessage}${label}`
+            : `${phoneLaboral?.whatsappMessage}${label}`;
+
+        const whatsappDesktop = getWhatsAppLink(phone?.number, message, true);
+        const whatsappMobile = getWhatsAppLink(phone?.number, message, false);
 
         return (
           <>
@@ -85,8 +95,10 @@ const { services: servicesProp, title, subtitle } = Astro.props as Props;
       <p class="services__cta-text">
         Si tu caso no figura, escribinos: escuchamos, evaluamos y te decimos cómo avanzar.
       </p>
+
+      <!-- CTA genérica: por ahora usa el de salud (o se puede dividir en dos si querés) -->
       <Button
-        href={getWhatsAppLink(contact.phone, contact.whatsappMessage, true)}
+        href={getWhatsAppLink(phoneSalud?.number, phoneSalud?.whatsappMessage, true)}
         variant="primary"
         device="desktop"
         external
@@ -96,7 +108,7 @@ const { services: servicesProp, title, subtitle } = Astro.props as Props;
       </Button>
 
       <Button
-        href={getWhatsAppLink(contact.phone, contact.whatsappMessage, false)}
+        href={getWhatsAppLink(phoneSalud?.number, phoneSalud?.whatsappMessage, false)}
         variant="primary"
         device="mobile"
         external

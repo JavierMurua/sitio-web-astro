@@ -1,3 +1,4 @@
+// src/contact/types.ts
 export interface Address {
   street: string;
   city: string;
@@ -7,9 +8,14 @@ export interface Address {
   embedMapUrl?: string;
 }
 
-export interface Contact {
-  phone: string; // número legible
+export interface Phone {
+  owner: string;
+  number: string; // número legible
   whatsappMessage: string;
+}
+
+export interface Contact {
+  phones: Phone[]; // ahora puede tener varios teléfonos
   email: string | null;
   address: Address;
   hours: {
@@ -23,3 +29,4 @@ export interface Contact {
     [key: string]: string | null;
   };
 }
+

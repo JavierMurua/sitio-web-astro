@@ -1,8 +1,19 @@
+// src/contact/config.ts
 import type { Contact } from "./types";
 
 export const contact: Contact = {
-  phone: "+54 0341 587-3908",
-  whatsappMessage: "Hola, quiero hacer una consulta:",
+  phones: [
+    {
+      owner: "Federico Zalazar",
+      number: "+54 0341 587-3908",
+      whatsappMessage: "Hola, quiero hacer una consulta de salud: ",
+    },
+    {
+      owner: "Daniel Paredes",
+      number: "+54 9 3416 63-9485",
+      whatsappMessage: "Hola, quiero hacer una consulta laboral: ",
+    },
+  ],
   email: null,
   address: {
     street: "El Jacarandá 6237",

@@ -1,7 +1,7 @@
 ---
 // src/sections/Contact.astro
 import Icon from "@/components/Icon.astro";
-import { getContactItems, contact, type ContactItem } from "@/contact";
+import { contact, getContactItems, getWhatsAppLink, type ContactItem } from "@/contact";
 
 interface Props {
   id?: string;
@@ -10,12 +10,7 @@ interface Props {
   layout?: "simple" | "detailed";
 }
 
-const {
-  id = "contact",
-  title,
-  subtitle,
-  layout = "simple",
-} = Astro.props;
+const { id = "contact", title, subtitle, layout = "simple" } = Astro.props;
 
 const items: ContactItem[] = getContactItems(layout);
 const mapSrc = contact.address.embedMapUrl;
@@ -24,58 +19,44 @@ const mapSrc = contact.address.embedMapUrl;
 <section id={id} class={`contact contact--${layout}`}>
   <div class="u-container">
     <div class={`contact__container contact__container--${layout}`}>
-      <!-- Info -->
+
+      <!-- Información de contacto -->
       <div class="contact__info">
         <h2 class="contact__title">{title}</h2>
         {subtitle && <p class="contact__subtitle">{subtitle}</p>}
 
-        {layout === "simple" && (
-          <ul class="contact__list" aria-label="Medios de contacto">
-            {items.map(({ label, href, value, icon }) => (
-              <li class="contact__item">
-                {icon && (
-                  <div class="contact-icon">
-                    <Icon name={icon} size={20} decorative />
-                  </div>
-                )}
-                <span class="contact__label">{label}:</span>
-                {href ? (
-                  <a href={href}>{value}</a>
-                ) : (
-                  <span>{value}</span>
-                )}
-              </li>
-            ))}
-          </ul>
-        )}
-
-        {layout === "detailed" && (
-          <>
-            {items.map(({ type, label, value, href, description, icon }) => (
-              <div class="contact-card">
-                {icon && (
-                  <div class="contact-icon">
-                    <Icon name={icon} size={28} decorative />
-                  </div>
-                )}
-                <div>
-                  <h3 class="contact-subtitle">{label}</h3>
-                  {href ? (
-                    <a href={href} class="contact-link">{value}</a>
-                  ) : (
-                    <p class={type === "schedule" ? "contact-schedule" : "contact-text"}>
-                      {value}
-                    </p>
-                  )}
-                  {description && <p class="contact-text">{description}</p>}
+        <ul class="contact__list" aria-label="Medios de contacto">
+          {items.map(({ type, label, value, icon, description }) => (
+            <li class="contact__item">
+              {icon && (
+                <div class="contact-icon">
+                  <Icon name={icon} size={layout === "detailed" ? 28 : 20} decorative />
                 </div>
-              </div>
-            ))}
-          </>
-        )}
+              )}
+              <span class="contact__label">{label}:</span>
+
+              {type === "phone" ? (() => {
+                const phone = contact.phones.find(p => p.number === value);
+                if (!phone) return value;
+
+                const whatsappDesktop = getWhatsAppLink(phone.number, phone.whatsappMessage, true);
+                const whatsappMobile = getWhatsAppLink(phone.number, phone.whatsappMessage, false);
+
+                return (
+                  <>
+                    <a href={whatsappDesktop} target="_blank" rel="noopener noreferrer" class="desktop-inline">{phone.number}</a>
+                    <a href={whatsappMobile} target="_blank" rel="noopener noreferrer" class="mobile-inline">{phone.number}</a>
+                  </>
+                );
+              })() : (
+                value && <a href={value} target="_blank" rel="noopener noreferrer">{value}</a>
+              )}
+            </li>
+          ))}
+        </ul>
       </div>
 
-      <!-- Map -->
+      <!-- Mapa -->
       <div class={`contact__map ${layout === "detailed" ? "contact-map" : ""}`}>
         <iframe
           class={layout === "detailed" ? "map-frame" : "contact__map-frame"}
@@ -97,6 +78,7 @@ const mapSrc = contact.address.embedMapUrl;
 .contact__title {
   font-size: 1.75rem;
   font-weight: 700;
+  margin-bottom: 0.5rem;
 }
 
 .contact__subtitle {
@@ -104,75 +86,121 @@ const mapSrc = contact.address.embedMapUrl;
   color: var(--color-text-muted, #555);
 }
 
-/* ==== Simple layout ==== */
-.contact--simple .contact__container {
+/* ===== Contenedor general ===== */
+.contact__container {
   display: grid;
-  gap: 1.5rem;
+  gap: 2rem;
 }
 
-.contact--simple .contact__info {
+.contact--simple .contact__container {
+  grid-template-columns: 1fr;
+}
+
+.contact--detailed .contact__container {
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 900px) {
+  .contact--simple .contact__container,
+  .contact--detailed .contact__container {
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+  }
+}
+
+/* ===== Información ===== */
+.contact__info {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
   padding: 2rem;
   background: #fff;
   border: 1px solid var(--color-border, #ddd);
   border-radius: var(--radius-2, 8px);
 }
 
+/* ===== Lista de contacto ===== */
 .contact__list {
   margin: 0;
   padding: 0;
   list-style: none;
-  display: grid;
-  gap: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 .contact__item {
   display: flex;
-  gap: 0.5rem;
-  align-items: center;
+  flex-direction: row;
+  gap: 0.75rem;
+  align-items: flex-start;
+  flex-wrap: wrap; /* Para que se apilen en Mobile si hace falta */
 }
 
-.contact__icon {
+.contact__item .contact-icon {
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color: #183c7a;
 }
 
-.contact__map-frame {
-  min-height: 260px;
-  border: 0;
-  border-radius: var(--radius-1, 6px);
+.contact__label {
+  font-weight: 600;
+  min-width: 100px; /* permite alinear los textos */
+}
+
+/* ===== Enlaces Desktop / Mobile ===== */
+.desktop-inline { display: none; }
+.mobile-inline { display: inline; }
+
+@media (min-width: 768px) {
+  .desktop-inline { display: inline; }
+  .mobile-inline { display: none; }
+}
+
+/* ===== Mapa ===== */
+.contact__map,
+.contact-map {
   width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  border: 4px solid #fff;
+  min-height: 300px;
 }
 
-@media (min-width: 900px) {
-  .contact--simple .contact__container {
-    grid-template-columns: 1fr 1fr;
-  }
-  .contact__map-frame {
-    min-height: 100%;
+.map-frame,
+.contact__map-frame {
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+@media (min-width: 1024px) {
+  .contact-map {
+    height: 500px;
   }
 }
 
-/* ==== Detailed layout ==== */
+/* ===== Tarjetas detalladas ===== */
 .contact-card {
   display: flex;
-  align-items: flex-start;
-  gap: 1rem;
+  flex-direction: column;
+  gap: 0.75rem;
   padding: 1rem;
   background: #fff;
   border-radius: 10px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.08);
   transition: box-shadow 0.3s ease;
-  margin-bottom: 1.5rem;
 }
+
 .contact-card:hover {
   box-shadow: 0 4px 12px rgba(0,0,0,0.12);
 }
 
-.contact-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #183c7a;
+.contact-card .contact-icon {
+  margin-bottom: 0.5rem;
 }
 
 .contact-subtitle {
@@ -188,14 +216,9 @@ const mapSrc = contact.address.embedMapUrl;
   font-weight: 600;
   text-decoration: none;
 }
+
 .contact-link:hover {
   text-decoration: underline;
-}
-
-.contact-text {
-  font-size: 0.875rem;
-  color: #6b7280;
-  margin-top: 0.25rem;
 }
 
 .contact-schedule {
@@ -203,36 +226,4 @@ const mapSrc = contact.address.embedMapUrl;
   color: #111827;
   font-weight: 500;
 }
-
-.contact-map {
-  height: 400px;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-  border: 4px solid #fff;
-}
-
-.contact--detailed .contact__container {
-  display: grid;
-  gap: 2rem;
-  grid-template-columns: 1fr;
-  align-items: center;
-}
-
-@media (min-width: 1024px) {
-  .contact--detailed .contact__container {
-    grid-template-columns: 1.2fr 1fr;
-  }
-  .contact-map {
-    height: 650px;
-  }
-}
-
-.map-frame {
-  width: 100%;
-  height: 100%;
-  border: 0;
-}
-
-
 </style>

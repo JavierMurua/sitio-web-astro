@@ -1,16 +1,19 @@
 import type { Address } from "./types";
 
 /** Elimina todo lo que no sea dígito */
-export function cleanPhoneNumber(phone: string): string {
+export function cleanPhoneNumber(phone?: string): string {
+  if (!phone) return "";
   return phone.replace(/\D/g, "");
 }
 
-export function getTelLink(phone: string): string {
-  return `tel:+${cleanPhoneNumber(phone)}`;
+export function getTelLink(phone?: string): string {
+  const clean = cleanPhoneNumber(phone);
+  return clean ? `tel:+${clean}` : "";
 }
 
-export function getWhatsAppLink(phone: string, message?: string, desktop = false): string {
+export function getWhatsAppLink(phone?: string, message?: string, desktop = false): string {
   const clean = cleanPhoneNumber(phone);
+  if (!clean) return "#";
   const encodedMsg = message ? encodeURIComponent(message) : "";
   return desktop
     ? `https://web.whatsapp.com/send?phone=${clean}${encodedMsg ? `&text=${encodedMsg}` : ""}`

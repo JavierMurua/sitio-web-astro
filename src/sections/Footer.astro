@@ -1,23 +1,20 @@
 ---
 // src/sections/Footer.astro
-import Logo from '../components/Logo.astro';
-import { contact } from "@/config/contact";
+import Logo from "../components/Logo.astro";
 import { siteConfig } from "@/config/site";
-import { getTelLink, getWhatsAppLink, formatFullAddress } from "@/utils/contact";
+import { contact, formatFullAddress, getTelLink, getWhatsAppLink } from "@/contact";
 
 export interface Props {
   menuItems: { label: string; href: string }[];
 }
 
-const {
-  menuItems = [],
-} = Astro.props;
-
+const { menuItems = [] } = Astro.props;
 ---
 
 <footer class="footer" role="contentinfo">
   <div class="u-container">
     <div class="footer__top">
+      <!-- Marca -->
       <div>
         <a href="/" class="footer__brand">
           <Logo
@@ -31,43 +28,67 @@ const {
         <p class="u-muted">{siteConfig.brand.description}</p>
       </div>
 
+      <!-- Menú rápido -->
       <nav aria-label="Enlaces rápidos">
         <div class="footer__menu">
-          {menuItems.map((item) => <a href={item.href}>{item.label}</a>)}
+          {menuItems.map((item) => (
+            <a href={item.href}>{item.label}</a>
+          ))}
         </div>
       </nav>
 
-      <div>
-        <p><strong>Contacto Directo</strong></p>
+      <!-- Contacto directo -->
+<div class="footer__contact">
+  <p><strong>Contacto Directo</strong></p>
+
+  {contact.phones.map((phone) => {
+    const lastName = phone.owner.split(" ").pop();
+
+    const whatsappDesktop = getWhatsAppLink(phone.number, phone.whatsappMessage, true);
+    const whatsappMobile = getWhatsAppLink(phone.number, phone.whatsappMessage, false);
+
+    return (
+      <div class="footer__contact-item">
         <p>
-      Tel: <a href={getTelLink(contact.phone)}>{contact.phone}</a>
-    </p>
-    
-    <p class="desktop">
-      <a href={getWhatsAppLink(contact.phone, contact.whatsappMessage, true)}>
-        WhatsApp: {contact.phone}
-      </a>
-    </p>
-    
-    <p class="mobile">
-      <a href={getWhatsAppLink(contact.phone, contact.whatsappMessage)}>
-        WhatsApp: {contact.phone}
-      </a>
-    </p>
-    
-    <p>
-      Dirección: <a href={contact.address.mapsLink}>
-        {formatFullAddress(contact.address)}
-      </a>
-    </p>
+          {lastName}:&nbsp;
+          <!-- Enlace a WhatsApp Web (Desktop) -->
+          <a
+            href={whatsappDesktop}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="desktop-inline"
+          >
+            {phone.number}
+          </a>
+
+          <!-- Enlace a WhatsApp App (Mobile) -->
+          <a
+            href={whatsappMobile}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="mobile-inline"
+          >
+            {phone.number}
+          </a>
+        </p>
       </div>
+    );
+  })}
+
+  <p>
+    Dirección:&nbsp;
+    <a href={contact.address.mapsLink} target="_blank" rel="noopener noreferrer">
+      {formatFullAddress(contact.address)}
+    </a>
+  </p>
+</div>
     </div>
 
+    <!-- Legal -->
     <div class="footer__bottom">
       <p class="u-muted">{siteConfig.legal}</p>
       <p class="u-muted">
-        © {new Date().getFullYear()}
-        {siteConfig.brand.name}. Todos los derechos reservados.
+        © {new Date().getFullYear()} {siteConfig.brand.name}. Todos los derechos reservados.
       </p>
     </div>
   </div>
