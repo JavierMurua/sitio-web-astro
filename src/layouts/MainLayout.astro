@@ -13,13 +13,21 @@ const menu = [
   { label: "Contacto", href: "/contacto" },
 ];
 
-const { title, description, url, image } = Astro.props;
+const { title, description, canonical, image, noIndex = false } = Astro.props;
+
 ---
 
 <!DOCTYPE html>
 <html lang="es-AR">
   <head>
-    <BaseHead title={title} description={description} canonical={url} image={image} />
+    <BaseHead 
+  title={title} 
+  description={description} 
+  image={image} 
+  canonical={canonical} 
+  noIndex={noIndex} 
+/>
+
   </head>
   <body>
     <Header menuItems={menu} />

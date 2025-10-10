@@ -43,4 +43,6 @@
 - [ ] Agregar a Search Console.
 - [ ] Verifiación GBP
 - [ ] Subir el acuerdo de servicios que aceptó Fede a Notebook.
+- [ ] Modificar el package y el package-lock.
+- [ ] Arreglar las páginas no-index.
 - [ ] 

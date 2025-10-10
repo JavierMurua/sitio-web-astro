@@ -6,7 +6,7 @@ const posts = await getCollection("blog");
 const tags = Array.from(new Set(posts.flatMap((p) => p.data.tags || [])));
 ---
 
-<MainLayout title="Etiquetas del blog" description="Explorá artículos por tema o categoría.">
+<MainLayout title="Etiquetas del blog" description="Explorá artículos por tema o categoría." noIndex={true}>
   <section class="u-container u-section">
     <h1>Etiquetas</h1>
     <ul class="tag-list">
