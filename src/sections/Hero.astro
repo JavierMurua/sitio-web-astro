@@ -1,8 +1,7 @@
 ---
 // src/components/Hero.astro
 import Button from '@/components/Button.astro';
-import { getWhatsAppLink } from '@/utils/contact';
-import { contact } from '@/config/contact';
+import { contact, getWhatsAppLink } from '@/contact'; // <<<<< AGREGADO
 
 interface CTA {
   text: string;
@@ -13,16 +12,15 @@ interface CTA {
 interface Props {
   title: string;
   subtitle?: string;
-  image?: string | ImageMetadata; // puede ser string o ImageMetadata
+  image?: string | ImageMetadata; 
   ctaPrimary?: CTA;
   ctaSecondary?: CTA;
   seal?: string;
 }
 
 const { title, subtitle, image, ctaPrimary, ctaSecondary, seal } = Astro.props;
-
-// Obtenemos la URL de la imagen, ya sea string o ImageMetadata
 const imageUrl = image ? (typeof image === 'string' ? image : image.src) : undefined;
+
 ---
 
 <section class="hero" aria-labelledby="hero-title">
@@ -41,25 +39,25 @@ const imageUrl = image ? (typeof image === 'string' ? image : image.src) : undef
     {(ctaPrimary || ctaSecondary) && (
       <div class="hero__actions">
         {ctaPrimary && (
-          <>
-            <Button
-              href={getWhatsAppLink(contact.phone, contact.whatsappMessage, true)}
-              variant="primary"
-              device="desktop"
-              external={ctaPrimary.external ?? true}
-            >
-              {ctaPrimary.text}
-            </Button>
-            <Button
-              href={getWhatsAppLink(contact.phone, contact.whatsappMessage)}
-              variant="primary"
-              device="mobile"
-              external={ctaPrimary.external ?? true}
-            >
-              {ctaPrimary.text}
-            </Button>
-          </>
-        )}
+  <>
+    <Button
+      href={getWhatsAppLink(contact.phones[0].number, contact.phones[0].whatsappMessage, true)}
+      variant="primary"
+      device="desktop"
+      external={ctaPrimary.external ?? true}
+    >
+      {ctaPrimary.text}
+    </Button>
+    <Button
+      href={getWhatsAppLink(contact.phones[0].number, contact.phones[0].whatsappMessage, false)}
+      variant="primary"
+      device="mobile"
+      external={ctaPrimary.external ?? true}
+    >
+      {ctaPrimary.text}
+    </Button>
+  </>
+)}
         {ctaSecondary && (
           <Button
             href={ctaSecondary.href}

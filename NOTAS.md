@@ -18,31 +18,30 @@
 - [X] Convertir trust en section
 - [X] Agregar las 3 entrevistas
 - [X] Comprar dominio.
+- [X] Arreglar las páginas no-index.
+- [X] Asegurarse que todas las etiquetas del sitio web sean adecuadas 
+- [X] Hacer que de la sección Trust, vaya a la sección de noticias en la que se muestran las entrevistas.
+- [X] Crear la sección Contact y que se adapte tanto de apariencia sencilla para las páginas y en grande y detallado para la página contacto.
+- [X] Tengo varios archivos relacionados con contact pero no sé cuál es el que de verdad funciona mejor, voy a revisarlos para asegurarme de que el que quede sea el mejor de todos.
+- [X] Hacer que se puedan ver los artículos según sus tags.
+- [X] Optimizar página de abogado de salud.
+- [X] Optimizar página de abogado laboral.
+- [X] Optimizar página de Casos de Éxito.
+- [X] Optimizar página de contacto.
+- [X] Agregar segundo número de teléfono a contact/config.ts
+- [X] Agregar el teléfono de Daniel donde corresponda.
+- [X] Agregar a Search Console.
+- [X] Subir el acuerdo de servicios que aceptó Fede a NotebookLM.
 - [ ] Pensar qué hacer con las imagenes de los artículos
 - [ ] averiguar mejor tamaño para esas imagenes de los post
-- [ ] Asegurarse que todas las etiquetas del sitio web sean adecuadas 
-- [ ] Hacer que de la sección Trust, vaya a la sección de noticias en la que se muestran las entrevistas.
-- [ ] Crear la sección Contact y que se adapte tanto de apariencia sencilla para las páginas y en grande y detallado para la página contacto.
-- [ ] Crear imagen hero contacto.
-- [ ] Hacer que los servicios sean algún tipo de componente que me permita hacer distitnas cosas, en un principio sólo desviarían el tráfico a Whatsapp, cuando agregue info de el servicio en cada página del abogado, desviaría el tráfico a esa explicación del servicio y cuando haga páginas individuales para cada servicio, desviaría el trafico hacia ahí.
-- [ ] Tengo varios archivos relacionados con contact pero no sé cuál es el que de verdad funciona mejor, voy a revisarlos para asegurarme de que el que quede sea el mejor de todos.
-- [ ] Hacer que se puedan ver los artículos según sus tags.
 - [ ] Asegurarme que todas las secciones usen el componente Button.
 - [ ] Revisar de optimizar los íconos porque hay muchos archivos y no sé cuáles son los correctos.
-- [ ] Optimizar página de abogado de salud.
-- [ ] Optimizar página de abogado laboral.
-- [ ] Optimizar página de Casos de Éxito.
-- [ ] Optimizar página de contacto.
+- [ ] Verifiación GBP
 - [ ] Agregar CTA final y FAQ a Index.
 - [ ] Cambiar preguntas y respuestas del FAQ de casos-de-exito.
 - [ ] Modificar hardcodeado de WA en CTA de las páginas de los profesionales.
 - [ ] Hacer que las imágenes de los hero se acomoden en distintas pantallas para que los elementos principales se mantengan a la vista.
-- [ ] Revisar FAQ de casos-de-exito.
-- [ ] Agregar segundo número de teléfono a contact/config.ts
-- [ ] Agregar el teléfono de Daniel donde corresponda.
-- [ ] Agregar a Search Console.
-- [ ] Verifiación GBP
-- [ ] Subir el acuerdo de servicios que aceptó Fede a Notebook.
 - [ ] Modificar el package y el package-lock.
-- [ ] Arreglar las páginas no-index.
+- [ ] Hacer que los servicios sean algún tipo de componente que me permita hacer distitnas cosas, en un principio sólo desviarían el tráfico a Whatsapp, cuando agregue info de el servicio en cada página del abogado, desviaría el tráfico a esa explicación del servicio y cuando haga páginas individuales para cada servicio, desviaría el trafico hacia ahí.
+- [ ] Solucionar enlaces de número de teléfono hardcodeados.
 - [ ] 

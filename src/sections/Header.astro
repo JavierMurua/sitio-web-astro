@@ -1,8 +1,8 @@
 ---
 import Button from '@/components/Button.astro';
 import Logo from '../components/Logo.astro';
-import { getWhatsAppLink } from '@/utils/contact';
-import { contact } from '@/config/contact';
+import { contact, getWhatsAppLink } from '@/contact';
+
 
 export interface Props {
   menuItems: { label: string; href: string; current?: boolean }[];
@@ -43,24 +43,24 @@ const cta = {
 
         <!-- CTA -->
         <li class="menu__cta">
-          <Button
-            href={getWhatsAppLink(contact.phone, contact.whatsappMessage, true)}
-            variant="primary"
-            device="desktop"
-            external={true}
-          >
-            {cta.label}
-          </Button>
+  <Button
+    href={getWhatsAppLink(contact.phones[0].number, contact.phones[0].whatsappMessage, true)}
+    variant="primary"
+    device="desktop"
+    external={true}
+  >
+    {cta.label}
+  </Button>
 
-          <Button
-            href={getWhatsAppLink(contact.phone, contact.whatsappMessage)}
-            variant="primary"
-            device="mobile"
-            external={true}
-          >
-            {cta.label}
-          </Button>
-        </li>
+  <Button
+    href={getWhatsAppLink(contact.phones[0].number, contact.phones[0].whatsappMessage, false)}
+    variant="primary"
+    device="mobile"
+    external={true}
+  >
+    {cta.label}
+  </Button>
+</li>
       </ul>
     </nav>
   </div>
