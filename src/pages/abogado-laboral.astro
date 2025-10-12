@@ -1,6 +1,5 @@
 ---
-// src/pages/abogado-salud.astro
-
+// src/pages/abogado-laboral.astro
 import MainLayout from '@/layouts/MainLayout.astro';
 import Hero from '@/sections/Hero.astro';
 import Trust from '@/sections/Trust.astro';
@@ -18,10 +17,19 @@ import elCiudadano from '@/assets/logos/el_ciudadano.jpg';
 import danielImage from '@/assets/images/daniel-paredes-00.webp';
 
 import { getPosts } from '@/config/postAdapter';
+import { contact, getWhatsAppLink } from '@/contact/contact';
 
 const laborServices = services.filter((s: Service) => s.category === 'laboral');
-
 const posts = await getPosts({ tag: 'noticias', limit: 3 });
+
+// Obtener el teléfono correspondiente a Daniel
+const daniPhone = contact.phones.find((p) => p.owner.includes('Daniel'))!;
+
+const heroCTA = {
+  text: "Consultar por WhatsApp",
+  href: getWhatsAppLink(daniPhone.number, daniPhone.whatsappMessage),
+  external: true,
+};
 
 const aboutData = {
   title: "Sobre Daniel Paredes – Especialista en Derecho Laboral, Accidentes y Enfermedades del trabajo",
@@ -35,8 +43,8 @@ const aboutData = {
   highlight: "📌 Primera consulta sin compromiso.",
   cta: {
     text: "Consultar ahora",
-    desktop: "https://web.whatsapp.com/send?phone=5403415873908",
-    mobile: "https://wa.me/5403415873908",
+    desktop: getWhatsAppLink(daniPhone.number, daniPhone.whatsappMessage, true),
+    mobile: getWhatsAppLink(daniPhone.number, daniPhone.whatsappMessage, false),
   },
 };
 
@@ -68,17 +76,13 @@ const faqItems = [
 <MainLayout>
 
   <Hero
-    title="Abogado Especialista en Accidentes y Enfermedades del Trabajo en Rosario"
-    subtitle="Si sufriste un accidente laboral o enfermedad profesional, te ayudamos a obtener la indemnización justa que te corresponde por ley."
-    image={heroImage}
-    ctaPrimary={{
-      text: "Consultar por WhatsApp",
-      href: "https://wa.me/5403415873908?text=Hola,%20quiero%20hacer%20una%20consulta:",
-      external: true,
-    }}
-    ctaSecondary={{ text: "Ver servicios", href: "#servicios" }}
-    seal="Trayectoria comprobada. Compromiso real."
-  />
+  title="Abogado Especialista en Accidentes y Enfermedades del Trabajo en Rosario"
+  subtitle="Si sufriste un accidente laboral o enfermedad profesional, te ayudamos a obtener la indemnización justa que te corresponde por ley."
+  image={heroImage}
+  ctaPrimary={heroCTA}
+  ctaSecondary={{ text: "Ver servicios", href: "#servicios" }}
+  seal="Trayectoria comprobada. Compromiso real."
+/>
 
   <Trust
     quote="Resolvieron mi tratamiento a tiempo. El estudio se encargó de todo con mi obra social; me sentí acompañado en cada paso."

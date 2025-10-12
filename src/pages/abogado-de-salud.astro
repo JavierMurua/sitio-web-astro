@@ -1,6 +1,5 @@
 ---
 // src/pages/abogado-de-salud.astro
-
 import MainLayout from '@/layouts/MainLayout.astro';
 import Hero from '@/sections/Hero.astro';
 import Trust from '@/sections/Trust.astro';
@@ -18,10 +17,13 @@ import elCiudadano from '@/assets/logos/el_ciudadano.jpg';
 import federicoImage from '@/assets/images/federico-zalazar-04.webp';
 
 import { getPosts } from '@/config/postAdapter';
+import { contact, getWhatsAppLink } from '@/contact/contact';
 
 const healthServices = services.filter((s: Service) => s.category === 'salud');
-
 const posts = await getPosts({ tag: 'noticias', limit: 3 });
+
+// Obtener el teléfono correspondiente a Fede
+const fedePhone = contact.phones.find((p) => p.owner.includes('Federico'))!;
 
 const aboutData = {
   title: "Sobre Federico Zalazar – Especialista en Derecho de la Salud",
@@ -35,8 +37,8 @@ const aboutData = {
   highlight: "📌 Primera consulta sin compromiso.",
   cta: {
     text: "Consultar ahora",
-    desktop: "https://web.whatsapp.com/send?phone=5403415873908",
-    mobile: "https://wa.me/5403415873908",
+    desktop: getWhatsAppLink(fedePhone.number, fedePhone.whatsappMessage, true),
+    mobile: getWhatsAppLink(fedePhone.number, fedePhone.whatsappMessage, false),
   },
 };
 

@@ -1,5 +1,6 @@
 ---
 import Button from '@/components/Button.astro';
+import { cleanPhoneNumber, contact, getTelLink, getWhatsAppLink } from '@/contact/contact';
 
 
 
@@ -16,11 +17,6 @@ const {
   phone = "5403415873908",
   message = "Hola, quiero hacer una consulta:",
 } = Astro.props;
-
-// URLs dinámicas
-const whatsappWeb = `https://web.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(message)}`;
-const whatsappMobile = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
-const phoneHref = `tel:+${phone}`;
 ---
 
 <section class="final-cta">
@@ -30,7 +26,7 @@ const phoneHref = `tel:+${phone}`;
 
     <div class="final-cta__buttons">
       <Button
-        href={whatsappWeb}
+        href={getWhatsAppLink(contact.phones[0].number, contact.phones[0].whatsappMessage, true)}
         variant="primary"
         device="desktop"
         external
@@ -40,7 +36,7 @@ const phoneHref = `tel:+${phone}`;
       </Button>
 
       <Button
-        href={whatsappMobile}
+        href={getWhatsAppLink(contact.phones[0].number, contact.phones[0].whatsappMessage, false)}
         variant="primary"
         device="mobile"
         external
@@ -50,7 +46,7 @@ const phoneHref = `tel:+${phone}`;
       </Button>
 
       <Button
-        href={phoneHref}
+        href={getTelLink(contact.phones[0].number)}
         variant="outline"
         ariaLabel="Llamar ahora"
       >

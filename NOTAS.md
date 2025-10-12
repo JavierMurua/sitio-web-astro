@@ -34,7 +34,7 @@
 - [X] Subir el acuerdo de servicios que aceptó Fede a NotebookLM.
 - [ ] Pensar qué hacer con las imagenes de los artículos
 - [ ] averiguar mejor tamaño para esas imagenes de los post
-- [ ] Asegurarme que todas las secciones usen el componente Button.
+- [X] Asegurarme que todas las secciones usen el componente Button.
 - [ ] Revisar de optimizar los íconos porque hay muchos archivos y no sé cuáles son los correctos.
 - [ ] Verifiación GBP
 - [ ] Agregar CTA final y FAQ a Index.
@@ -47,4 +47,5 @@
 - [ ] Agregar blog a los enlaces del footer.
 - [ ] Mejorar la presentación de las tarjetas del blog.
 - [ ] Hacer que las secciones alternen sus colores automáticamente.
+- [ ] Modificar el teléfono de FinalCTA en la página de Dani.
 - [ ] 

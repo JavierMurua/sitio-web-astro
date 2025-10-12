@@ -1,4 +1,6 @@
 ---
+// src\sections\Cases.astro
+import { contact, getWhatsAppLink } from "@/contact/contact";
 import Button from "../components/Button.astro";
 
 // ====== Datos de los casos ======
@@ -124,7 +126,7 @@ const casos = [
       <div class="cta-box">
         <p class="cta-text">¿Tu caso es parecido?</p>
         <Button
-          href="https://web.whatsapp.com/send?phone=5403415873908&text=Hola,%20quiero%20consultar%20sobre%20mi%20caso"
+          href={getWhatsAppLink(contact.phones[0].number, contact.phones[0].whatsappMessage, true)}
           external
           variant="primary"
           device="desktop"
@@ -133,7 +135,7 @@ const casos = [
           Consultanos ya
         </Button>
         <Button
-          href="https://wa.me/5403415873908?text=Hola,%20quiero%20consultar%20sobre%20mi%20caso"
+          href={getWhatsAppLink(contact.phones[0].number, contact.phones[0].whatsappMessage, false)}
           external
           variant="primary"
           device="mobile"

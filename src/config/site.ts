@@ -10,7 +10,7 @@ export const siteConfig = {
     title: "Zalazar & Paredes - Abogados en Salud y Trabajo",
     description:
       "Estudio jurídico en Rosario especializado en derecho de la salud y laboral. Consultá con nuestros abogados y conocé nuestros casos de éxito.",
-    siteUrl: "https://www.tudominio.com",
+    siteUrl: "https://estudiozalazarparedes.com/",
     ogImage: "/og-image.jpg", // imagen OG/Twitter por defecto
     locale: "es_AR",
   },

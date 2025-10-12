@@ -1,9 +1,10 @@
 ---
+// src\sections\AboutTeam.astro
 import AboutBase from "@/components/AboutBase.astro";
 import { Image } from "astro:assets";
-
 import federicoImage from "@/assets/images/federico-zalazar-01.webp";
 import danielImage from "@/assets/images/daniel-paredes-00.webp";
+import { contact, getWhatsAppLink } from "@/contact/contact";
 
 const aboutData = {
   title: "Somos Federico y Daniel, los abogados que te van a acompañar",
@@ -17,6 +18,7 @@ const aboutData = {
       alt: "Retrato profesional de Federico Zalazar",
       description:
         "Mi misión es asegurar que recibas la atención médica que merecés, sin demoras ni excusas. Actúo con la urgencia y sensibilidad que tu salud requiere.",
+      link: "/abogado-de-salud",
     },
     {
       name: "Daniel Paredes",
@@ -25,14 +27,13 @@ const aboutData = {
       alt: "Retrato profesional de Daniel Paredes",
       description:
         "Mi objetivo es proteger tus derechos como trabajador. Te asesoro y acompaño en cada etapa para que recibas lo que es justo.",
+      link: "/abogado-laboral",
     },
   ],
   cta: {
     text: "Consultar ahora",
-    desktop:
-      "https://web.whatsapp.com/send?phone=5403415873908&text=Hola%2C%20me%20gustar%C3%ADa%20asesor%C3%ADa%20con%20un%20abogado.",
-    mobile:
-      "https://wa.me/5403415873908?text=Hola%2C%20me%20gustar%C3%ADa%20asesor%C3%ADa%20con%20un%20abogado.",
+    desktop: getWhatsAppLink(contact.phones[0].number, contact.phones[0].whatsappMessage, true),
+    mobile: getWhatsAppLink(contact.phones[0].number, contact.phones[0].whatsappMessage, false),
   },
 };
 ---
@@ -40,7 +41,12 @@ const aboutData = {
 <AboutBase title={aboutData.title} subtitle={aboutData.subtitle} cta={aboutData.cta}>
   <div class="about-grid" role="list">
     {aboutData.people.map((person) => (
-      <article class="about-card" role="listitem" aria-label={`${person.name} - ${person.specialty}`}>
+      <a
+        class="about-card"
+        role="listitem"
+        aria-label={`${person.name} - ${person.specialty}`}
+        href={person.link}
+      >
         <div class="about-media">
           <Image
             src={person.image}
@@ -57,7 +63,7 @@ const aboutData = {
           <span class="about-specialty">{person.specialty}</span>
           <p class="about-text">{person.description}</p>
         </div>
-      </article>
+      </a>
     ))}
   </div>
 </AboutBase>

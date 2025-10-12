@@ -1,6 +1,7 @@
 ---
 // src/sections/Process.astro
 import Button from "@/components/Button.astro";
+import { contact, getWhatsAppLink } from "@/contact/contact";
 
 const processData = {
   title: "Nuestro Proceso Simplificado",
@@ -26,10 +27,6 @@ const processData = {
   ],
   cta: {
     text: "Agendá tu consulta",
-    desktop:
-      "https://web.whatsapp.com/send?phone=5403415873908&text=Hola%2C%20quiero%20agendar%20una%20consulta.",
-    mobile:
-      "https://wa.me/5403415873908?text=Hola%2C%20quiero%20agendar%20una%20consulta.",
   },
 };
 ---
@@ -56,7 +53,7 @@ const processData = {
 
     <div class="process__cta">
       <Button
-        href={processData.cta.desktop}
+        href={getWhatsAppLink(contact.phones[0].number, contact.phones[0].whatsappMessage, true)}
         variant="primary"
         device="desktop"
         external
@@ -66,7 +63,7 @@ const processData = {
       </Button>
 
       <Button
-        href={processData.cta.mobile}
+        href={getWhatsAppLink(contact.phones[0].number, contact.phones[0].whatsappMessage, false)}
         variant="primary"
         device="mobile"
         external
