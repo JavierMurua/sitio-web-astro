@@ -1,7 +1,14 @@
 ---
 // src/sections/Contact.astro
 import Icon from "@/components/Icon.astro";
-import { contact, getContactItems, getWhatsAppLink, type ContactItem } from "@/contact";
+import {
+  contact,
+  getWhatsAppLink,
+} from "@/contact/contact";
+import {
+  getContactItems,
+  type ContactItem,
+} from "@/contact/adapter";
 
 interface Props {
   id?: string;
@@ -26,33 +33,68 @@ const mapSrc = contact.address.embedMapUrl;
         {subtitle && <p class="contact__subtitle">{subtitle}</p>}
 
         <ul class="contact__list" aria-label="Medios de contacto">
-          {items.map(({ type, label, value, icon, description }) => (
-            <li class="contact__item">
-              {icon && (
-                <div class="contact-icon">
-                  <Icon name={icon} size={layout === "detailed" ? 28 : 20} decorative />
-                </div>
-              )}
-              <span class="contact__label">{label}:</span>
+          {items.map((item) => {
+            // Evita el "p: any" implícito — todo viene tipado desde ContactItem
+            const { type, label, value, icon } = item;
 
-              {type === "phone" ? (() => {
-                const phone = contact.phones.find(p => p.number === value);
-                if (!phone) return value;
+            return (
+              <li class="contact__item">
+                {icon && (
+                  <div class="contact-icon">
+                    <Icon name={icon} size={layout === "detailed" ? 28 : 20} decorative />
+                  </div>
+                )}
 
-                const whatsappDesktop = getWhatsAppLink(phone.number, phone.whatsappMessage, true);
-                const whatsappMobile = getWhatsAppLink(phone.number, phone.whatsappMessage, false);
+                <span class="contact__label">{label}:</span>
 
-                return (
-                  <>
-                    <a href={whatsappDesktop} target="_blank" rel="noopener noreferrer" class="desktop-inline">{phone.number}</a>
-                    <a href={whatsappMobile} target="_blank" rel="noopener noreferrer" class="mobile-inline">{phone.number}</a>
-                  </>
-                );
-              })() : (
-                value && <a href={value} target="_blank" rel="noopener noreferrer">{value}</a>
-              )}
-            </li>
-          ))}
+                {type === "phone" ? (() => {
+                  // Busca el teléfono en la configuración tipada
+                  const phone = contact.phones.find((p) => p.number === value);
+                  if (!phone) return <span>{value}</span>;
+
+                  const whatsappDesktop = getWhatsAppLink(
+                    phone.number,
+                    phone.whatsappMessage,
+                    true
+                  );
+                  const whatsappMobile = getWhatsAppLink(
+                    phone.number,
+                    phone.whatsappMessage,
+                    false
+                  );
+
+                  return (
+                    <>
+                      <a
+                        href={whatsappDesktop}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="desktop-inline"
+                      >
+                        {phone.number}
+                      </a>
+                      <a
+                        href={whatsappMobile}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="mobile-inline"
+                      >
+                        {phone.number}
+                      </a>
+                    </>
+                  );
+                })() : type === "address" ? (
+                  <a href={contact.address.mapsLink} target="_blank" rel="noopener noreferrer">
+                    {value}
+                  </a>
+                ) : type === "email" && contact.email ? (
+                  <a href={`mailto:${contact.email}`}>{value}</a>
+                ) : (
+                  <span>{value}</span>
+                )}
+              </li>
+            );
+          })}
         </ul>
       </div>
 
@@ -69,6 +111,7 @@ const mapSrc = contact.address.embedMapUrl;
     </div>
   </div>
 </section>
+
 
 <style>
 .contact {

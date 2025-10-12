@@ -1,51 +1,61 @@
 ---
-import Icon from '../assets/icon/Icon.astro';
-import { contactInfo } from '../data/contact';
+import Icon from "@/components/Icon.astro";
+import { contact, getWhatsAppLink } from "@/contact/contact";
 
 export interface Props {
-  size?: number;
+  owner: string;
   message?: string;
+  size?: number;
 }
 
-const {
-  whatsapp: { linkMobile, linkDesktop },
-} = contactInfo;
+const { owner, message, size = 60 } = Astro.props;
 
-const {
-  size = 60,
-  message = "Hola 👋, necesito orientación legal y quiero contarles brevemente mi situación ⬇️\n\n",
-} = Astro.props;
+const phone = contact.phones.find(p => p.owner === owner);
 
-const encodedMessage = encodeURIComponent(message);
+if (!phone) {
+  console.warn(`[WhatsAppButton] No phone found for owner "${owner}".`);
+}
 
-const whatsappMobileUrl = `${linkMobile}?text=${encodedMessage}`;
-const whatsappDesktopUrl = `${linkDesktop}&text=${encodedMessage}`;
+const targetPhone = phone?.number ?? "";
+const targetMessage = message ?? phone?.whatsappMessage ?? "Hola 👋";
 
+const whatsappDesktopUrl = getWhatsAppLink(targetPhone, targetMessage, true);
+const whatsappMobileUrl = getWhatsAppLink(targetPhone, targetMessage, false);
+
+const buttonSize = `${size}px`;
+const iconSize = size * 0.6;
 ---
 
-<!-- Botón para Mobile y Tablet -->
-<a
-  href={whatsappMobileUrl}
-  target="_blank"
-  rel="noopener noreferrer"
-  class="whatsapp-button whatsapp-mobile"
-  style={`--button-size: ${size}px;`}
-  aria-label="Chatear por WhatsApp"
->
-  <Icon name="whatsapp" width={size * 0.6} height={size * 0.6} class="whatsapp-icon" />
-</a>
+{phone ? (
+  <>
+    <!-- Mobile & Tablet -->
+    <a
+      href={whatsappMobileUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="whatsapp-button whatsapp-mobile"
+      style={`--button-size: ${buttonSize};`}
+      aria-label={`Chatear con ${owner} por WhatsApp`}
+    >
+      <Icon name="whatsapp" size={iconSize} class="whatsapp-icon" decorative />
+    </a>
 
-<!-- Botón para Desktop -->
-<a
-  href={whatsappDesktopUrl}
-  target="_blank"
-  rel="noopener noreferrer"
-  class="whatsapp-button whatsapp-desktop"
-  style={`--button-size: ${size}px;`}
-  aria-label="Chatear por WhatsApp"
->
-  <Icon name="whatsapp" width={size * 0.6} height={size * 0.6} class="whatsapp-icon" />
-</a>
+    <!-- Desktop -->
+    <a
+      href={whatsappDesktopUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="whatsapp-button whatsapp-desktop"
+      style={`--button-size: ${buttonSize};`}
+      aria-label={`Chatear con ${owner} por WhatsApp`}
+    >
+      <Icon name="whatsapp" size={iconSize} class="whatsapp-icon" decorative />
+    </a>
+  </>
+) : (
+  <p class="whatsapp-button__error">Error: no se encontró el número de {owner}.</p>
+)}
+
 
 <style>
   .whatsapp-button {

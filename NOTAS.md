@@ -44,4 +44,7 @@
 - [ ] Modificar el package y el package-lock.
 - [ ] Hacer que los servicios sean algún tipo de componente que me permita hacer distitnas cosas, en un principio sólo desviarían el tráfico a Whatsapp, cuando agregue info de el servicio en cada página del abogado, desviaría el tráfico a esa explicación del servicio y cuando haga páginas individuales para cada servicio, desviaría el trafico hacia ahí.
 - [ ] Solucionar enlaces de número de teléfono hardcodeados.
+- [ ] Agregar blog a los enlaces del footer.
+- [ ] Mejorar la presentación de las tarjetas del blog.
+- [ ] Hacer que las secciones alternen sus colores automáticamente.
 - [ ] 
