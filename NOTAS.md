@@ -32,9 +32,9 @@
 - [X] Agregar el teléfono de Daniel donde corresponda.
 - [X] Agregar a Search Console.
 - [X] Subir el acuerdo de servicios que aceptó Fede a NotebookLM.
+- [X] Asegurarme que todas las secciones usen el componente Button.
 - [ ] Pensar qué hacer con las imagenes de los artículos
 - [ ] averiguar mejor tamaño para esas imagenes de los post
-- [X] Asegurarme que todas las secciones usen el componente Button.
 - [ ] Revisar de optimizar los íconos porque hay muchos archivos y no sé cuáles son los correctos.
 - [ ] Verifiación GBP
 - [ ] Agregar CTA final y FAQ a Index.

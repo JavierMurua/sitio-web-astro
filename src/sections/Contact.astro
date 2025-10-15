@@ -53,12 +53,12 @@ const mapSrc = contact.address.embedMapUrl;
                   if (!phone) return <span>{value}</span>;
 
                   const whatsappDesktop = getWhatsAppLink(
-                    phone.number,
+                    phone,
                     phone.whatsappMessage,
                     true
                   );
                   const whatsappMobile = getWhatsAppLink(
-                    phone.number,
+                    phone,
                     phone.whatsappMessage,
                     false
                   );

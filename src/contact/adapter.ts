@@ -1,13 +1,15 @@
-// src/contact/adapter.ts
-import { contact, getTelLink, formatFullAddress } from "./contact";
+// src\contact\adapter.ts
+import {
+  contact,
+  getTelLink,
+  formatFullAddress,
+  getWhatsAppLink,
+  getDefaultPhone,
+} from "./contact";
 import type { IconName } from "@/config/icons";
 
-/**
- * A generic, UI-ready contact entry.
- * Used by components to display contact info consistently.
- */
 export interface ContactItem {
-  type: "phone" | "email" | "address" | "schedule";
+  type: "phone" | "email" | "address" | "schedule" | "social";
   label: string;
   value: string;
   href?: string;
@@ -16,66 +18,98 @@ export interface ContactItem {
 }
 
 /**
- * Returns a list of contact items for display purposes.
- * @param layout Controls whether the output includes descriptions (for “detailed” layouts)
+ * Builds contact items for UI components.
+ * @param layout 'simple' or 'detailed' rendering mode.
+ * @param customContact Optional custom contact source.
  */
 export function getContactItems(
-  layout: "simple" | "detailed" = "simple"
+  layout: "simple" | "detailed" = "simple",
+  customContact = contact
 ): ContactItem[] {
   const items: ContactItem[] = [];
 
-  // --- Phones ---
-  contact.phones.forEach((phone) => {
+  /* ------------------------------ Phones ------------------------------ */
+  customContact.phones.forEach((phone) => {
     items.push({
       type: "phone",
       label: phone.owner,
       value: phone.number,
-      href: getTelLink(phone.number),
+      href: getTelLink(phone.id),
       description:
         layout === "detailed" ? phone.whatsappMessage : undefined,
       icon: "phone",
     });
   });
 
-  // --- Email ---
-  if (contact.email) {
+  /* ------------------------------- Email ------------------------------ */
+  if (customContact.email) {
     items.push({
       type: "email",
       label: "Email",
-      value: contact.email,
-      href: `mailto:${contact.email}`,
+      value: customContact.email,
+      href: `mailto:${customContact.email}`,
       description:
         layout === "detailed"
-          ? "Envianos tu consulta por correo electrónico."
+          ? "Envíanos tu consulta por correo electrónico."
           : undefined,
       icon: "email",
     });
   }
 
-  // --- Address ---
-  items.push({
-    type: "address",
-    label: "Dirección",
-    value: formatFullAddress(contact.address),
-    href: contact.address.mapsLink,
-    description:
-      layout === "detailed"
-        ? `${contact.address.province}, ${contact.address.country}`
-        : undefined,
-    icon: "pointer",
-  });
+  /* ------------------------------ Address ----------------------------- */
+  if (customContact.address) {
+    items.push({
+      type: "address",
+      label: "Dirección",
+      value: formatFullAddress(customContact.address),
+      href: customContact.address.mapsLink,
+      description:
+        layout === "detailed"
+          ? `${customContact.address.province}, ${customContact.address.country}`
+          : undefined,
+      icon: "pointer",
+    });
+  }
 
-  // --- Schedule ---
-  if (contact.hours?.weekdays) {
+  /* ----------------------------- Schedule ----------------------------- */
+  if (customContact.hours?.weekdays) {
     items.push({
       type: "schedule",
       label: "Horarios de atención",
-      value: contact.hours.weekdays,
+      value: customContact.hours.weekdays,
       description:
         layout === "detailed"
-          ? "Consultas online disponibles."
+          ? "Consultas online disponibles durante el horario laboral."
           : undefined,
       icon: "time",
+    });
+  }
+
+  /* ---------------------------- Social Links -------------------------- */
+  if (customContact.social) {
+    Object.entries(customContact.social).forEach(([key, url]) => {
+      if (url) {
+        items.push({
+          type: "social",
+          label: key.charAt(0).toUpperCase() + key.slice(1),
+          value: url,
+          href: url,
+          icon: key as IconName,
+        });
+      }
+    });
+  }
+
+  /* ----------------------------- Fallback ----------------------------- */
+  if (items.length === 0) {
+    const fallback = getDefaultPhone();
+    items.push({
+      type: "phone",
+      label: fallback.owner,
+      value: fallback.number,
+      href: getWhatsAppLink(fallback),
+      description: "Contacto principal",
+      icon: "phone",
     });
   }
 

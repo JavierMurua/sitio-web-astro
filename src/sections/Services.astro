@@ -3,7 +3,7 @@
 import Button from "@/components/Button.astro";
 import Icon from "@/components/Icon.astro";
 import type { IconName } from "@/config/icons";
-import { contact, getWhatsAppLink } from "@/contact/contact";
+import { contact, getPhoneById, getWhatsAppLink, type Phone } from "@/contact/contact";
 
 export interface Service {
   label: string;
@@ -24,16 +24,18 @@ export const services: Service[] = [
 ];
 
 interface Props {
-  services: Service[];
+  services?: Service[];
   title?: string;
   subtitle?: string;
+  phoneOverride?: Phone;
 }
 
-const { services: servicesProp, title, subtitle } = Astro.props as Props;
+const { services: servicesProp = services, title, subtitle, phoneOverride } = Astro.props as Props;
+const phone = phoneOverride ?? contact.phones[0];
 
-// Obtener teléfonos
-const phoneSalud = contact.phones.find((p) => p.owner.includes("Federico"));
-const phoneLaboral = contact.phones.find((p) => p.owner.includes("Daniel"));
+// Obtener teléfonos por ID semántico
+const phoneSalud = getPhoneById("fede");
+const phoneLaboral = getPhoneById("daniel");
 ---
 
 <section id="servicios" class="u-section" aria-labelledby="servicios-title">
@@ -43,27 +45,18 @@ const phoneLaboral = contact.phones.find((p) => p.owner.includes("Daniel"));
 
     <div class="services__grid" role="list" aria-label="Listado de servicios">
       {servicesProp.map(({ label, icon, category }) => {
-        // Determinar qué número usar según la categoría
-        const phone =
-          category === "salud" ? phoneSalud : phoneLaboral;
-
-        const message =
-          category === "salud"
-            ? `${phoneSalud?.whatsappMessage}${label}`
-            : `${phoneLaboral?.whatsappMessage}${label}`;
-
-        const whatsappDesktop = getWhatsAppLink(phone?.number, message, true);
-        const whatsappMobile = getWhatsAppLink(phone?.number, message, false);
+        const phone = category === "salud" ? phoneSalud : phoneLaboral;
+        const message = `${phone.whatsappMessage}${label}`;
+        const whatsappDesktop = getWhatsAppLink(phone, message, true);
+        const whatsappMobile = getWhatsAppLink(phone, message, false);
 
         return (
-          <>
-            <!-- Desktop link -->
+          <article class="service-card-wrapper" role="listitem">
             <a
               href={whatsappDesktop}
               target="_blank"
               rel="noopener noreferrer"
               class="card service-card desktop-flex"
-              role="listitem"
               aria-label={`Consultar sobre ${label} (escritorio)`}
             >
               <div class="service-card__media" aria-hidden="true">
@@ -72,13 +65,11 @@ const phoneLaboral = contact.phones.find((p) => p.owner.includes("Daniel"));
               <div class="service-card__label">{label}</div>
             </a>
 
-            <!-- Mobile link -->
             <a
               href={whatsappMobile}
               target="_blank"
               rel="noopener noreferrer"
               class="card service-card mobile-flex"
-              role="listitem"
               aria-label={`Consultar sobre ${label} (móvil)`}
             >
               <div class="service-card__media" aria-hidden="true">
@@ -86,7 +77,7 @@ const phoneLaboral = contact.phones.find((p) => p.owner.includes("Daniel"));
               </div>
               <div class="service-card__label">{label}</div>
             </a>
-          </>
+          </article>
         );
       })}
     </div>
@@ -96,9 +87,8 @@ const phoneLaboral = contact.phones.find((p) => p.owner.includes("Daniel"));
         Si tu caso no figura, escribinos: escuchamos, evaluamos y te decimos cómo avanzar.
       </p>
 
-      <!-- CTA genérica: por ahora usa el de salud (o se puede dividir en dos si querés) -->
       <Button
-        href={getWhatsAppLink(phoneSalud?.number, phoneSalud?.whatsappMessage, true)}
+        href={getWhatsAppLink(phone, undefined, true)}
         variant="primary"
         device="desktop"
         external
@@ -108,7 +98,7 @@ const phoneLaboral = contact.phones.find((p) => p.owner.includes("Daniel"));
       </Button>
 
       <Button
-        href={getWhatsAppLink(phoneSalud?.number, phoneSalud?.whatsappMessage, false)}
+        href={getWhatsAppLink(phone, undefined, false)}
         variant="primary"
         device="mobile"
         external
@@ -119,6 +109,7 @@ const phoneLaboral = contact.phones.find((p) => p.owner.includes("Daniel"));
     </div>
   </div>
 </section>
+
 
 <style>
 .services__grid {
@@ -137,7 +128,7 @@ const phoneLaboral = contact.phones.find((p) => p.owner.includes("Daniel"));
   border-radius: var(--radius-2);
   background: var(--color-bg);
   border: 1px solid var(--color-border);
-  min-height: 150px;
+  min-height: 100%;
   transition:
     transform 0.25s ease,
     box-shadow 0.25s ease,

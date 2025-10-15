@@ -1,22 +1,21 @@
 ---
 import Button from '@/components/Button.astro';
-import { cleanPhoneNumber, contact, getTelLink, getWhatsAppLink } from '@/contact/contact';
+import { contact, getTelLink, getWhatsAppLink, type Phone } from '@/contact/contact';
 
 
 
 interface Props {
   title?: string;
   subtitle?: string;
-  phone?: string; // ej: "5403415873908"
-  message?: string; // mensaje de whatsapp prellenado
+  phoneOverride?: Phone;
 }
 
 const {
   title = "¿Listo para tu consulta?",
   subtitle = "Hablá con nosotros ahora mismo. Estamos para defender tus derechos.",
-  phone = "5403415873908",
-  message = "Hola, quiero hacer una consulta:",
+  phoneOverride 
 } = Astro.props;
+const phone = phoneOverride ?? contact.phones[0];
 ---
 
 <section class="final-cta">
@@ -26,7 +25,7 @@ const {
 
     <div class="final-cta__buttons">
       <Button
-        href={getWhatsAppLink(contact.phones[0].number, contact.phones[0].whatsappMessage, true)}
+        href={getWhatsAppLink(phone, undefined, true)}
         variant="primary"
         device="desktop"
         external
@@ -36,7 +35,7 @@ const {
       </Button>
 
       <Button
-        href={getWhatsAppLink(contact.phones[0].number, contact.phones[0].whatsappMessage, false)}
+        href={getWhatsAppLink(phone, undefined, false)}
         variant="primary"
         device="mobile"
         external
@@ -46,7 +45,7 @@ const {
       </Button>
 
       <Button
-        href={getTelLink(contact.phones[0].number)}
+        href={getTelLink(phone.number)}
         variant="outline"
         ariaLabel="Llamar ahora"
       >

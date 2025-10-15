@@ -17,19 +17,13 @@ import elCiudadano from '@/assets/logos/el_ciudadano.jpg';
 import danielImage from '@/assets/images/daniel-paredes-00.webp';
 
 import { getPosts } from '@/config/postAdapter';
-import { contact, getWhatsAppLink } from '@/contact/contact';
+import { getPhoneById, getWhatsAppLink } from '@/contact/contact';
 
 const laborServices = services.filter((s: Service) => s.category === 'laboral');
 const posts = await getPosts({ tag: 'noticias', limit: 3 });
 
-// Obtener el teléfono correspondiente a Daniel
-const daniPhone = contact.phones.find((p) => p.owner.includes('Daniel'))!;
+const daniPhone = getPhoneById("daniel");
 
-const heroCTA = {
-  text: "Consultar por WhatsApp",
-  href: getWhatsAppLink(daniPhone.number, daniPhone.whatsappMessage),
-  external: true,
-};
 
 const aboutData = {
   title: "Sobre Daniel Paredes – Especialista en Derecho Laboral, Accidentes y Enfermedades del trabajo",
@@ -43,8 +37,8 @@ const aboutData = {
   highlight: "📌 Primera consulta sin compromiso.",
   cta: {
     text: "Consultar ahora",
-    desktop: getWhatsAppLink(daniPhone.number, daniPhone.whatsappMessage, true),
-    mobile: getWhatsAppLink(daniPhone.number, daniPhone.whatsappMessage, false),
+    desktop: getWhatsAppLink(undefined, undefined, true, daniPhone),
+    mobile: getWhatsAppLink(undefined, undefined, false, daniPhone),
   },
 };
 
@@ -79,7 +73,11 @@ const faqItems = [
   title="Abogado Especialista en Accidentes y Enfermedades del Trabajo en Rosario"
   subtitle="Si sufriste un accidente laboral o enfermedad profesional, te ayudamos a obtener la indemnización justa que te corresponde por ley."
   image={heroImage}
-  ctaPrimary={heroCTA}
+  ctaPrimary={{
+    text: "Consultar por WhatsApp",
+    href: getWhatsAppLink(undefined, undefined, false, daniPhone),
+    external: true,
+  }}
   ctaSecondary={{ text: "Ver servicios", href: "#servicios" }}
   seal="Trayectoria comprobada. Compromiso real."
 />
@@ -101,7 +99,7 @@ const faqItems = [
     subtitle="Nos ocupamos de tu caso si sufriste un accidente o enfermedad laboral y la ART no responde como corresponde."
   />
 
-  <Process />
+  <Process phoneOverride={daniPhone} />
 
   <Posts
     title="Casos reales de trabajadores que defendieron su derecho"
@@ -109,7 +107,7 @@ const faqItems = [
     posts={posts}
   />
 
-  <FinalCTA />
+  <FinalCTA phoneOverride={daniPhone} />
 
   <Faq
     title="Preguntas frecuentes sobre reclamos laborales"

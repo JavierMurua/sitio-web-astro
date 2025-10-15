@@ -1,7 +1,13 @@
 ---
 // src/sections/Process.astro
 import Button from "@/components/Button.astro";
-import { contact, getWhatsAppLink } from "@/contact/contact";
+import { contact, getWhatsAppLink, type Phone } from "@/contact/contact";
+
+interface Props {
+  phoneOverride?: Phone;
+}
+
+const { phoneOverride } = Astro.props;
 
 const processData = {
   title: "Nuestro Proceso Simplificado",
@@ -53,7 +59,7 @@ const processData = {
 
     <div class="process__cta">
       <Button
-        href={getWhatsAppLink(contact.phones[0].number, contact.phones[0].whatsappMessage, true)}
+        href={getWhatsAppLink(phoneOverride ?? contact.phones[0], undefined, true)}
         variant="primary"
         device="desktop"
         external
@@ -63,7 +69,7 @@ const processData = {
       </Button>
 
       <Button
-        href={getWhatsAppLink(contact.phones[0].number, contact.phones[0].whatsappMessage, false)}
+        href={getWhatsAppLink(phoneOverride ?? contact.phones[0], undefined, false)}
         variant="primary"
         device="mobile"
         external
