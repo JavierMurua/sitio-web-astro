@@ -4,14 +4,15 @@ export const siteConfig = {
     short: "Z&P",
     name: "Zalazar & Paredes",
     description:
-      "Defensa en salud y trabajo. Rosario, Alvear, Pueblo Esther, Villa Amelia, Roldán, Funes, Carcarañá y Santa Fe.",
+      "Abogados en Salud y Trabajo. Consultas gratuitas en Rosario y Santa Fe. Defensa experta, atención humana.",
   },
   seo: {
-    title: "Zalazar & Paredes - Abogados en Salud y Trabajo",
+    title: "Zalazar & Paredes | Abogados en Salud y Trabajo en Rosario",
     description:
-      "Estudio jurídico en Rosario especializado en derecho de la salud y laboral. Consultá con nuestros abogados y conocé nuestros casos de éxito.",
+      "Defendemos tus derechos en salud y trabajo. Consultas gratuitas con abogados especialistas en Rosario. Resultados comprobados y atención personalizada.",
     siteUrl: "https://estudiozalazarparedes.com/",
-    ogImage: "/og-image.jpg", // imagen OG/Twitter por defecto
+    ogImage: "https://estudiozalazarparedes.com/og-preview.png",
+    ogImageAlt: "Zalazar & Paredes - Abogados en Salud y Trabajo",
     locale: "es_AR",
   },
   legal:
@@ -19,5 +20,7 @@ export const siteConfig = {
   social: {
     twitter: "",
     linkedin: "",
+    facebook: "",
+    instagram: "",
   },
 };

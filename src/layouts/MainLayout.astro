@@ -4,6 +4,7 @@ import Header from "../sections/Header.astro";
 import Footer from "../sections/Footer.astro";
 import BaseHead from "../components/BaseHead.astro";
 import WhatsAppButton from "@/components/WhatsAppButton.astro";
+import { contact, getDefaultPhone } from "@/contact/contact";
 
 const menu = [
   { label: "Inicio", href: "/" },
@@ -14,20 +15,19 @@ const menu = [
 ];
 
 const { title, description, canonical, image, noIndex = false } = Astro.props;
-
+const defaultPhone = getDefaultPhone();
 ---
 
 <!DOCTYPE html>
 <html lang="es-AR">
   <head>
-    <BaseHead 
-  title={title} 
-  description={description} 
-  image={image} 
-  canonical={canonical} 
-  noIndex={noIndex} 
-/>
-
+    <BaseHead
+      title={title}
+      description={description}
+      image={image}
+      canonical={canonical}
+      noIndex={noIndex}
+    />
   </head>
   <body>
     <Header menuItems={menu} />
@@ -35,6 +35,6 @@ const { title, description, canonical, image, noIndex = false } = Astro.props;
       <slot />
     </main>
     <Footer menuItems={menu} />
-    <WhatsAppButton owner="Federico Zalazar" />
+    <WhatsAppButton owner={defaultPhone.owner} />
   </body>
 </html>
