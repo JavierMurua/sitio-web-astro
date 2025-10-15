@@ -11,7 +11,7 @@ export const siteConfig = {
     description:
       "Defendemos tus derechos en salud y trabajo. Consultas gratuitas con abogados especialistas en Rosario. Resultados comprobados y atención personalizada.",
     siteUrl: "https://estudiozalazarparedes.com/",
-    ogImage: "https://estudiozalazarparedes.com/og-preview.png",
+    ogImage: "https://estudiozalazarparedes.com/og-image.png",
     ogImageAlt: "Zalazar & Paredes - Abogados en Salud y Trabajo",
     locale: "es_AR",
   },
