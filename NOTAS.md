@@ -49,4 +49,5 @@
 - [ ] Hacer que las secciones alternen sus colores automáticamente.
 - [ ] Modificar el teléfono de FinalCTA en la página de Dani.
 - [ ] Investigar si es conveniente adaptar el contenido del BaseHead según la página.
+- [ ] Agregar componente de compartir sitio en las redes.
 - [ ] 
