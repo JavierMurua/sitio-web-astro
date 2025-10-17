@@ -10,36 +10,46 @@ interface Props {
   noIndex?: boolean;
 }
 
+// Props con fallback
 const {
   title,
-  description = siteConfig.seo.description,
-  image = siteConfig.seo.ogImage,
+  description,
+  image,
   canonical,
   noIndex = false,
 } = Astro.props;
 
-// Base URL fallback
-const baseUrl = Astro.site ?? siteConfig.seo.siteUrl;
+// Valores globales
+const baseUrl = siteConfig.seo.siteUrl.replace(/\/$/, "");
+const defaultImage = siteConfig.seo.ogImage;
+const defaultDescription = siteConfig.seo.description;
 
-// Safe canonical URL
-const canonicalURL = canonical ?? new URL(Astro.url.pathname, baseUrl).toString();
+// Normalización de valores
+const pageTitle =
+title && !title.includes(siteConfig.brand.name)
+? `${title} | ${siteConfig.brand.name}`
+: title || siteConfig.seo.title;
 
-// Ensure absolute OG image URL
-const imageURL = image.startsWith("http")
-  ? image
-  : new URL(image, baseUrl).toString();
+const pageDescription = description || defaultDescription;
 
-const pageTitle = title
-  ? `${title} | ${siteConfig.brand.name}`
-  : siteConfig.seo.title;
+const canonicalURL = canonical
+? canonical.startsWith("http")
+? canonical
+: `${baseUrl}${canonical}`
+: `${baseUrl}${Astro.url.pathname}`;
+
+const imageURL = image
+? image.startsWith("http")
+? image
+: `${baseUrl}${image}`
+: defaultImage;
 ---
 
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>{pageTitle}</title>
-<meta name="description" content={description} />
+<meta name="description" content={pageDescription} />
 <meta name="author" content={siteConfig.brand.name} />
-<meta name="generator" content="Astro" />
 
 {noIndex ? (
   <meta name="robots" content="noindex, nofollow" />
@@ -47,6 +57,7 @@ const pageTitle = title
   <meta name="robots" content="index, follow" />
 )}
 
+<meta name="theme-color" content="#003366" />
 <link rel="canonical" href={canonicalURL} />
 
 <!-- =====================
@@ -57,7 +68,7 @@ const pageTitle = title
 <meta property="og:locale" content={siteConfig.seo.locale} />
 <meta property="og:url" content={canonicalURL} />
 <meta property="og:title" content={pageTitle} />
-<meta property="og:description" content={description} />
+<meta property="og:description" content={pageDescription} />
 <meta property="og:image" content={imageURL} />
 <meta property="og:image:alt" content={siteConfig.seo.ogImageAlt} />
 <meta property="og:image:width" content="1200" />
@@ -68,10 +79,11 @@ const pageTitle = title
      ===================== -->
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content={pageTitle} />
-<meta name="twitter:description" content={description} />
+<meta name="twitter:description" content={pageDescription} />
 <meta name="twitter:image" content={imageURL} />
+
 {siteConfig.social.twitter && (
   <meta name="twitter:site" content={siteConfig.social.twitter} />
 )}
 
-<meta name="theme-color" content="#003366" />
+

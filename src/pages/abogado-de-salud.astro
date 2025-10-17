@@ -25,6 +25,13 @@ const posts = await getPosts({ tag: 'noticias', limit: 3 });
 // Obtener el teléfono correspondiente a Fede
 const fedePhone = contact.phones.find((p) => p.owner.includes('Federico'))!;
 
+// Metadata específica
+const title = "Abogado Especialista en Derecho de la Salud en Rosario y Santa Fe";
+const description = "Asesoramiento legal en amparos de salud, medicamentos, tratamientos y prestaciones médicas. Consultas sin compromiso.";
+
+// Si querés, también podrías pasar canonical explícito
+const canonical = "https://estudiozalazarparedes.com/abogado-de-salud";
+
 const aboutData = {
   title: "Sobre Federico Zalazar – Especialista en Derecho de la Salud",
   image: federicoImage,
@@ -68,7 +75,7 @@ const faqItems = [
 ---
 
 
-<MainLayout>
+<MainLayout {title} {description} {canonical}>
   <Hero
     title="Abogado Especialista en Derecho de la Salud en Rosario y Santa Fe"
     subtitle="Reclamos por medicamentos, tratamientos, prótesis y prestaciones médicas. Protejo tu derecho a la salud frente a obras sociales y prepagas."
