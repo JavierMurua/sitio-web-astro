@@ -86,12 +86,17 @@ const { menuItems = [] } = Astro.props;
     </div>
 
     <!-- Legal -->
-    <div class="footer__bottom">
-      <p class="u-muted">{siteConfig.legal}</p>
-      <p class="u-muted">
-        © {new Date().getFullYear()} {siteConfig.brand.name}. Todos los derechos reservados.
-      </p>
-    </div>
+<div class="footer__bottom">
+  <p class="u-muted">{siteConfig.legal}</p>
+  <p class="u-muted">
+    © {new Date().getFullYear()} {siteConfig.brand.name}. Todos los derechos reservados.
+  </p>
+  <!-- Crédito discreto -->
+  <p class="u-muted">
+    Potenciado por <a href="https://muruadev.com" target="_blank" rel="noopener noreferrer">Murúa Dev</a>
+  </p>
+</div>
+
   </div>
 </footer>
 
