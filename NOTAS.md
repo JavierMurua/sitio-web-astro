@@ -41,8 +41,8 @@
 - [X] Verificación GBP
 - [X] Poner firma de Murúa Dev.
 - [X] Alinear a la izquierda el título del about
-- [ ] Pensar qué hacer con las imagenes de los artículos
-- [ ] averiguar mejor tamaño para esas imagenes de los post
+- [ ] Pensar qué hacer con las imágenes de los artículos
+- [ ] averiguar mejor tamaño para esas imágenes de los post
 - [ ] Agregar CTA final y FAQ a Index.
 - [ ] Cambiar preguntas y respuestas del FAQ de casos-de-exito.
 - [ ] Hacer que las imágenes de los hero se acomoden en distintas pantallas para que los elementos principales se mantengan a la vista.
@@ -57,5 +57,6 @@
 - [ ] Revisar ficha GBP para ver qué puede mejorarse.
 - [ ] Arreglar mapa que se ve mal.
 - [ ] Pensar en cómo usar un mapa del tipo Google Maps pero cero Javascript.
+- [ ] Agregar la posibilidad de usar negrita en los FAQ
 - [ ] 
 - [ ] 
